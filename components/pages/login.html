@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Stackly Hotel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../assets/css/auth.css" />
+  </head>
+  <body class="auth-body">
+    <div class="auth-page">
+      <!-- ══ LEFT PANEL ══ -->
+      <div class="auth-left">
+        <div class="auth-left-bg">
+          <img src="/assets/images/home/home-hero-bg-3.webp" alt="Hotel room" />
+        </div>
+
+        <!-- Logo -->
+        <a href="../../index.html" class="auth-left-logo">
+          <img src="../../assets/images/logoStackly.webp" alt="Stackly Hotel" />
+        </a>
+
+        <!-- Bottom copy -->
+        <div class="auth-left-stars">
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+        </div>
+        <div class="auth-left-bar"></div>
+        <div class="auth-left-copy">
+          <h2>Experience<br />Unmatched Luxury</h2>
+          <p>
+            From breathtaking rooms to world-class dining — every moment at
+            Stackly is crafted for you.
+          </p>
+        </div>
+      </div>
+
+      <!-- ══ RIGHT PANEL ══ -->
+      <div class="auth-right">
+        <div class="auth-card">
+          <!-- Back to Home -->
+          <div class="auth-back-top">
+            <a href="../../index.html"
+              ><i class="fa-solid fa-arrow-left"></i> Back to Home</a
+            >
+          </div>
+
+          <!-- Toast -->
+          <div class="auth-toast" id="auth-toast">
+            <i class="fa-solid fa-circle-check"></i>
+            <span id="auth-toast-msg">Login successful!</span>
+          </div>
+
+          <!-- Heading -->
+          <span class="section-label">Welcome Back</span>
+          <h2 class="auth-title">Sign In</h2>
+          <p class="auth-subtitle">
+            Access your Stackly Hotel account to manage bookings and exclusive
+            offers.
+          </p>
+          <div class="auth-divider"></div>
+
+          <form id="login-form" novalidate>
+            <!-- Role -->
+            <div class="auth-field">
+              <label for="role"
+                ><i class="fa-solid fa-user-tag"></i> Role</label
+              >
+              <select id="role" name="role">
+                <option value="">Select your role</option>
+                <option value="admin">Admin</option>
+                <option value="guest">Guest</option>
+                <option value="member">Member</option>
+                <option value="corporate">Corporate</option>
+              </select>
+              <span class="auth-error" id="role-error"></span>
+            </div>
+
+            <!-- Email -->
+            <div class="auth-field">
+              <label for="email"
+                ><i class="fa-regular fa-envelope"></i> Email Address</label
+              >
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="your@email.com"
+              />
+              <span class="auth-error" id="email-error"></span>
+            </div>
+
+            <!-- Password -->
+            <div class="auth-field">
+              <label for="password"
+                ><i class="fa-solid fa-lock"></i> Password</label
+              >
+              <div class="input-eye-wrap">
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Enter your password"
+                />
+                <button
+                  type="button"
+                  class="eye-toggle"
+                  data-target="password"
+                  aria-label="Toggle password"
+                >
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </div>
+              <span class="auth-error" id="password-error"></span>
+            </div>
+
+            <!-- Remember Me -->
+            <div class="auth-field">
+              <label class="auth-check-label">
+                <input type="checkbox" id="remember" name="remember" />
+                <span class="auth-checkmark"></span>
+                Remember me on this device
+              </label>
+              <span class="auth-error" id="remember-error"></span>
+            </div>
+
+            <button type="submit" class="btn-gold auth-submit">
+              Sign In <i class="fa-solid fa-arrow-right ms-2"></i>
+            </button>
+          </form>
+
+          <p class="auth-switch">
+            Don't have an account? <a href="register.html">Create one here</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- /.auth-page -->
+    <script src="../../assets/js/dead-link-guard.js"></script>
+    <script>
+      // Eye toggle
+      document.querySelectorAll(".eye-toggle").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const inp = document.getElementById(btn.dataset.target);
+          const icon = btn.querySelector("i");
+          inp.type = inp.type === "password" ? "text" : "password";
+          icon.classList.toggle("fa-eye", inp.type === "password");
+          icon.classList.toggle("fa-eye-slash", inp.type === "text");
+        });
+      });
+
+      // Toast helper
+      function showToast(msg) {
+        const toast = document.getElementById("auth-toast");
+        document.getElementById("auth-toast-msg").textContent = msg;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 3500);
+      }
+
+      // Error helper
+      function showError(id, msg) {
+        const el = document.getElementById(id + "-error");
+        if (!el) return;
+        el.textContent = msg;
+        el.classList.toggle("visible", !!msg);
+      }
+      function clearErrors() {
+        document.querySelectorAll(".auth-error").forEach((e) => {
+          e.textContent = "";
+          e.classList.remove("visible");
+        });
+      }
+
+      // Submit
+      document
+        .getElementById("login-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          clearErrors();
+          let valid = true;
+
+          const role = document.getElementById("role").value;
+          const email = document.getElementById("email").value.trim();
+          const password = document.getElementById("password").value;
+          const remember = document.getElementById("remember").checked;
+
+          if (!role) {
+            showError("role", "Role is required.");
+            valid = false;
+          }
+          if (!email) {
+            showError("email", "Email Address is required.");
+            valid = false;
+          } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            showError("email", "Please enter a valid Email Address.");
+            valid = false;
+          }
+          if (!password) {
+            showError("password", "Password is required.");
+            valid = false;
+          }
+          if (!remember) {
+            showError("remember", "Remember Me is required to continue.");
+            valid = false;
+          }
+
+          if (valid) {
+            showToast("Login successful! Redirecting…");
+            // redirect logic here
+          }
+        });
+
+      // Live clear
+      ["role", "email", "password", "remember"].forEach((id) => {
+        const el = document.getElementById(id);
+        el?.addEventListener("change", () => showError(id, ""));
+        el?.addEventListener("input", () => showError(id, ""));
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+<header id="site-header">
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-between">
+      <!-- Logo -->
+      <a href="index.html" class="header-logo">
+        <img
+          src="assets/images/logoStackly.webp"
+          alt="Stackly Logo"
+          class="site-logo-img"
+        />
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav>
+        <ul class="nav-list">
+          <li><a href="#" class="nav-link active">Home</a></li>
+          <li>
+            <a href="#" class="nav-link">Rooms</a>
+            <ul class="nav-dropdown">
+              <li><a href="#">Standard Rooms</a></li>
+              <li><a href="#">Deluxe Rooms</a></li>
+              <li><a href="#">Suites</a></li>
+              <li><a href="#">Presidential Suite</a></li>
+            </ul>
+          </li>
+          <li><a href="#" class="nav-link">Amenities</a></li>
+          <li><a href="#" class="nav-link">Offers</a></li>
+          <li><a href="#" class="nav-link">Gallery</a></li>
+          <li><a href="#" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- CTA + Hamburger -->
+      <div class="header-cta">
+        <a href="components/pages/login.html" class="btn-gold">Book Now</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="mobile-overlay"></div>
+
+<!-- Mobile Nav -->
+<nav class="mobile-nav" id="mobile-nav">
+  <button class="mobile-nav-close" id="mobile-nav-close">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+  <img
+    src="assets/images/logoStackly.webp"
+    alt="Stackly Logo"
+    class="site-logo-img mobile-logo"
+  />
+  <a href="#" class="nav-link">Home</a>
+  <a href="#" class="nav-link">Rooms</a>
+  <a href="#" class="nav-link">Amenities</a>
+  <a href="#" class="nav-link">Offers</a>
+  <a href="#" class="nav-link">Gallery</a>
+  <a href="#" class="nav-link">Contact</a>
+  <div class="mt-4">
+    <a
+      href="components/pages/login.html"
+      class="btn-gold w-100 text-center d-block"
+      >Book Now</a
+    >
+  </div>
+  <div class="social-links mt-4">
+    <a href="#" class="social-link"><i class="fa-brands fa-facebook-f"></i></a>
+    <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+    <a href="#" class="social-link"><i class="fa-brands fa-x-twitter"></i></a>
+  </div>
+</nav>

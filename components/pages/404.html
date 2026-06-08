@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - Page Not Found | Stackly Hotel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../assets/css/404.css" />
+  </head>
+  <body class="page-404-body">
+    <!-- Ambient background -->
+    <div class="e404-bg">
+      <img
+        src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1800&q=85"
+        alt=""
+      />
+      <div class="e404-bg-overlay"></div>
+      <!-- Floating orbs -->
+      <div class="e404-orb e404-orb-1"></div>
+      <div class="e404-orb e404-orb-2"></div>
+      <div class="e404-orb e404-orb-3"></div>
+    </div>
+
+    <!-- Header bar -->
+    <!-- <header class="e404-header">
+      <a href="../../index.html" class="e404-logo">
+        <img src="../../assets/images/logoStackly.webp" alt="Stackly Hotel" />
+      </a>
+    </header> -->
+
+    <!-- Main content -->
+    <main class="e404-main">
+      <!-- Decorative ring -->
+      <div class="e404-ring-wrap">
+        <svg class="e404-ring-svg" viewBox="0 0 220 220">
+          <circle class="e404-ring-track" cx="110" cy="110" r="100" />
+          <circle class="e404-ring-spin" cx="110" cy="110" r="100" />
+        </svg>
+        <!-- 404 number -->
+        <div class="e404-number">404</div>
+      </div>
+
+      <!-- Stars -->
+      <div class="e404-stars">
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+      </div>
+
+      <div class="e404-divider"></div>
+
+      <h1 class="e404-title">Room Not Found</h1>
+      <p class="e404-subtitle">
+        It seems the page you're looking for has checked out.<br />
+        Let us guide you back to the comfort of our lobby.
+      </p>
+
+      <!-- Countdown -->
+      <p class="e404-countdown">
+        Redirecting to home in <span id="e404-count">15</span>s
+      </p>
+
+      <!-- Actions -->
+      <div class="e404-actions">
+        <a href="../../index.html" class="btn-gold e404-btn">
+          <i class="fa-solid fa-house me-2"></i>Back to Home
+        </a>
+        <button onclick="history.back()" class="btn-outline-white e404-btn">
+          <i class="fa-solid fa-arrow-left me-2"></i>Go Back
+        </button>
+      </div>
+    </main>
+
+    <script src="../../assets/js/dead-link-guard.js"></script>
+    <script>
+      // Countdown redirect
+      let count = 15;
+      const countEl = document.getElementById("e404-count");
+      const timer = setInterval(() => {
+        count--;
+        if (countEl) countEl.textContent = count;
+        if (count <= 0) {
+          clearInterval(timer);
+          window.location.href = "../../index.html";
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>

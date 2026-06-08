@@ -1,0 +1,1135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stackly Hotel - Luxury Hotel & Booking</title>
+    <meta
+      name="description"
+      content="Stackly Hotel - Experience unparalleled luxury and personalized service. Book your stay in the heart of Brooklyn."
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap 5 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+
+    <!-- Font Awesome 6 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <!-- PRELOADER -->
+    <div id="preloader">
+      <!-- left dark panel -->
+      <div class="pl-panel pl-panel-left"></div>
+      <!-- right dark panel -->
+      <div class="pl-panel pl-panel-right"></div>
+
+      <!-- centre stage -->
+      <div class="pl-stage">
+        <!-- spinning ring -->
+        <div class="pl-ring-outer">
+          <svg class="pl-ring-svg" viewBox="0 0 120 120">
+            <circle class="pl-ring-track" cx="60" cy="60" r="54" />
+            <circle class="pl-ring-fill" cx="60" cy="60" r="54" />
+          </svg>
+        </div>
+
+        <!-- logo inside ring -->
+        <div class="pl-logo-wrap">
+          <img
+            src="assets/images/logoStackly.webp"
+            alt="Stackly"
+            class="pl-logo"
+          />
+        </div>
+
+        <!-- bottom text -->
+        <div class="pl-info">
+          <p class="pl-tagline">Luxury Hotel &amp; Spa</p>
+          <span class="pl-pct">0%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- HEADER -->
+    <div id="header-placeholder"></div>
+
+    <!-- HERO SLIDER -->
+    <section class="hero-section" id="hero">
+      <!-- Slide 1 -->
+      <div class="hero-slide">
+        <img
+          class="hero-bg"
+          src="./assets/images/home/home-hero-bg-1.webp"
+          alt="Hotel lobby"
+        />
+        <div class="hero-overlay"></div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="hero-slide">
+        <img
+          class="hero-bg"
+          src="./assets/images/home/home-hero-bg-2.webp"
+          alt="Hotel pool"
+        />
+        <div class="hero-overlay"></div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="hero-slide">
+        <img
+          class="hero-bg"
+          src="./assets/images/home/home-hero-bg-3.webp"
+          alt="Luxury room"
+        />
+        <div class="hero-overlay"></div>
+      </div>
+
+      <!-- Content -->
+      <div class="hero-content">
+        <div>
+          <div class="hero-stars fade-up">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <h1 class="hero-title fade-up delay-1">
+            Where Every Stay<br />is Extraordinary
+          </h1>
+          <p class="hero-subtitle fade-up delay-2">
+            Discover the perfect blend of luxury, comfort, and personalised
+            service at Stackly. Nestled in the heart of Brooklyn.
+          </p>
+          <div
+            class="d-flex gap-3 justify-content-center flex-wrap fade-up delay-3"
+          >
+            <a href="#" class="btn-gold">Reserve a Room</a>
+            <a href="#" class="btn-outline-white">Explore Rooms</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arrows -->
+      <button
+        class="hero-arrow hero-arrow-prev"
+        id="hero-prev"
+        aria-label="Previous"
+      >
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button
+        class="hero-arrow hero-arrow-next"
+        id="hero-next"
+        aria-label="Next"
+      >
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+      <!-- Dots -->
+      <div class="hero-dots">
+        <button class="hero-dot" aria-label="Slide 1"></button>
+        <button class="hero-dot" aria-label="Slide 2"></button>
+        <button class="hero-dot" aria-label="Slide 3"></button>
+      </div>
+    </section>
+
+    <!-- BOOKING BAR -->
+    <div class="booking-bar" id="booking">
+      <div class="container">
+        <form class="booking-bar-inner" id="booking-form">
+          <div class="booking-field">
+            <label for="check-in"
+              ><i class="fa-regular fa-calendar me-1"></i> Check-In</label
+            >
+            <input type="date" id="check-in" name="check_in" />
+          </div>
+
+          <div class="booking-field">
+            <label for="check-out"
+              ><i class="fa-regular fa-calendar me-1"></i> Check-Out</label
+            >
+            <input type="date" id="check-out" name="check_out" />
+          </div>
+
+          <div class="booking-field">
+            <label for="guests"
+              ><i class="fa-solid fa-user me-1"></i> Guests</label
+            >
+            <select id="guests" name="guests">
+              <option value="1">1 Guest</option>
+              <option value="2" selected>2 Guests</option>
+              <option value="3">3 Guests</option>
+              <option value="4">4 Guests</option>
+              <option value="5">5+ Guests</option>
+            </select>
+          </div>
+
+          <div class="booking-field">
+            <label for="room-type"
+              ><i class="fa-solid fa-bed me-1"></i> Room Type</label
+            >
+            <select id="room-type" name="room_type">
+              <option value="">Any Room</option>
+              <option value="standard">Standard Room</option>
+              <option value="deluxe">Deluxe Room</option>
+              <option value="suite">Suite</option>
+              <option value="presidential">Presidential Suite</option>
+            </select>
+          </div>
+
+          <div class="booking-field" style="flex: 0 0 auto">
+            <label style="opacity: 0; pointer-events: none">submit</label>
+            <button
+              type="submit"
+              class="btn-gold w-100"
+              style="padding: 11px 32px"
+            >
+              <i class="fa-solid fa-magnifying-glass me-2"></i>Check
+              Availability
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- WELCOME SECTION -->
+    <section class="section-pad" id="about">
+      <div class="container">
+        <div class="row g-5 align-items-center">
+          <!-- Image -->
+          <div class="col-lg-5 col-md-6">
+            <div class="welcome-img-wrap fade-up">
+              <img
+                src="./assets/images/home/home-welcome-section-img.webp"
+                alt="Hotel interior"
+                class="welcome-img-main"
+              />
+              <div class="welcome-img-badge">
+                <span class="badge-num">25+</span>
+                <span class="badge-text">Years of Excellence</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Text -->
+          <div class="col-lg-7 col-md-6">
+            <div class="ps-lg-4">
+              <span class="section-label fade-up">Welcome to Stackly</span>
+              <h2 class="display-6 mb-4 fade-up delay-1">
+                Exceptional Hospitality &<br />Unmatched Relaxation
+              </h2>
+              <p class="text-muted mb-4 fade-up delay-2">
+                At Stackly, we believe a great stay is more than just a room —
+                it's a complete experience. From the moment you arrive, our
+                dedicated team ensures every detail of your visit is perfectly
+                curated to exceed your expectations.
+              </p>
+
+              <div class="rating-row fade-up delay-2">
+                <span class="stars-gold">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                </span>
+                <span class="fw-500">4.9 / 5</span>
+                <span class="rating-text">Based on 25,000+ reviews</span>
+              </div>
+
+              <div class="row g-3 mb-4 fade-up delay-3">
+                <div class="col-6">
+                  <div class="d-flex align-items-center gap-2">
+                    <i class="fa-solid fa-check text-gold"></i>
+                    <span class="small">24/7 Concierge Service</span>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="d-flex align-items-center gap-2">
+                    <i class="fa-solid fa-check text-gold"></i>
+                    <span class="small">Free High-Speed WiFi</span>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="d-flex align-items-center gap-2">
+                    <i class="fa-solid fa-check text-gold"></i>
+                    <span class="small">Fine Dining Restaurant</span>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="d-flex align-items-center gap-2">
+                    <i class="fa-solid fa-check text-gold"></i>
+                    <span class="small">Rooftop Infinity Pool</span>
+                  </div>
+                </div>
+              </div>
+
+              <a href="#" class="btn-gold fade-up delay-4">Explore Our Rooms</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AMENITIES -->
+    <section class="section-pad bg-light-custom" id="amenities">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="section-label fade-up">What We Offer</span>
+          <h2 class="display-6 fade-up delay-1">World-Class Amenities</h2>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6 fade-up delay-1">
+            <div class="amenity-card">
+              <div class="amenity-icon">
+                <i class="fa-solid fa-utensils"></i>
+              </div>
+              <h5>Fine Dining</h5>
+              <p>
+                Award-winning chefs craft exquisite menus using seasonal,
+                locally sourced ingredients for an unforgettable culinary
+                journey.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 fade-up delay-2">
+            <div class="amenity-card">
+              <div class="amenity-icon">
+                <i class="fa-solid fa-water-ladder"></i>
+              </div>
+              <h5>Infinity Pool</h5>
+              <p>
+                Relax in our stunning rooftop infinity pool with panoramic city
+                views, available year-round for all guests.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 fade-up delay-3">
+            <div class="amenity-card">
+              <div class="amenity-icon"><i class="fa-solid fa-spa"></i></div>
+              <h5>Spa & Wellness</h5>
+              <p>
+                Rejuvenate body and mind at our luxury spa offering a full range
+                of treatments, massages, and holistic therapies.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 fade-up delay-1">
+            <div class="amenity-card">
+              <div class="amenity-icon">
+                <i class="fa-solid fa-dumbbell"></i>
+              </div>
+              <h5>Fitness Centre</h5>
+              <p>
+                State-of-the-art equipment, personal trainers, and daily fitness
+                classes to keep you energised throughout your stay.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 fade-up delay-2">
+            <div class="amenity-card">
+              <div class="amenity-icon">
+                <i class="fa-solid fa-person-chalkboard"></i>
+              </div>
+              <h5>Meeting Rooms</h5>
+              <p>
+                Fully equipped conference facilities with AV technology,
+                catering, and dedicated event coordinators for seamless
+                meetings.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 fade-up delay-3">
+            <div class="amenity-card">
+              <div class="amenity-icon"><i class="fa-solid fa-car"></i></div>
+              <h5>Valet Parking</h5>
+              <p>
+                Complimentary valet parking service with 24-hour security,
+                available for all hotel guests and event attendees.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROOMS -->
+    <section class="section-pad" id="rooms">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="section-label fade-up">Elegant Accommodation</span>
+          <h2 class="display-6 fade-up delay-1">Our Rooms & Suites</h2>
+          <p
+            class="text-muted mt-3 fade-up delay-2"
+            style="max-width: 520px; margin: 12px auto 0"
+          >
+            Each room is thoughtfully designed with premium furnishings,
+            luxurious bedding, and stunning views.
+          </p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6 fade-up delay-1">
+            <div class="room-card">
+              <img
+                class="room-card-img"
+                src="./assets/images/home/home-ROOMS-img1.webp"
+                alt="Standard Room"
+              />
+              <div class="room-card-overlay"></div>
+              <div class="room-card-body">
+                <h4 class="room-card-title">Standard Room</h4>
+                <div class="room-card-meta">
+                  <span><i class="fa-solid fa-user"></i> 2 Guests</span>
+                  <span><i class="fa-solid fa-vector-square"></i> 28 m²</span>
+                  <span><i class="fa-solid fa-bed"></i> King Bed</span>
+                </div>
+                <div class="room-card-price">
+                  From <strong>$129</strong><span>/ night</span>
+                </div>
+                <a href="#" class="room-card-btn">Book Now</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 fade-up delay-2">
+            <div class="room-card">
+              <img
+                class="room-card-img"
+                src="./assets/images/home/home-ROOMS-img2.webp"
+                alt="Deluxe Room"
+              />
+              <div class="room-card-overlay"></div>
+              <div class="room-card-body">
+                <h4 class="room-card-title">Deluxe Room</h4>
+                <div class="room-card-meta">
+                  <span><i class="fa-solid fa-user"></i> 2 Guests</span>
+                  <span><i class="fa-solid fa-vector-square"></i> 38 m²</span>
+                  <span><i class="fa-solid fa-bed"></i> King Bed</span>
+                </div>
+                <div class="room-card-price">
+                  From <strong>$199</strong><span>/ night</span>
+                </div>
+                <a href="#" class="room-card-btn">Book Now</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 fade-up delay-3">
+            <div class="room-card">
+              <img
+                class="room-card-img"
+                src="./assets/images/home/home-ROOMS-img3.webp"
+                alt="Junior Suite"
+              />
+              <div class="room-card-overlay"></div>
+              <div class="room-card-body">
+                <h4 class="room-card-title">Junior Suite</h4>
+                <div class="room-card-meta">
+                  <span><i class="fa-solid fa-user"></i> 3 Guests</span>
+                  <span><i class="fa-solid fa-vector-square"></i> 55 m²</span>
+                  <span><i class="fa-solid fa-bed"></i> King Bed</span>
+                </div>
+                <div class="room-card-price">
+                  From <strong>$289</strong><span>/ night</span>
+                </div>
+                <a href="#" class="room-card-btn">Book Now</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 fade-up delay-1">
+            <div class="room-card">
+              <img
+                class="room-card-img"
+                src="./assets/images/home/home-ROOMS-img4.webp"
+                alt="Family Suite"
+              />
+              <div class="room-card-overlay"></div>
+              <div class="room-card-body">
+                <h4 class="room-card-title">Family Suite</h4>
+                <div class="room-card-meta">
+                  <span><i class="fa-solid fa-user"></i> 4 Guests</span>
+                  <span><i class="fa-solid fa-vector-square"></i> 72 m²</span>
+                  <span><i class="fa-solid fa-bed"></i> 2 Queen Beds</span>
+                </div>
+                <div class="room-card-price">
+                  From <strong>$349</strong><span>/ night</span>
+                </div>
+                <a href="#" class="room-card-btn">Book Now</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 fade-up delay-2">
+            <div class="room-card">
+              <img
+                class="room-card-img"
+                src="./assets/images/home/home-ROOMS-img5.webp"
+                alt="Premier Room"
+              />
+              <div class="room-card-overlay"></div>
+              <div class="room-card-body">
+                <h4 class="room-card-title">Premier Room</h4>
+                <div class="room-card-meta">
+                  <span><i class="fa-solid fa-user"></i> 2 Guests</span>
+                  <span><i class="fa-solid fa-vector-square"></i> 45 m²</span>
+                  <span><i class="fa-solid fa-bed"></i> King Bed</span>
+                </div>
+                <div class="room-card-price">
+                  From <strong>$249</strong><span>/ night</span>
+                </div>
+                <a href="#" class="room-card-btn">Book Now</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 fade-up delay-3">
+            <div class="room-card">
+              <img
+                class="room-card-img"
+                src="./assets/images/home/home-ROOMS-img6.webp"
+                alt="Presidential Suite"
+              />
+              <div class="room-card-overlay"></div>
+              <div class="room-card-body">
+                <h4 class="room-card-title">Presidential Suite</h4>
+                <div class="room-card-meta">
+                  <span><i class="fa-solid fa-user"></i> 4 Guests</span>
+                  <span><i class="fa-solid fa-vector-square"></i> 120 m²</span>
+                  <span><i class="fa-solid fa-bed"></i> King Bed</span>
+                </div>
+                <div class="room-card-price">
+                  From <strong>$799</strong><span>/ night</span>
+                </div>
+                <a href="#" class="room-card-btn">Book Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="section-pad-sm bg-dark-custom">
+      <div class="container">
+        <div class="row g-0">
+          <div class="col-6 col-md-3 fade-up">
+            <div class="stat-card">
+              <div class="stat-num"><span data-count="120">0</span>+</div>
+              <div class="stat-label">Luxury Rooms</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3 fade-up delay-1">
+            <div class="stat-card">
+              <div class="stat-num"><span data-count="25000">0</span>+</div>
+              <div class="stat-label">Happy Guests</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3 fade-up delay-2">
+            <div class="stat-card">
+              <div class="stat-num"><span data-count="15">0</span>+</div>
+              <div class="stat-label">Awards Won</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3 fade-up delay-3">
+            <div class="stat-card">
+              <div class="stat-num"><span data-count="25">0</span>+</div>
+              <div class="stat-label">Years Experience</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPECIAL OFFERS═ -->
+    <section class="section-pad bg-light-custom" id="offers">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="section-label fade-up">Exclusive Deals</span>
+          <h2 class="display-6 fade-up delay-1">Special Offers</h2>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6 fade-up delay-1">
+            <div class="offer-card">
+              <div style="position: relative">
+                <img
+                  class="offer-card-img"
+                  src="./assets/images/home/home-SPECIALOFFERS-1.webp"
+                  alt="Honeymoon package"
+                />
+                <span class="offer-badge">Save 20%</span>
+              </div>
+              <div class="offer-card-body">
+                <h5>Honeymoon Package</h5>
+                <p>
+                  Celebrate your love with champagne, rose petals, and a private
+                  dinner with breathtaking views.
+                </p>
+                <div class="d-flex align-items-center justify-content-between">
+                  <div class="offer-price">$399 <span>/ night</span></div>
+                  <a
+                    href="#"
+                    class="btn-outline-gold"
+                    style="padding: 8px 20px; font-size: 10px"
+                    >Book Now</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 fade-up delay-2">
+            <div class="offer-card">
+              <div style="position: relative">
+                <img
+                  class="offer-card-img"
+                  src="./assets/images/home/home-SPECIALOFFERS-2.webp"
+                  alt="Breakfast included"
+                />
+                <span class="offer-badge">Best Value</span>
+              </div>
+              <div class="offer-card-body">
+                <h5>Bed & Breakfast</h5>
+                <p>
+                  Start each morning with our renowned breakfast buffet
+                  featuring international and local delicacies.
+                </p>
+                <div class="d-flex align-items-center justify-content-between">
+                  <div class="offer-price">$179 <span>/ night</span></div>
+                  <a
+                    href="#"
+                    class="btn-outline-gold"
+                    style="padding: 8px 20px; font-size: 10px"
+                    >Book Now</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 fade-up delay-3">
+            <div class="offer-card">
+              <div style="position: relative">
+                <img
+                  class="offer-card-img"
+                  src="./assets/images/home/home-SPECIALOFFERS-3.webp"
+                  alt="Wellness retreat"
+                />
+                <span class="offer-badge">Limited</span>
+              </div>
+              <div class="offer-card-body">
+                <h5>Wellness Retreat</h5>
+                <p>
+                  A 3-night package with daily spa treatments, yoga sessions,
+                  and personalised nutrition plans.
+                </p>
+                <div class="d-flex align-items-center justify-content-between">
+                  <div class="offer-price">$699 <span>/ 3 nights</span></div>
+                  <a
+                    href="#"
+                    class="btn-outline-gold"
+                    style="padding: 8px 20px; font-size: 10px"
+                    >Book Now</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FACILITIES -->
+    <section class="section-pad">
+      <div class="container">
+        <div class="row g-5 align-items-center">
+          <div class="col-lg-5 fade-up">
+            <img
+              src="./assets/images/home/home-FACILITIES-img.webp"
+              alt="Hotel facilities"
+              class="img-fluid rounded-custom"
+              style="box-shadow: var(--shadow)"
+            />
+          </div>
+
+          <div class="col-lg-7 fade-up delay-2">
+            <span class="section-label">Our Facilities</span>
+            <h2 class="display-6 mb-4">
+              Everything You Need,<br />All in One Place
+            </h2>
+
+            <div class="facility-item">
+              <div class="facility-icon"><i class="fa-solid fa-wifi"></i></div>
+              <div class="facility-text">
+                <h6>High-Speed WiFi</h6>
+                <p>
+                  Complimentary gigabit Wi-Fi across all areas including rooms,
+                  pool, and meeting spaces.
+                </p>
+              </div>
+            </div>
+
+            <div class="facility-item">
+              <div class="facility-icon">
+                <i class="fa-solid fa-concierge-bell"></i>
+              </div>
+              <div class="facility-text">
+                <h6>24/7 Concierge</h6>
+                <p>
+                  Our dedicated concierge team is available around the clock to
+                  fulfil every request.
+                </p>
+              </div>
+            </div>
+
+            <div class="facility-item">
+              <div class="facility-icon">
+                <i class="fa-solid fa-martini-glass"></i>
+              </div>
+              <div class="facility-text">
+                <h6>Rooftop Bar & Lounge</h6>
+                <p>
+                  Unwind with craft cocktails and panoramic city views at our
+                  exclusive rooftop bar.
+                </p>
+              </div>
+            </div>
+
+            <div class="facility-item">
+              <div class="facility-icon"><i class="fa-solid fa-shirt"></i></div>
+              <div class="facility-text">
+                <h6>Laundry & Dry Cleaning</h6>
+                <p>
+                  Same-day laundry and professional dry cleaning service
+                  available seven days a week.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIDEO / CTA SECTION -->
+    <div class="video-section">
+      <div class="video-bg"></div>
+      <div class="video-content fade-up">
+        <a href="#" rel="noopener" class="play-btn" aria-label="Watch video">
+          <i class="fa-solid fa-play"></i>
+        </a>
+        <h3
+          class="text-white mb-2"
+          style="
+            font-family: &quot;Cormorant Garamond&quot;, serif;
+            font-size: 2rem;
+          "
+        >
+          Experience Stackly
+        </h3>
+        <p
+          class="text-white-75"
+          style="font-size: 14px; letter-spacing: 0.08em"
+        >
+          Watch our story
+        </p>
+      </div>
+    </div>
+
+    <!-- GALLERY -->
+    <section class="section-pad bg-light-custom" id="gallery">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="section-label fade-up">Visual Tour</span>
+          <h2 class="display-6 fade-up delay-1">Hotel Gallery</h2>
+        </div>
+      </div>
+
+      <div class="gallery-grid fade-up">
+        <div class="gallery-item">
+          <img
+            class="gallery-img"
+            src="./assets/images/home/home-gallery-img-1.webp"
+            alt="Hotel lobby"
+          />
+          <div class="gallery-overlay">
+            <i class="fa-solid fa-magnifying-glass-plus"></i>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img
+            class="gallery-img"
+            src="./assets/images/home/home-gallery-img-2.webp"
+            alt="Pool"
+          />
+          <div class="gallery-overlay">
+            <i class="fa-solid fa-magnifying-glass-plus"></i>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img
+            class="gallery-img"
+            src="./assets/images/home/home-gallery-img-3.webp"
+            alt="Room"
+          />
+          <div class="gallery-overlay">
+            <i class="fa-solid fa-magnifying-glass-plus"></i>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img
+            class="gallery-img"
+            src="./assets/images/home/home-gallery-img-4.webp"
+            alt="Restaurant"
+          />
+          <div class="gallery-overlay">
+            <i class="fa-solid fa-magnifying-glass-plus"></i>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img
+            class="gallery-img"
+            src="./assets/images/home/home-gallery-img-5.webp"
+            alt="Spa"
+          />
+          <div class="gallery-overlay">
+            <i class="fa-solid fa-magnifying-glass-plus"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOCAL EXPERIENCES -->
+    <section class="section-pad" id="experiences">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="section-label fade-up">Around Brooklyn</span>
+          <h2 class="display-6 fade-up delay-1">Local Experiences</h2>
+          <p
+            class="text-muted fade-up delay-2"
+            style="max-width: 520px; margin: 12px auto 0"
+          >
+            Step beyond our doors and discover the very best of Brooklyn —
+            curated by our expert concierge team.
+          </p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-lg-3 col-md-6 fade-up delay-1">
+            <div class="exp-card">
+              <div class="exp-img-wrap">
+                <img
+                  src="./assets/images/home/home-LOCALEXPERIENCES-img-1.webp"
+                  alt="Fine Dining"
+                  class="exp-img"
+                />
+                <div class="exp-tag">Food & Drink</div>
+              </div>
+              <div class="exp-body">
+                <h6 class="exp-title">Brooklyn Food Scene</h6>
+                <p class="exp-desc">
+                  Explore world-renowned restaurants, artisan markets, and
+                  rooftop bars just minutes away.
+                </p>
+                <div class="exp-meta">
+                  <i class="fa-solid fa-location-dot"></i> 5 min walk
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 fade-up delay-2">
+            <div class="exp-card">
+              <div class="exp-img-wrap">
+                <img
+                  src="./assets/images/home/home-LOCALEXPERIENCES-img-2.webp"
+                  alt="Nature"
+                  class="exp-img"
+                />
+                <div class="exp-tag">Nature</div>
+              </div>
+              <div class="exp-body">
+                <h6 class="exp-title">Prospect Park</h6>
+                <p class="exp-desc">
+                  Enjoy morning jogs, weekend picnics, and open-air concerts in
+                  Brooklyn's beloved green escape.
+                </p>
+                <div class="exp-meta">
+                  <i class="fa-solid fa-location-dot"></i> 10 min drive
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 fade-up delay-3">
+            <div class="exp-card">
+              <div class="exp-img-wrap">
+                <img
+                  src="./assets/images/home/home-LOCALEXPERIENCES-img-3.webp"
+                  alt="Art"
+                  class="exp-img"
+                />
+                <div class="exp-tag">Arts & Culture</div>
+              </div>
+              <div class="exp-body">
+                <h6 class="exp-title">Brooklyn Museum</h6>
+                <p class="exp-desc">
+                  One of the largest art museums in the US, housing an
+                  extraordinary collection spanning 5,000 years.
+                </p>
+                <div class="exp-meta">
+                  <i class="fa-solid fa-location-dot"></i> 8 min drive
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 fade-up delay-4">
+            <div class="exp-card">
+              <div class="exp-img-wrap">
+                <img
+                  src="./assets/images/home/home-LOCALEXPERIENCES-img-4.webp"
+                  alt="Skyline"
+                  class="exp-img"
+                />
+                <div class="exp-tag">Sightseeing</div>
+              </div>
+              <div class="exp-body">
+                <h6 class="exp-title">Manhattan Skyline</h6>
+                <p class="exp-desc">
+                  Cross the iconic Brooklyn Bridge on foot for breathtaking
+                  views of the Manhattan skyline.
+                </p>
+                <div class="exp-meta">
+                  <i class="fa-solid fa-location-dot"></i> 15 min walk
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MEET THE TEAM -->
+    <section class="section-pad bg-light-custom" id="team">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="section-label fade-up">The People Behind Stackly</span>
+          <h2 class="display-6 fade-up delay-1">Meet Our Team</h2>
+          <p
+            class="text-muted fade-up delay-2"
+            style="max-width: 520px; margin: 12px auto 0"
+          >
+            Our dedicated professionals are passionate about delivering an
+            unforgettable experience for every guest.
+          </p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+          <div class="col-lg-3 col-md-6 fade-up delay-1">
+            <div class="team-card">
+              <div class="team-img-wrap">
+                <img
+                  src="./assets/images/home/home-team-person1.webp"
+                  alt="General Manager"
+                  class="team-img"
+                />
+                <div class="team-social">
+                  <a href="#" aria-label="LinkedIn"
+                    ><i class="fa-brands fa-linkedin-in"></i
+                  ></a>
+                  <a href="#" aria-label="Twitter"
+                    ><i class="fa-brands fa-x-twitter"></i
+                  ></a>
+                </div>
+              </div>
+              <div class="team-body">
+                <h6 class="team-name">James Hartwell</h6>
+                <span class="team-role">General Manager</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 fade-up delay-2">
+            <div class="team-card">
+              <div class="team-img-wrap">
+                <img
+                  src="./assets/images/home/home-team-person2.webp"
+                  alt="Head Chef"
+                  class="team-img"
+                />
+                <div class="team-social">
+                  <a href="#" aria-label="LinkedIn"
+                    ><i class="fa-brands fa-linkedin-in"></i
+                  ></a>
+                  <a href="#" aria-label="Instagram"
+                    ><i class="fa-brands fa-instagram"></i
+                  ></a>
+                </div>
+              </div>
+              <div class="team-body">
+                <h6 class="team-name">Sofia Martine</h6>
+                <span class="team-role">Executive Head Chef</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 fade-up delay-3">
+            <div class="team-card">
+              <div class="team-img-wrap">
+                <img
+                  src="./assets/images/home/home-team-person3.webp"
+                  alt="Spa Director"
+                  class="team-img"
+                />
+                <div class="team-social">
+                  <a href="#" aria-label="LinkedIn"
+                    ><i class="fa-brands fa-linkedin-in"></i
+                  ></a>
+                  <a href="#" aria-label="Instagram"
+                    ><i class="fa-brands fa-instagram"></i
+                  ></a>
+                </div>
+              </div>
+              <div class="team-body">
+                <h6 class="team-name">Amara Osei</h6>
+                <span class="team-role">Spa & Wellness Director</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 fade-up delay-4">
+            <div class="team-card">
+              <div class="team-img-wrap">
+                <img
+                  src="./assets/images/home/home-team-person4.webp"
+                  alt="Concierge"
+                  class="team-img"
+                />
+                <div class="team-social">
+                  <a href="#" aria-label="LinkedIn"
+                    ><i class="fa-brands fa-linkedin-in"></i
+                  ></a>
+                  <a href="#" aria-label="Twitter"
+                    ><i class="fa-brands fa-x-twitter"></i
+                  ></a>
+                </div>
+              </div>
+              <div class="team-body">
+                <h6 class="team-name">Daniel Cruz</h6>
+                <span class="team-role">Head Concierge</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonial-section section-pad">
+      <div class="testimonial-bg"></div>
+      <div class="testimonial-wrap container">
+        <div class="text-center mb-2">
+          <span class="section-label" style="color: var(--gold)"
+            >Guest Reviews</span
+          >
+        </div>
+
+        <div class="testimonial-card">
+          <div class="quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+          <p class="testimonial-text">
+            "An absolutely magical experience. The staff went above and beyond,
+            the room was immaculate, and the rooftop dinner was simply
+            unforgettable. Stackly has set a new standard for luxury."
+          </p>
+          <div class="testimonial-author">Sarah & James Mitchell</div>
+          <div class="testimonial-role">Honeymooners, London</div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+          <p class="testimonial-text">
+            "From the moment we checked in, every detail was perfect. The
+            Presidential Suite exceeded all expectations and the spa treatments
+            were world-class. We will definitely return."
+          </p>
+          <div class="testimonial-author">Robert Chen</div>
+          <div class="testimonial-role">Business Traveller, New York</div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+          <p class="testimonial-text">
+            "Our family holiday at Stackly was perfect in every way. The kids
+            loved the pool and the family suite gave us so much space. The
+            breakfast buffet was extraordinary — five stars!"
+          </p>
+          <div class="testimonial-author">The Harrison Family</div>
+          <div class="testimonial-role">Family Guests, California</div>
+        </div>
+
+        <div class="testi-dots">
+          <button class="testi-dot" aria-label="Review 1"></button>
+          <button class="testi-dot" aria-label="Review 2"></button>
+          <button class="testi-dot" aria-label="Review 3"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Back to top -->
+    <button id="back-to-top" aria-label="Back to top">
+      <i class="fa-solid fa-chevron-up"></i>
+    </button>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Component Loader -->
+    <script>
+      function loadComponent(id, url) {
+        fetch(url)
+          .then((r) => r.text())
+          .then((html) => {
+            document.getElementById(id).innerHTML = html;
+            // Re-run script.js init after header loads
+            if (id === "header-placeholder") initHeader();
+          });
+      }
+      loadComponent("header-placeholder", "components/common/header.html");
+      loadComponent("footer-placeholder", "components/common/footer.html");
+    </script>
+
+    <!-- Custom JS -->
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/dead-link-guard.js"></script>
+  </body>
+</html>
