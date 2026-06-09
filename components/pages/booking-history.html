@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Booking History - Stackly Hotel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <link rel="stylesheet" href="../../assets/css/styles.css"/>
+  <link rel="stylesheet" href="../../assets/css/dashboard.css"/>
+  <style>
+    /* Section head: wrap on small screens */
+    .bh-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .bh-search-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
+    .bh-search-wrap i {
+      position: absolute;
+      left: 11px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 12px;
+      pointer-events: none;
+    }
+    .bh-search-wrap input {
+      padding: 8px 12px 8px 32px;
+      border: 1px solid #ede8e0;
+      border-radius: 6px;
+      font-family: Jost, sans-serif;
+      font-size: 13px;
+      outline: none;
+      width: 200px;
+      transition: border-color .2s;
+    }
+    .bh-search-wrap input:focus { border-color: var(--gold); }
+
+    /* Mobile history cards */
+    .bh-mobile-list { display: none; flex-direction: column; gap: 12px; }
+    .bh-card {
+      border: 1px solid #ede8e0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .bh-card-top {
+      background: linear-gradient(135deg, var(--dark), #2a221a);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .bh-card-id {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .12em;
+      color: rgba(255,255,255,.5);
+    }
+    .bh-card-room {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .bh-card-body {
+      padding: 14px 16px;
+      background: white;
+    }
+    .bh-card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 16px;
+      margin-bottom: 12px;
+    }
+    .bh-field .lbl {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .bh-field .val {
+      font-size: 13px;
+      color: var(--dark);
+      margin-top: 1px;
+    }
+    .bh-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 10px;
+      border-top: 1px solid #f5f2ed;
+    }
+
+    /* Hide/show per breakpoint */
+    @media (max-width: 767px) {
+      .bh-desktop-table { display: none; }
+      .bh-mobile-list   { display: flex; }
+      .bh-search-wrap input { width: 100%; }
+      .bh-search-wrap { width: 100%; }
+      .bh-head { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* Hide less-important table columns on tablet */
+    @media (max-width: 991px) and (min-width: 768px) {
+      .bh-col-hide { display: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="db-wrapper">
+  <aside class="db-sidebar" id="db-sidebar"></aside>
+  <div class="db-sidebar-overlay" id="db-overlay"></div>
+  <div class="db-main">
+
+    <header class="db-topbar">
+      <div class="db-topbar-left">
+        <button class="db-menu-toggle" id="db-menu-toggle"><i class="fa-solid fa-bars"></i></button>
+        <div>
+          <div class="db-page-title">Booking History</div>
+          <div class="db-breadcrumb">My Stay · Past Stays</div>
+        </div>
+      </div>
+      <div class="db-topbar-right">
+        <div class="db-topbar-date" id="db-date"></div>
+        <button class="db-notif-btn"><i class="fa-regular fa-bell"></i><span class="db-notif-badge"></span></button>
+        <div class="db-topbar-user">
+          <div class="db-topbar-avatar" id="topbar-avatar">S</div>
+          <span class="db-topbar-name" id="topbar-name">Guest</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="db-content">
+
+      <!-- KPIs -->
+      <div class="db-kpi-grid" style="margin-bottom:24px;">
+        <div class="db-kpi-card">
+          <div class="db-kpi-header"><span class="db-kpi-label">Total Stays</span><div class="db-kpi-icon"><i class="fa-solid fa-bed"></i></div></div>
+          <div class="db-kpi-value">12</div>
+          <div class="db-kpi-trend neutral"><i class="fa-solid fa-minus"></i> Since 2022</div>
+        </div>
+        <div class="db-kpi-card">
+          <div class="db-kpi-header"><span class="db-kpi-label">Total Nights</span><div class="db-kpi-icon"><i class="fa-solid fa-moon"></i></div></div>
+          <div class="db-kpi-value">38</div>
+          <div class="db-kpi-trend neutral"><i class="fa-solid fa-minus"></i> All time</div>
+        </div>
+        <div class="db-kpi-card">
+          <div class="db-kpi-header"><span class="db-kpi-label">Total Spent</span><div class="db-kpi-icon"><i class="fa-solid fa-dollar-sign"></i></div></div>
+          <div class="db-kpi-value">$9,240</div>
+          <div class="db-kpi-trend neutral"><i class="fa-solid fa-minus"></i> Lifetime value</div>
+        </div>
+        <div class="db-kpi-card">
+          <div class="db-kpi-header"><span class="db-kpi-label">Avg. Rating Given</span><div class="db-kpi-icon"><i class="fa-solid fa-star"></i></div></div>
+          <div class="db-kpi-value">4.8</div>
+          <div class="db-kpi-trend up"><i class="fa-solid fa-arrow-trend-up"></i> You love us!</div>
+        </div>
+      </div>
+
+      <!-- History card -->
+      <div class="db-card">
+        <div class="bh-head">
+          <div class="db-section-title">Past Stays</div>
+          <div class="bh-search-wrap">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Search stays…" oninput="filterHistory(this.value)"/>
+          </div>
+        </div>
+
+        <!-- Desktop table -->
+        <div class="bh-desktop-table" style="overflow-x:auto;">
+          <table class="db-table">
+            <thead>
+              <tr>
+                <th>Booking ID</th>
+                <th>Room</th>
+                <th>Check-In</th>
+                <th class="bh-col-hide">Check-Out</th>
+                <th>Nights</th>
+                <th>Total</th>
+                <th class="bh-col-hide">Rating</th>
+                <th>Invoice</th>
+              </tr>
+            </thead>
+            <tbody id="bh-tbody"></tbody>
+          </table>
+        </div>
+
+        <!-- Mobile cards -->
+        <div class="bh-mobile-list" id="bh-mobile"></div>
+      </div>
+
+    </main>
+  </div>
+</div>
+<script src="../../assets/js/db-shell.js"></script>
+<script>
+const stays = [
+  { id:"BK-1038", room:"Suite 402",    checkin:"05 May 2025", checkout:"08 May 2025", nights:3, total:"$1,290", stars:5 },
+  { id:"BK-1021", room:"Deluxe 308",   checkin:"14 Feb 2025", checkout:"17 Feb 2025", nights:3, total:"$870",   stars:5 },
+  { id:"BK-1008", room:"Standard 112", checkin:"22 Nov 2024", checkout:"24 Nov 2024", nights:2, total:"$350",   stars:4 },
+  { id:"BK-0994", room:"Suite 501",    checkin:"10 Aug 2024", checkout:"14 Aug 2024", nights:4, total:"$1,720", stars:5 },
+  { id:"BK-0978", room:"Deluxe 204",   checkin:"14 Mar 2024", checkout:"16 Mar 2024", nights:2, total:"$580",   stars:5 },
+];
+let filtered = [...stays];
+
+function stars(n) {
+  return Array.from({length:5}, (_,i) =>
+    `<span style="color:var(--gold);${i>=n?'opacity:.25;':''}">★</span>`
+  ).join("");
+}
+
+function render() {
+  // Desktop
+  document.getElementById("bh-tbody").innerHTML = filtered.map(s => `
+    <tr>
+      <td style="font-size:11px;color:var(--text-muted);font-weight:500;">${s.id}</td>
+      <td>${s.room}</td>
+      <td>${s.checkin}</td>
+      <td class="bh-col-hide">${s.checkout}</td>
+      <td style="text-align:center;">${s.nights}</td>
+      <td style="font-weight:500;color:var(--dark);">${s.total}</td>
+      <td class="bh-col-hide">${stars(s.stars)}</td>
+      <td><a href="#" class="db-view-all" style="font-size:11px;">PDF</a></td>
+    </tr>`).join("");
+
+  // Mobile
+  document.getElementById("bh-mobile").innerHTML = filtered.map(s => `
+    <div class="bh-card">
+      <div class="bh-card-top">
+        <div>
+          <div class="bh-card-id">${s.id}</div>
+          <div class="bh-card-room">${s.room}</div>
+        </div>
+        <div style="font-size:16px;">${stars(s.stars)}</div>
+      </div>
+      <div class="bh-card-body">
+        <div class="bh-card-grid">
+          <div class="bh-field"><div class="lbl">Check-In</div><div class="val">${s.checkin}</div></div>
+          <div class="bh-field"><div class="lbl">Check-Out</div><div class="val">${s.checkout}</div></div>
+          <div class="bh-field"><div class="lbl">Nights</div><div class="val">${s.nights}</div></div>
+          <div class="bh-field"><div class="lbl">Total</div><div class="val" style="color:var(--gold);font-weight:500;">${s.total}</div></div>
+        </div>
+        <div class="bh-card-footer">
+          <span style="font-size:11px;color:var(--text-muted);">Stay completed</span>
+          <a href="#" class="db-view-all" style="font-size:11px;"><i class="fa-solid fa-file-pdf me-1"></i>Download PDF</a>
+        </div>
+      </div>
+    </div>`).join("");
+}
+
+function filterHistory(q) {
+  q = q.toLowerCase();
+  filtered = stays.filter(s =>
+    s.id.toLowerCase().includes(q) || s.room.toLowerCase().includes(q) ||
+    s.checkin.toLowerCase().includes(q)
+  );
+  render();
+}
+
+render();
+</script>
+</body>
+</html>

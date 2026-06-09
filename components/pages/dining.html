@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dining Reservations - Stackly Hotel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <link rel="stylesheet" href="../../assets/css/styles.css"/>
+  <link rel="stylesheet" href="../../assets/css/dashboard.css"/>
+  <style>
+    .resto-card{background:var(--white);border:1px solid #ede8e0;border-radius:10px;overflow:hidden;transition:all .22s;}
+    .resto-card:hover{box-shadow:0 8px 28px rgba(184,154,96,.13);transform:translateY(-3px);}
+    .resto-header{background:linear-gradient(135deg,var(--dark),#2a221a);padding:24px;text-align:center;}
+    .resto-icon{font-size:28px;color:var(--gold);margin-bottom:8px;}
+    .resto-name{font-family:"Cormorant Garamond",serif;font-size:1.3rem;font-weight:700;color:var(--white);}
+    .resto-cuisine{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:3px;}
+    .resto-body{padding:18px 20px;}
+    .resto-desc{font-size:12px;color:var(--text-muted);line-height:1.65;margin-bottom:12px;}
+    .resto-meta{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--text-muted);}
+    .resto-meta i{color:var(--gold);margin-right:4px;}
+    .resto-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-bottom:28px;}
+  </style>
+</head>
+<body>
+<div class="db-wrapper">
+  <aside class="db-sidebar" id="db-sidebar"></aside>
+  <div class="db-sidebar-overlay" id="db-overlay"></div>
+  <div class="db-main">
+    <header class="db-topbar">
+      <div class="db-topbar-left">
+        <button class="db-menu-toggle" id="db-menu-toggle"><i class="fa-solid fa-bars"></i></button>
+        <div><div class="db-page-title">Dining Reservations</div><div class="db-breadcrumb">Extras · Book a Table</div></div>
+      </div>
+      <div class="db-topbar-right">
+        <div class="db-topbar-date" id="db-date"></div>
+        <button class="db-notif-btn"><i class="fa-regular fa-bell"></i><span class="db-notif-badge"></span></button>
+        <div class="db-topbar-user"><div class="db-topbar-avatar" id="topbar-avatar">S</div><span class="db-topbar-name" id="topbar-name">Guest</span></div>
+      </div>
+    </header>
+    <main class="db-content">
+
+      <div class="db-section-head" style="margin-bottom:16px;"><div class="db-section-title">Our Restaurants</div></div>
+      <div class="resto-grid">
+        <div class="resto-card"><div class="resto-header"><div class="resto-icon"><i class="fa-solid fa-utensils"></i></div><div class="resto-name">The Grand Table</div><div class="resto-cuisine">Contemporary European</div></div><div class="resto-body"><div class="resto-desc">Our signature fine dining restaurant offering expertly crafted tasting menus with local, seasonal ingredients.</div><div class="resto-meta"><span><i class="fa-solid fa-clock"></i>18:00 – 22:30</span><span><i class="fa-solid fa-star"></i>4.9</span></span></div><div style="margin-top:14px;"><a href="#book" class="btn-gold" style="font-size:11px;padding:9px 18px;display:inline-block;">Reserve Table</a></div></div></div>
+        <div class="resto-card"><div class="resto-header"><div class="resto-icon"><i class="fa-solid fa-mug-saucer"></i></div><div class="resto-name">The Atrium Café</div><div class="resto-cuisine">All-Day Dining</div></div><div class="resto-body"><div class="resto-desc">A bright, relaxed space for breakfast, brunch and light lunches. Fresh pastries baked daily on-site.</div><div class="resto-meta"><span><i class="fa-solid fa-clock"></i>07:00 – 16:00</span><span><i class="fa-solid fa-star"></i>4.8</span></div><div style="margin-top:14px;"><a href="#book" class="btn-gold" style="font-size:11px;padding:9px 18px;display:inline-block;">Reserve Table</a></div></div></div>
+        <div class="resto-card"><div class="resto-header"><div class="resto-icon"><i class="fa-solid fa-martini-glass"></i></div><div class="resto-name">Rooftop Bar & Lounge</div><div class="resto-cuisine">Cocktails & Small Plates</div></div><div class="resto-body"><div class="resto-desc">Panoramic city views with craft cocktails, premium spirits, and an elegant selection of sharing plates.</div><div class="resto-meta"><span><i class="fa-solid fa-clock"></i>16:00 – 01:00</span><span><i class="fa-solid fa-star"></i>4.9</span></div><div style="margin-top:14px;"><a href="#book" class="btn-gold" style="font-size:11px;padding:9px 18px;display:inline-block;">Reserve Table</a></div></div></div>
+      </div>
+
+      <div class="db-grid-2" style="margin-bottom:28px;">
+        <!-- Booking Form -->
+        <div class="db-card" id="book">
+          <div class="db-section-head"><div class="db-section-title">Make a Reservation</div></div>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div><label style="font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px;"><i class="fa-solid fa-utensils me-1"></i>Restaurant</label><select style="width:100%;padding:11px 14px;border:1px solid #ede8e0;border-radius:6px;font-family:Jost,sans-serif;font-size:13px;outline:none;"><option>The Grand Table</option><option>The Atrium Café</option><option>Rooftop Bar & Lounge</option></select></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+              <div><label style="font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px;"><i class="fa-regular fa-calendar me-1"></i>Date</label><input type="date" style="width:100%;padding:11px 14px;border:1px solid #ede8e0;border-radius:6px;font-family:Jost,sans-serif;font-size:13px;outline:none;"/></div>
+              <div><label style="font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px;"><i class="fa-solid fa-users me-1"></i>Guests</label><select style="width:100%;padding:11px 14px;border:1px solid #ede8e0;border-radius:6px;font-family:Jost,sans-serif;font-size:13px;outline:none;"><option>1 Guest</option><option>2 Guests</option><option>3 Guests</option><option>4 Guests</option><option>5+ Guests</option></select></div>
+            </div>
+            <div><label style="font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px;"><i class="fa-solid fa-clock me-1"></i>Preferred Time</label><select style="width:100%;padding:11px 14px;border:1px solid #ede8e0;border-radius:6px;font-family:Jost,sans-serif;font-size:13px;outline:none;"><option>18:00</option><option>18:30</option><option>19:00</option><option>19:30</option><option>20:00</option><option>20:30</option><option>21:00</option></select></div>
+            <div><label style="font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px;">Special Requests</label><textarea placeholder="Dietary requirements, occasion, seating preference…" style="width:100%;padding:11px 14px;border:1px solid #ede8e0;border-radius:6px;font-family:Jost,sans-serif;font-size:13px;outline:none;resize:vertical;min-height:80px;"></textarea></div>
+            <button class="btn-gold" style="font-size:11px;padding:12px 28px;"><i class="fa-solid fa-calendar-check me-2"></i>Confirm Reservation</button>
+          </div>
+        </div>
+
+        <!-- Upcoming Dining -->
+        <div class="db-card">
+          <div class="db-section-head"><div class="db-section-title">Your Dining Reservations</div></div>
+          <div class="db-activity-list">
+            <div class="db-activity-item"><div class="db-activity-icon"><i class="fa-solid fa-utensils"></i></div><div><div class="db-activity-text"><strong>The Grand Table</strong> — Tonight, 19:30</div><div class="db-activity-time">2 guests · Window table requested</div></div></div>
+            <div class="db-activity-item"><div class="db-activity-icon"><i class="fa-solid fa-martini-glass"></i></div><div><div class="db-activity-text"><strong>Rooftop Bar</strong> — 14 Jul 2025, 20:00</div><div class="db-activity-time">4 guests · Birthday celebration</div></div></div>
+          </div>
+          <div style="margin-top:16px;padding-top:16px;border-top:1px solid #f5f2ed;">
+            <div class="db-section-head" style="margin-bottom:12px;"><div class="db-section-title" style="font-size:1rem;">Today's Specials</div></div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div style="padding:12px;background:#faf8f5;border-radius:8px;border-left:3px solid var(--gold);"><div style="font-size:13px;font-weight:500;color:var(--dark);">Lobster Bisque</div><div style="font-size:12px;color:var(--text-muted);">Starter of the day · $24</div></div>
+              <div style="padding:12px;background:#faf8f5;border-radius:8px;border-left:3px solid var(--gold);"><div style="font-size:13px;font-weight:500;color:var(--dark);">Herb-Crusted Rack of Lamb</div><div style="font-size:12px;color:var(--text-muted);">Main of the day · $58</div></div>
+              <div style="padding:12px;background:#faf8f5;border-radius:8px;border-left:3px solid var(--gold);"><div style="font-size:13px;font-weight:500;color:var(--dark);">Crème Brûlée à la Maison</div><div style="font-size:12px;color:var(--text-muted);">Dessert of the day · $16</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+<script src="../../assets/js/db-shell.js"></script>
+</body>
+</html>

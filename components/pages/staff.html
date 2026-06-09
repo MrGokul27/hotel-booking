@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Staff Management - Stackly Hotel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../assets/css/dashboard.css" />
+    <style>
+      .staff-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 18px;
+      }
+      .staff-card {
+        background: var(--white);
+        border: 1px solid #ede8e0;
+        border-radius: 10px;
+        padding: 22px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: all 0.22s;
+      }
+      .staff-card:hover {
+        box-shadow: 0 8px 28px rgba(184, 154, 96, 0.13);
+        transform: translateY(-3px);
+      }
+      .staff-av {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: var(--dark);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 700;
+        font-size: 24px;
+        color: var(--gold);
+        margin-bottom: 14px;
+        border: 2px solid #ede8e0;
+      }
+      .staff-name {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--dark);
+        margin-bottom: 3px;
+      }
+      .staff-role {
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 10px;
+      }
+      .staff-dept {
+        font-size: 12px;
+        color: var(--text-muted);
+        margin-bottom: 12px;
+      }
+      .shift-badge {
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .shift-on {
+        background: rgba(39, 174, 96, 0.1);
+        color: #27ae60;
+      }
+      .shift-off {
+        background: rgba(150, 150, 150, 0.1);
+        color: #999;
+      }
+      .shift-leave {
+        background: rgba(243, 156, 18, 0.12);
+        color: #d4870a;
+      }
+      .staff-contact {
+        display: flex;
+        gap: 10px;
+        margin-top: 14px;
+        justify-content: center;
+      }
+      .staff-contact a {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 1px solid #ede8e0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-muted);
+        font-size: 13px;
+        transition: all 0.2s;
+      }
+      .staff-contact a:hover {
+        background: var(--gold);
+        border-color: var(--gold);
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="db-wrapper">
+      <aside class="db-sidebar" id="db-sidebar"></aside>
+      <div class="db-sidebar-overlay" id="db-overlay"></div>
+      <div class="db-main">
+        <header class="db-topbar">
+          <div class="db-topbar-left">
+            <button class="db-menu-toggle" id="db-menu-toggle">
+              <i class="fa-solid fa-bars"></i>
+            </button>
+            <div>
+              <div class="db-page-title">Staff Management</div>
+              <div class="db-breadcrumb">Operations · Team Directory</div>
+            </div>
+          </div>
+          <div class="db-topbar-right">
+            <div class="db-topbar-date" id="db-date"></div>
+            <button class="db-notif-btn">
+              <i class="fa-regular fa-bell"></i
+              ><span class="db-notif-badge"></span>
+            </button>
+            <div class="db-topbar-user">
+              <div class="db-topbar-avatar" id="topbar-avatar">S</div>
+              <span class="db-topbar-name" id="topbar-name">Admin</span>
+            </div>
+          </div>
+        </header>
+        <main class="db-content">
+          <div class="db-kpi-grid" style="margin-bottom: 28px">
+            <div class="db-kpi-card">
+              <div class="db-kpi-header">
+                <span class="db-kpi-label">Total Staff</span>
+                <div class="db-kpi-icon">
+                  <i class="fa-solid fa-user-tie"></i>
+                </div>
+              </div>
+              <div class="db-kpi-value">84</div>
+              <div class="db-kpi-trend neutral">
+                <i class="fa-solid fa-minus"></i> 6 departments
+              </div>
+            </div>
+            <div class="db-kpi-card">
+              <div class="db-kpi-header">
+                <span class="db-kpi-label">On Shift</span>
+                <div class="db-kpi-icon">
+                  <i class="fa-solid fa-circle-check"></i>
+                </div>
+              </div>
+              <div class="db-kpi-value">52</div>
+              <div class="db-kpi-trend up">
+                <i class="fa-solid fa-arrow-trend-up"></i> Full coverage
+              </div>
+            </div>
+            <div class="db-kpi-card">
+              <div class="db-kpi-header">
+                <span class="db-kpi-label">On Leave</span>
+                <div class="db-kpi-icon">
+                  <i class="fa-solid fa-umbrella-beach"></i>
+                </div>
+              </div>
+              <div class="db-kpi-value">8</div>
+              <div class="db-kpi-trend neutral">
+                <i class="fa-solid fa-minus"></i> Approved
+              </div>
+            </div>
+            <div class="db-kpi-card">
+              <div class="db-kpi-header">
+                <span class="db-kpi-label">Open Shifts</span>
+                <div class="db-kpi-icon">
+                  <i class="fa-solid fa-calendar-xmark"></i>
+                </div>
+              </div>
+              <div class="db-kpi-value">3</div>
+              <div class="db-kpi-trend down">
+                <i class="fa-solid fa-arrow-trend-down"></i> Needs filling
+              </div>
+            </div>
+          </div>
+
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              flex-wrap: wrap;
+              gap: 12px;
+              margin-bottom: 22px;
+            "
+          >
+            <div
+              style="
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+                align-items: center;
+              "
+            >
+              <div style="position: relative">
+                <i
+                  class="fa-solid fa-magnifying-glass"
+                  style="
+                    position: absolute;
+                    left: 12px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    color: var(--text-muted);
+                    font-size: 13px;
+                  "
+                ></i>
+                <input
+                  type="text"
+                  placeholder="Search staff…"
+                  oninput="renderStaff(this.value)"
+                  style="
+                    padding: 9px 14px 9px 36px;
+                    border: 1px solid #ede8e0;
+                    border-radius: 6px;
+                    font-family: Jost, sans-serif;
+                    font-size: 13px;
+                    outline: none;
+                    width: 210px;
+                  "
+                />
+              </div>
+              <select
+                onchange="renderStaff('', this.value)"
+                style="
+                  padding: 9px 14px;
+                  border: 1px solid #ede8e0;
+                  border-radius: 6px;
+                  font-size: 13px;
+                  outline: none;
+                  background: white;
+                  font-family: Jost, sans-serif;
+                "
+              >
+                <option value="">All Departments</option>
+                <option>Front Desk</option>
+                <option>Housekeeping</option>
+                <option>Spa</option>
+                <option>F&B</option>
+                <option>Maintenance</option>
+                <option>Management</option>
+              </select>
+            </div>
+            <a
+              href="#"
+              class="btn-gold"
+              style="font-size: 11px; padding: 9px 20px"
+              ><i class="fa-solid fa-user-plus me-2"></i>Add Staff</a
+            >
+          </div>
+
+          <div class="staff-grid" id="staff-grid"></div>
+        </main>
+      </div>
+    </div>
+    <script src="../../assets/js/db-shell.js"></script>
+    <script>
+      const staff = [
+        {
+          name: "Elena Vasquez",
+          role: "General Manager",
+          dept: "Management",
+          shift: "on",
+          ext: "x201",
+        },
+        {
+          name: "Thomas Reid",
+          role: "Front Desk Manager",
+          dept: "Front Desk",
+          shift: "on",
+          ext: "x202",
+        },
+        {
+          name: "Amara Diallo",
+          role: "Head Concierge",
+          dept: "Front Desk",
+          shift: "on",
+          ext: "x203",
+        },
+        {
+          name: "Kenji Tanaka",
+          role: "Executive Chef",
+          dept: "F&B",
+          shift: "on",
+          ext: "x210",
+        },
+        {
+          name: "Fatima Al-Hassan",
+          role: "Spa Director",
+          dept: "Spa",
+          shift: "on",
+          ext: "x215",
+        },
+        {
+          name: "Lucas Bennett",
+          role: "Head of Housekeeping",
+          dept: "Housekeeping",
+          shift: "on",
+          ext: "x220",
+        },
+        {
+          name: "Sophia Martins",
+          role: "Revenue Manager",
+          dept: "Management",
+          shift: "on",
+          ext: "x205",
+        },
+        {
+          name: "Omar Ibrahim",
+          role: "Maintenance Lead",
+          dept: "Maintenance",
+          shift: "on",
+          ext: "x225",
+        },
+        {
+          name: "Claire Dubois",
+          role: "Guest Relations",
+          dept: "Front Desk",
+          shift: "leave",
+          ext: "x204",
+        },
+        {
+          name: "Marcus Webb",
+          role: "Sous Chef",
+          dept: "F&B",
+          shift: "off",
+          ext: "x211",
+        },
+        {
+          name: "Aisha Nkosi",
+          role: "Spa Therapist",
+          dept: "Spa",
+          shift: "on",
+          ext: "x216",
+        },
+        {
+          name: "David Park",
+          role: "Night Auditor",
+          dept: "Front Desk",
+          shift: "off",
+          ext: "x206",
+        },
+      ];
+      const shiftCls = {
+        on: "shift-on",
+        off: "shift-off",
+        leave: "shift-leave",
+      };
+      const shiftLbl = { on: "On Shift", off: "Off Duty", leave: "On Leave" };
+      function renderStaff(q = "", dept = "") {
+        const list = staff.filter(
+          (s) =>
+            (!q ||
+              s.name.toLowerCase().includes(q.toLowerCase()) ||
+              s.role.toLowerCase().includes(q.toLowerCase())) &&
+            (!dept || s.dept === dept),
+        );
+        const ini = (n) =>
+          n
+            .split(" ")
+            .map((w) => w[0])
+            .slice(0, 2)
+            .join("")
+            .toUpperCase();
+        document.getElementById("staff-grid").innerHTML = list
+          .map(
+            (s) => `
+    <div class="staff-card">
+      <div class="staff-av">${ini(s.name)}</div>
+      <div class="staff-name">${s.name}</div>
+      <div class="staff-role">${s.role}</div>
+      <div class="staff-dept"><i class="fa-solid fa-building me-1"></i>${s.dept}</div>
+      <span class="shift-badge ${shiftCls[s.shift]}">${shiftLbl[s.shift]}</span>
+      <div class="staff-contact">
+        <a href="#" title="Email"><i class="fa-regular fa-envelope"></i></a>
+        <a href="#" title="Extension: ${s.ext}"><i class="fa-solid fa-phone"></i></a>
+        <a href="#" title="Profile"><i class="fa-solid fa-user"></i></a>
+      </div>
+    </div>`,
+          )
+          .join("");
+      }
+      renderStaff();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Room Management - Stackly Hotel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../assets/css/dashboard.css" />
+    <style>
+      .room-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 14px;
+      }
+      .room-tile {
+        background: var(--white);
+        border: 1px solid #ede8e0;
+        border-radius: 10px;
+        padding: 18px 16px;
+        cursor: pointer;
+        transition: all 0.22s;
+        text-align: center;
+        position: relative;
+      }
+      .room-tile:hover {
+        box-shadow: 0 6px 24px rgba(184, 154, 96, 0.15);
+        transform: translateY(-2px);
+      }
+      .room-tile.occupied {
+        border-top: 3px solid var(--gold);
+      }
+      .room-tile.available {
+        border-top: 3px solid #27ae60;
+      }
+      .room-tile.maintenance {
+        border-top: 3px solid #e74c3c;
+      }
+      .room-tile.reserved {
+        border-top: 3px solid #3498db;
+      }
+      .room-num {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--dark);
+        line-height: 1;
+      }
+      .room-type-tag {
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin: 4px 0 8px;
+      }
+      .room-status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin: 0 auto 6px;
+      }
+      .room-guest {
+        font-size: 11px;
+        color: var(--text);
+        line-height: 1.4;
+      }
+      .filter-tabs {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+      }
+      .filter-tab {
+        padding: 7px 18px;
+        border: 1px solid #ede8e0;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        background: white;
+        transition: all 0.2s;
+        color: var(--text);
+      }
+      .filter-tab.active,
+      .filter-tab:hover {
+        background: var(--gold);
+        border-color: var(--gold);
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="db-wrapper">
+      <aside class="db-sidebar" id="db-sidebar"></aside>
+      <div class="db-sidebar-overlay" id="db-overlay"></div>
+      <div class="db-main">
+        <header class="db-topbar">
+          <div class="db-topbar-left">
+            <button class="db-menu-toggle" id="db-menu-toggle">
+              <i class="fa-solid fa-bars"></i>
+            </button>
+            <div>
+              <div class="db-page-title">Room Management</div>
+              <div class="db-breadcrumb">Admin · Floor Overview</div>
+            </div>
+          </div>
+          <div class="db-topbar-right">
+            <div class="db-topbar-date" id="db-date"></div>
+            <button class="db-notif-btn">
+              <i class="fa-regular fa-bell"></i
+              ><span class="db-notif-badge"></span>
+            </button>
+            <div class="db-topbar-user">
+              <div class="db-topbar-avatar" id="topbar-avatar">S</div>
+              <span class="db-topbar-name" id="topbar-name">Admin</span>
+            </div>
+          </div>
+        </header>
+        <main class="db-content">
+          <!-- KPIs -->
+          <div class="db-kpi-grid" style="margin-bottom: 28px">
+            <div class="db-kpi-card">
+              <div class="db-kpi-header">
+                <span class="db-kpi-label">Total Rooms</span>
+                <div class="db-kpi-icon">
+                  <i class="fa-solid fa-door-open"></i>
+                </div>
+              </div>
+              <div class="db-kpi-value">100</div>
+              <div class="db-kpi-trend neutral">
+                <i class="fa-solid fa-minus"></i> 5 floors
+              </div>
+            </div>
+            <div class="db-kpi-card">
+              <div class="db-kpi-header">
+                <span class="db-kpi-label">Occupied</span>
+                <div class="db-kpi-icon"><i class="fa-solid fa-bed"></i></div>
+              </div>
+              <div class="db-kpi-value">76</div>
+              <div class="db-kpi-trend up">
+                <i class="fa-solid fa-arrow-trend-up"></i> 76% occupancy
+              </div>
+            </div>
+            <div class="db-kpi-card">
+              <div class="db-kpi-header">
+                <span class="db-kpi-label">Available</span>
+                <div class="db-kpi-icon">
+                  <i class="fa-solid fa-circle-check"></i>
+                </div>
+              </div>
+              <div class="db-kpi-value">18</div>
+              <div class="db-kpi-trend up">
+                <i class="fa-solid fa-arrow-trend-up"></i> Ready to book
+              </div>
+            </div>
+            <div class="db-kpi-card">
+              <div class="db-kpi-header">
+                <span class="db-kpi-label">Maintenance</span>
+                <div class="db-kpi-icon">
+                  <i class="fa-solid fa-wrench"></i>
+                </div>
+              </div>
+              <div class="db-kpi-value">2</div>
+              <div class="db-kpi-trend down">
+                <i class="fa-solid fa-arrow-trend-down"></i> Est. 2 days
+              </div>
+            </div>
+          </div>
+
+          <!-- Legend + Filter -->
+          <div class="db-card" style="margin-bottom: 24px">
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 14px;
+              "
+            >
+              <div style="display: flex; gap: 20px; flex-wrap: wrap">
+                <span
+                  style="
+                    font-size: 12px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                  "
+                  ><span
+                    style="
+                      width: 10px;
+                      height: 10px;
+                      border-radius: 2px;
+                      background: var(--gold);
+                      display: inline-block;
+                    "
+                  ></span
+                  >Occupied</span
+                >
+                <span
+                  style="
+                    font-size: 12px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                  "
+                  ><span
+                    style="
+                      width: 10px;
+                      height: 10px;
+                      border-radius: 2px;
+                      background: #27ae60;
+                      display: inline-block;
+                    "
+                  ></span
+                  >Available</span
+                >
+                <span
+                  style="
+                    font-size: 12px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                  "
+                  ><span
+                    style="
+                      width: 10px;
+                      height: 10px;
+                      border-radius: 2px;
+                      background: #3498db;
+                      display: inline-block;
+                    "
+                  ></span
+                  >Reserved</span
+                >
+                <span
+                  style="
+                    font-size: 12px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                  "
+                  ><span
+                    style="
+                      width: 10px;
+                      height: 10px;
+                      border-radius: 2px;
+                      background: #e74c3c;
+                      display: inline-block;
+                    "
+                  ></span
+                  >Maintenance</span
+                >
+              </div>
+              <a
+                href="#"
+                class="btn-gold"
+                style="font-size: 11px; padding: 9px 20px"
+                ><i class="fa-solid fa-plus me-2"></i>Add Room</a
+              >
+            </div>
+          </div>
+
+          <!-- Filter Tabs -->
+          <div class="filter-tabs">
+            <button class="filter-tab active" onclick="filterRooms('')">
+              All Rooms
+            </button>
+            <button class="filter-tab" onclick="filterRooms('available')">
+              Available
+            </button>
+            <button class="filter-tab" onclick="filterRooms('occupied')">
+              Occupied
+            </button>
+            <button class="filter-tab" onclick="filterRooms('reserved')">
+              Reserved
+            </button>
+            <button class="filter-tab" onclick="filterRooms('maintenance')">
+              Maintenance
+            </button>
+            <button class="filter-tab" onclick="filterRooms('standard')">
+              Standard
+            </button>
+            <button class="filter-tab" onclick="filterRooms('deluxe')">
+              Deluxe
+            </button>
+            <button class="filter-tab" onclick="filterRooms('suite')">
+              Suite
+            </button>
+          </div>
+
+          <!-- Room Grid -->
+          <div class="room-grid" id="room-grid"></div>
+        </main>
+      </div>
+    </div>
+    <script src="../../assets/js/db-shell.js"></script>
+    <script>
+      const statusColors = {
+        occupied: "var(--gold)",
+        available: "#27ae60",
+        reserved: "#3498db",
+        maintenance: "#e74c3c",
+      };
+      const rooms = [
+        ...Array.from({ length: 20 }, (_, i) => ({
+          num: 100 + i + 1,
+          floor: 1,
+          type: "standard",
+          status: [
+            "available",
+            "occupied",
+            "occupied",
+            "reserved",
+            "available",
+          ][i % 5],
+          guest: ["—", "L. Martin", "S. Osei", "—", "—"][i % 5],
+        })),
+        ...Array.from({ length: 30 }, (_, i) => ({
+          num: 200 + i + 1,
+          floor: 2,
+          type: "deluxe",
+          status: [
+            "occupied",
+            "occupied",
+            "confirmed",
+            "available",
+            "occupied",
+          ][i % 5],
+          guest: ["J. Harrington", "A. Moore", "—", "—", "P. Sharma"][i % 5],
+        })),
+        ...Array.from({ length: 20 }, (_, i) => ({
+          num: 300 + i + 1,
+          floor: 3,
+          type: "suite",
+          status: ["occupied", "available", "reserved", "occupied", "occupied"][
+            i % 5
+          ],
+          guest: ["M. Lefevre", "—", "C. Romano", "T. Al-Farsi", "I. Larsson"][
+            i % 5
+          ],
+        })),
+        ...Array.from({ length: 10 }, (_, i) => ({
+          num: 400 + i + 1,
+          floor: 4,
+          type: "suite",
+          status:
+            i === 1 ? "maintenance" : i % 2 === 0 ? "occupied" : "available",
+          guest: i === 1 ? "Maintenance" : i % 2 === 0 ? "Mei Lin" : "—",
+        })),
+        {
+          num: 501,
+          floor: 5,
+          type: "presidential",
+          status: "occupied",
+          guest: "Sophie Caldwell",
+        },
+        {
+          num: 502,
+          floor: 5,
+          type: "presidential",
+          status: "available",
+          guest: "—",
+        },
+      ];
+      let activeFilter = "";
+      function filterRooms(f) {
+        activeFilter = f;
+        document
+          .querySelectorAll(".filter-tab")
+          .forEach((t) => t.classList.remove("active"));
+        event.currentTarget.classList.add("active");
+        render();
+      }
+      function render() {
+        const grid = document.getElementById("room-grid");
+        const list = activeFilter
+          ? rooms.filter(
+              (r) => r.status === activeFilter || r.type === activeFilter,
+            )
+          : rooms;
+        grid.innerHTML = list
+          .map(
+            (r) => `
+    <div class="room-tile ${r.status}" title="${r.type} · ${r.status}">
+      <div class="room-status-dot" style="background:${statusColors[r.status] || statusColors.available};"></div>
+      <div class="room-num">${r.num}</div>
+      <div class="room-type-tag">${r.type}</div>
+      <div class="room-guest">${r.guest}</div>
+    </div>`,
+          )
+          .join("");
+      }
+      render();
+    </script>
+  </body>
+</html>

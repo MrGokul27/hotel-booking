@@ -26,7 +26,10 @@
       <!-- ══ LEFT PANEL ══ -->
       <div class="auth-left">
         <div class="auth-left-bg">
-          <img src="../../assets/images/home/home-hero-bg-3.webp" alt="Hotel room" />
+          <img
+            src="../../assets/images/home/home-hero-bg-3.webp"
+            alt="Hotel room"
+          />
         </div>
 
         <!-- Logo -->
@@ -222,8 +225,14 @@
           }
 
           if (valid) {
+            sessionStorage.setItem(
+              "stackly_user",
+              JSON.stringify({ role, email, remember }),
+            );
             showToast("Login successful! Redirecting…");
-            // redirect logic here
+            setTimeout(() => {
+              window.location.href = "dashboard.html";
+            }, 1400);
           }
         });
 

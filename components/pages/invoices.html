@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoices & Billing - Stackly Hotel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../assets/css/dashboard.css" />
+    <style>
+      /* Toolbar */
+      .inv-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .inv-filters {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+        flex: 1;
+        min-width: 0;
+      }
+      .inv-search-wrap {
+        position: relative;
+        flex: 1;
+        min-width: 140px;
+        max-width: 240px;
+      }
+      .inv-search-wrap i {
+        position: absolute;
+        left: 11px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+        font-size: 12px;
+        pointer-events: none;
+      }
+      .inv-search-wrap input {
+        width: 100%;
+        padding: 9px 12px 9px 32px;
+        border: 1px solid #ede8e0;
+        border-radius: 6px;
+        font-family: Jost, sans-serif;
+        font-size: 13px;
+        outline: none;
+      }
+      .inv-select {
+        padding: 9px 12px;
+        border: 1px solid #ede8e0;
+        border-radius: 6px;
+        font-family: Jost, sans-serif;
+        font-size: 13px;
+        outline: none;
+        background: white;
+      }
+      .inv-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      /* Mobile invoice cards */
+      .inv-mobile-list {
+        display: none;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .inv-mobile-card {
+        background: white;
+        border: 1px solid #ede8e0;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .inv-mobile-card-top {
+        background: linear-gradient(135deg, var(--dark), #2a221a);
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .inv-mobile-card-id {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        color: rgba(255, 255, 255, 0.55);
+      }
+      .inv-mobile-card-body {
+        padding: 14px 16px;
+      }
+      .inv-mobile-guest {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--dark);
+        margin-bottom: 10px;
+      }
+      .inv-mobile-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px 14px;
+        margin-bottom: 12px;
+      }
+      .inv-mobile-field .lbl {
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+      .inv-mobile-field .val {
+        font-size: 13px;
+        color: var(--dark);
+        margin-top: 1px;
+      }
+
+      @media (max-width: 767px) {
+        .inv-desktop-table {
+          display: none;
+        }
+        .inv-mobile-list {
+          display: flex;
+        }
+        .inv-select {
+          display: none;
+        }
+        .inv-actions .btn-outline-gold {
+          display: none;
+        }
+      }
+      @media (max-width: 575px) {
+        .inv-search-wrap {
+          max-width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="db-wrapper">
+      <aside class="db-sidebar" id="db-sidebar"></aside>
+      <div class="db-sidebar-overlay" id="db-overlay"></div>
+      <div class="db-main">
+        <header class="db-topbar">
+          <div class="db-topbar-left">
+            <button class="db-menu-toggle" id="db-menu-toggle">
+              <i class="fa-solid fa-bars"></i>
+            </button>
+            <div>
+              <div class="db-page-title">Invoices & Billing</div>
+              <div class="db-breadcrumb">Finance · Payments</div>
+            </div>
+          </div>
+          <div class="db-topbar-right">
+            <div class="db-topbar-date" id="db-date"></div>
+            <button class="db-notif-btn">
+              <i class="fa-regular fa-bell"></i
+              ><span class="db-notif-badge"></span>
+            </button>
+            <div class="db-topbar-user">
+              <div class="db-topbar-avatar" id="topbar-avatar">S</div>
+              <span class="db-topbar-name" id="topbar-name">Admin</span>
+            </div>
+          </div>
+        </header>
+        <main class="db-content">
+          <!-- KPIs -->
+          <div class="db-kpi-grid" style="margin-bottom: 24px">
+            <div class="db-kpi-card">
+              <div class="db-kpi-header">
+                <span class="db-kpi-label">Total Invoiced</span>
+                <div class="db-kpi-icon">
+                  <i class="fa-solid fa-file-invoice-dollar"></i>
+                </div>
+              </div>
+              <div class="db-kpi-value">$142K</div>
+              <div class="db-kpi-trend up">
+                <i class="fa-solid fa-arrow-trend-up"></i> This month
+              </div>
+            </div>
+            <div class="db-kpi-card">
+              <div class="db-kpi-header">
+                <span class="db-kpi-label">Paid</span>
+                <div class="db-kpi-icon">
+                  <i class="fa-solid fa-circle-check"></i>
+                </div>
+              </div>
+              <div class="db-kpi-value">$128K</div>
+              <div class="db-kpi-trend up">
+                <i class="fa-solid fa-arrow-trend-up"></i> 90.1% collected
+              </div>
+            </div>
+            <div class="db-kpi-card">
+              <div class="db-kpi-header">
+                <span class="db-kpi-label">Outstanding</span>
+                <div class="db-kpi-icon"><i class="fa-solid fa-clock"></i></div>
+              </div>
+              <div class="db-kpi-value">$14K</div>
+              <div class="db-kpi-trend down">
+                <i class="fa-solid fa-arrow-trend-down"></i> 8 invoices
+              </div>
+            </div>
+            <div class="db-kpi-card">
+              <div class="db-kpi-header">
+                <span class="db-kpi-label">Overdue</span>
+                <div class="db-kpi-icon">
+                  <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+              </div>
+              <div class="db-kpi-value">$3.2K</div>
+              <div class="db-kpi-trend down">
+                <i class="fa-solid fa-arrow-trend-down"></i> 3 invoices
+              </div>
+            </div>
+          </div>
+
+          <!-- Toolbar -->
+          <div class="db-card" style="margin-bottom: 20px">
+            <div class="inv-toolbar">
+              <div class="inv-filters">
+                <div class="inv-search-wrap">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <input
+                    type="text"
+                    placeholder="Invoice ID or guest…"
+                    oninput="filterInvoices(this.value)"
+                  />
+                </div>
+                <select
+                  class="inv-select"
+                  onchange="filterInvoices('', this.value)"
+                >
+                  <option value="">All Statuses</option>
+                  <option value="paid">Paid</option>
+                  <option value="pending">Pending</option>
+                  <option value="overdue">Overdue</option>
+                </select>
+              </div>
+              <div class="inv-actions">
+                <a
+                  href="#"
+                  class="btn-outline-gold"
+                  style="
+                    font-size: 11px;
+                    padding: 9px 16px;
+                    white-space: nowrap;
+                  "
+                  ><i class="fa-solid fa-download me-2"></i>Export</a
+                >
+                <a
+                  href="#"
+                  class="btn-gold"
+                  style="
+                    font-size: 11px;
+                    padding: 9px 16px;
+                    white-space: nowrap;
+                  "
+                  ><i class="fa-solid fa-plus me-2"></i>New Invoice</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Invoice list -->
+          <div class="db-card">
+            <div class="db-section-head">
+              <div class="db-section-title">Invoice Register</div>
+            </div>
+
+            <!-- Desktop table -->
+            <div class="inv-desktop-table" style="overflow-x: auto">
+              <table class="db-table">
+                <thead>
+                  <tr>
+                    <th>Invoice ID</th>
+                    <th>Guest / Company</th>
+                    <th>Room</th>
+                    <th>Issue Date</th>
+                    <th>Due Date</th>
+                    <th>Amount</th>
+                    <th>Method</th>
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="inv-tbody"></tbody>
+              </table>
+            </div>
+
+            <!-- Mobile cards -->
+            <div class="inv-mobile-list" id="inv-mobile"></div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="../../assets/js/db-shell.js"></script>
+    <script>
+      const invoices = [
+        {
+          id: "INV-2025-042",
+          guest: "Alexandra Moore",
+          room: "Suite 501",
+          date: "01 Jul 2025",
+          due: "12 Jul 2025",
+          amount: "$1,290",
+          method: "Card",
+          status: "paid",
+        },
+        {
+          id: "INV-2025-043",
+          guest: "James Harrington",
+          room: "Deluxe 204",
+          date: "01 Jul 2025",
+          due: "12 Jul 2025",
+          amount: "$580",
+          method: "Card",
+          status: "paid",
+        },
+        {
+          id: "INV-2025-044",
+          guest: "Priya Sharma",
+          room: "Room 108",
+          date: "05 Jul 2025",
+          due: "20 Jul 2025",
+          amount: "$875",
+          method: "Bank",
+          status: "pending",
+        },
+        {
+          id: "INV-2025-045",
+          guest: "Nexus Corp",
+          room: "Suite 302",
+          date: "06 Jul 2025",
+          due: "20 Jul 2025",
+          amount: "$3,440",
+          method: "Invoice",
+          status: "pending",
+        },
+        {
+          id: "INV-2025-046",
+          guest: "Sophie Caldwell",
+          room: "Pres. Suite",
+          date: "07 Jul 2025",
+          due: "22 Jul 2025",
+          amount: "$5,250",
+          method: "Card",
+          status: "pending",
+        },
+        {
+          id: "INV-2025-039",
+          guest: "Tariq Al-Farsi",
+          room: "Deluxe 310",
+          date: "22 Jun 2025",
+          due: "05 Jul 2025",
+          amount: "$580",
+          method: "Bank",
+          status: "overdue",
+        },
+        {
+          id: "INV-2025-038",
+          guest: "Global Travel Co.",
+          room: "Various",
+          date: "20 Jun 2025",
+          due: "04 Jul 2025",
+          amount: "$2,400",
+          method: "Invoice",
+          status: "overdue",
+        },
+        {
+          id: "INV-2025-040",
+          guest: "Ingrid Larsson",
+          room: "Room 112",
+          date: "28 Jun 2025",
+          due: "10 Jul 2025",
+          amount: "$525",
+          method: "Card",
+          status: "paid",
+        },
+        {
+          id: "INV-2025-041",
+          guest: "Daniel Osei",
+          room: "Deluxe 215",
+          date: "30 Jun 2025",
+          due: "12 Jul 2025",
+          amount: "$580",
+          method: "Card",
+          status: "paid",
+        },
+        {
+          id: "INV-2025-047",
+          guest: "Ivan Petrov",
+          room: "Pres. Suite",
+          date: "08 Jul 2025",
+          due: "25 Jul 2025",
+          amount: "$3,750",
+          method: "Bank",
+          status: "pending",
+        },
+      ];
+      let fInvoices = [...invoices];
+      const sl = {
+        paid: "<span class='db-badge db-badge-confirmed'>Paid</span>",
+        pending: "<span class='db-badge db-badge-pending'>Pending</span>",
+        overdue: "<span class='db-badge db-badge-cancelled'>Overdue</span>",
+      };
+
+      function renderInvoices() {
+        // Desktop
+        document.getElementById("inv-tbody").innerHTML = fInvoices
+          .map(
+            (i) =>
+              `<tr>
+      <td style="font-size:11px;font-weight:500;color:var(--text-muted);">${i.id}</td>
+      <td><strong>${i.guest}</strong></td>
+      <td>${i.room}</td>
+      <td>${i.date}</td>
+      <td>${i.due}</td>
+      <td style="font-weight:500;color:var(--dark);">${i.amount}</td>
+      <td style="font-size:12px;">${i.method}</td>
+      <td>${sl[i.status]}</td>
+      <td><a href="#" class="db-view-all" style="font-size:11px;">View</a></td>
+    </tr>`,
+          )
+          .join("");
+
+        // Mobile
+        document.getElementById("inv-mobile").innerHTML = fInvoices
+          .map(
+            (i) => `
+    <div class="inv-mobile-card">
+      <div class="inv-mobile-card-top">
+        <span class="inv-mobile-card-id">${i.id}</span>
+        ${sl[i.status]}
+      </div>
+      <div class="inv-mobile-card-body">
+        <div class="inv-mobile-guest">${i.guest}</div>
+        <div class="inv-mobile-grid">
+          <div class="inv-mobile-field"><div class="lbl">Room</div><div class="val">${i.room}</div></div>
+          <div class="inv-mobile-field"><div class="lbl">Amount</div><div class="val" style="color:var(--gold);font-weight:500;">${i.amount}</div></div>
+          <div class="inv-mobile-field"><div class="lbl">Due Date</div><div class="val">${i.due}</div></div>
+          <div class="inv-mobile-field"><div class="lbl">Method</div><div class="val">${i.method}</div></div>
+        </div>
+        <a href="#" class="db-view-all" style="font-size:11px;">View Invoice</a>
+      </div>
+    </div>`,
+          )
+          .join("");
+      }
+
+      function filterInvoices(q = "", st = "") {
+        fInvoices = invoices.filter(
+          (i) =>
+            (!q ||
+              i.id.toLowerCase().includes(q.toLowerCase()) ||
+              i.guest.toLowerCase().includes(q.toLowerCase())) &&
+            (!st || i.status === st),
+        );
+        renderInvoices();
+      }
+      renderInvoices();
+    </script>
+  </body>
+</html>

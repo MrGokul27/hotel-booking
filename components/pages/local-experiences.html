@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Local Experiences - Stackly Hotel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../assets/css/dashboard.css" />
+    <style>
+      .exp-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+      }
+      .exp-dash-card {
+        background: var(--white);
+        border: 1px solid #ede8e0;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: all 0.22s;
+      }
+      .exp-dash-card:hover {
+        box-shadow: 0 8px 28px rgba(184, 154, 96, 0.14);
+        transform: translateY(-3px);
+      }
+      .exp-img-wrap {
+        height: 160px;
+        background: var(--dark);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .exp-img-wrap .icon {
+        font-size: 40px;
+        color: rgba(184, 154, 96, 0.5);
+      }
+      .exp-img-wrap .tag {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        background: var(--gold);
+        color: white;
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 4px 10px;
+        border-radius: 4px;
+      }
+      .exp-body {
+        padding: 18px 20px;
+      }
+      .exp-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--dark);
+        margin-bottom: 6px;
+      }
+      .exp-desc {
+        font-size: 12px;
+        color: var(--text-muted);
+        line-height: 1.6;
+        margin-bottom: 12px;
+      }
+      .exp-meta-row {
+        display: flex;
+        gap: 14px;
+        font-size: 11px;
+        color: var(--text-muted);
+        margin-bottom: 14px;
+        flex-wrap: wrap;
+      }
+      .exp-meta-row i {
+        color: var(--gold);
+        margin-right: 4px;
+      }
+      .exp-price {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--gold);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="db-wrapper">
+      <aside class="db-sidebar" id="db-sidebar"></aside>
+      <div class="db-sidebar-overlay" id="db-overlay"></div>
+      <div class="db-main">
+        <header class="db-topbar">
+          <div class="db-topbar-left">
+            <button class="db-menu-toggle" id="db-menu-toggle">
+              <i class="fa-solid fa-bars"></i>
+            </button>
+            <div>
+              <div class="db-page-title">Local Experiences</div>
+              <div class="db-breadcrumb">Extras · Curated by Stackly</div>
+            </div>
+          </div>
+          <div class="db-topbar-right">
+            <div class="db-topbar-date" id="db-date"></div>
+            <button class="db-notif-btn">
+              <i class="fa-regular fa-bell"></i
+              ><span class="db-notif-badge"></span>
+            </button>
+            <div class="db-topbar-user">
+              <div class="db-topbar-avatar" id="topbar-avatar">S</div>
+              <span class="db-topbar-name" id="topbar-name">Guest</span>
+            </div>
+          </div>
+        </header>
+        <main class="db-content">
+          <div class="db-welcome" style="margin-bottom: 28px">
+            <div class="db-welcome-text">
+              <div class="db-welcome-label">Brooklyn · Local Insider Guide</div>
+              <h2>Discover Brooklyn Like a Local</h2>
+              <p>
+                Curated experiences, tours and activities handpicked by our
+                concierge team. All bookable through Stackly.
+              </p>
+            </div>
+          </div>
+
+          <div
+            style="
+              display: flex;
+              gap: 8px;
+              flex-wrap: wrap;
+              margin-bottom: 22px;
+            "
+          >
+            <button
+              onclick="filterExp('')"
+              style="
+                padding: 7px 18px;
+                border: 1px solid var(--gold);
+                border-radius: 20px;
+                font-size: 12px;
+                background: var(--gold);
+                color: white;
+                cursor: pointer;
+              "
+            >
+              All
+            </button>
+            <button
+              onclick="filterExp('Culture')"
+              style="
+                padding: 7px 18px;
+                border: 1px solid #ede8e0;
+                border-radius: 20px;
+                font-size: 12px;
+                background: white;
+                cursor: pointer;
+              "
+            >
+              Culture
+            </button>
+            <button
+              onclick="filterExp('Food')"
+              style="
+                padding: 7px 18px;
+                border: 1px solid #ede8e0;
+                border-radius: 20px;
+                font-size: 12px;
+                background: white;
+                cursor: pointer;
+              "
+            >
+              Food & Drink
+            </button>
+            <button
+              onclick="filterExp('Adventure')"
+              style="
+                padding: 7px 18px;
+                border: 1px solid #ede8e0;
+                border-radius: 20px;
+                font-size: 12px;
+                background: white;
+                cursor: pointer;
+              "
+            >
+              Adventure
+            </button>
+            <button
+              onclick="filterExp('Wellness')"
+              style="
+                padding: 7px 18px;
+                border: 1px solid #ede8e0;
+                border-radius: 20px;
+                font-size: 12px;
+                background: white;
+                cursor: pointer;
+              "
+            >
+              Wellness
+            </button>
+          </div>
+
+          <div class="exp-grid" id="exp-grid"></div>
+        </main>
+      </div>
+    </div>
+    <script src="../../assets/js/db-shell.js"></script>
+    <script>
+      const exps = [
+        {
+          tag: "Culture",
+          icon: "fa-palette",
+          title: "Brooklyn Art Museum Private Tour",
+          desc: "Exclusive after-hours tour of the Brooklyn Museum guided by a curator. Includes champagne reception.",
+          duration: "2.5 hrs",
+          group: "Up to 8",
+          price: "$95/person",
+        },
+        {
+          tag: "Food",
+          icon: "fa-utensils",
+          title: "Brooklyn Food & Markets Walk",
+          desc: "Explore DUMBO's artisan food scene — tastings at local makers, craft brewers and rooftop farms.",
+          duration: "3 hrs",
+          group: "Up to 12",
+          price: "$65/person",
+        },
+        {
+          tag: "Adventure",
+          icon: "fa-bicycle",
+          title: "Sunset Cycling — Brooklyn Bridge",
+          desc: "Guided evening bike ride across the Brooklyn Bridge with stunning Manhattan skyline views.",
+          duration: "2 hrs",
+          group: "Up to 10",
+          price: "$45/person",
+        },
+        {
+          tag: "Culture",
+          icon: "fa-music",
+          title: "Jazz at the Bridge Club",
+          desc: "Reserved front-row seats at Brooklyn's iconic jazz venue. Includes welcome drink.",
+          duration: "Evening",
+          group: "2–6",
+          price: "$80/person",
+        },
+        {
+          tag: "Wellness",
+          icon: "fa-leaf",
+          title: "Sunrise Yoga in Prospect Park",
+          desc: "Morning yoga session led by a certified instructor at the park's hidden meadow clearing.",
+          duration: "1.5 hrs",
+          group: "Up to 15",
+          price: "$35/person",
+        },
+        {
+          tag: "Food",
+          icon: "fa-wine-glass",
+          title: "Brooklyn Craft Brewery Tour",
+          desc: "Behind-the-scenes tour of three local craft breweries with paired tastings and a souvenir glass.",
+          duration: "3.5 hrs",
+          group: "Up to 20",
+          price: "$55/person",
+        },
+      ];
+      let allExps = [...exps];
+      function filterExp(t) {
+        allExps = t ? exps.filter((e) => e.tag === t) : [...exps];
+        renderExp();
+      }
+      function renderExp() {
+        document.getElementById("exp-grid").innerHTML = allExps
+          .map(
+            (e) => `
+    <div class="exp-dash-card">
+      <div class="exp-img-wrap"><i class="icon fa-solid ${e.icon}"></i><span class="tag">${e.tag}</span></div>
+      <div class="exp-body">
+        <div class="exp-title">${e.title}</div>
+        <div class="exp-desc">${e.desc}</div>
+        <div class="exp-meta-row"><span><i class="fa-solid fa-clock"></i>${e.duration}</span><span><i class="fa-solid fa-users"></i>${e.group}</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div class="exp-price">${e.price}</div>
+          <a href="#" class="btn-gold" style="font-size:11px;padding:8px 16px;">Book Now</a>
+        </div>
+      </div>
+    </div>`,
+          )
+          .join("");
+      }
+      renderExp();
+    </script>
+  </body>
+</html>

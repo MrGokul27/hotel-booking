@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Housekeeping - Stackly Hotel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../assets/css/dashboard.css" />
+    <style>
+      .hk-task {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 16px;
+        background: #faf8f5;
+        border: 1px solid #ede8e0;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        transition: all 0.2s;
+      }
+      .hk-task:hover {
+        border-color: rgba(184, 154, 96, 0.4);
+        box-shadow: 0 3px 12px rgba(184, 154, 96, 0.08);
+      }
+      .hk-task.done {
+        opacity: 0.55;
+      }
+      .hk-room {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--dark);
+        width: 70px;
+        flex-shrink: 0;
+      }
+      .hk-type {
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--text);
+        flex: 1;
+      }
+      .hk-assign {
+        font-size: 11px;
+        color: var(--text-muted);
+      }
+      .hk-priority {
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        flex-shrink: 0;
+      }
+      .pri-urgent {
+        background: rgba(231, 76, 60, 0.1);
+        color: #e74c3c;
+      }
+      .pri-normal {
+        background: rgba(184, 154, 96, 0.1);
+        color: var(--gold);
+      }
+      .pri-low {
+        background: rgba(150, 150, 150, 0.1);
+        color: #999;
+      }
+      .hk-check {
+        width: 20px;
+        height: 20px;
+        border-radius: 4px;
+        border: 1.5px solid #c8bfb2;
+        background: white;
+        cursor: pointer;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+      }
+      .hk-check.checked {
+        background: var(--gold);
+        border-color: var(--gold);
+        color: white;
+        font-size: 11px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="db-wrapper">
+      <aside class="db-sidebar" id="db-sidebar"></aside>
+      <div class="db-sidebar-overlay" id="db-overlay"></div>
+      <div class="db-main">
+        <header class="db-topbar">
+          <div class="db-topbar-left">
+            <button class="db-menu-toggle" id="db-menu-toggle">
+              <i class="fa-solid fa-bars"></i>
+            </button>
+            <div>
+              <div class="db-page-title">Housekeeping</div>
+              <div class="db-breadcrumb">Operations · Today's Tasks</div>
+            </div>
+          </div>
+          <div class="db-topbar-right">
+            <div class="db-topbar-date" id="db-date"></div>
+            <button class="db-notif-btn">
+              <i class="fa-regular fa-bell"></i
+              ><span class="db-notif-badge"></span>
+            </button>
+            <div class="db-topbar-user">
+              <div class="db-topbar-avatar" id="topbar-avatar">S</div>
+              <span class="db-topbar-name" id="topbar-name">Admin</span>
+            </div>
+          </div>
+        </header>
+        <main class="db-content">
+          <div class="db-kpi-grid" style="margin-bottom: 28px">
+            <div class="db-kpi-card">
+              <div class="db-kpi-header">
+                <span class="db-kpi-label">Total Tasks Today</span>
+                <div class="db-kpi-icon">
+                  <i class="fa-solid fa-list-check"></i>
+                </div>
+              </div>
+              <div class="db-kpi-value">34</div>
+              <div class="db-kpi-trend neutral">
+                <i class="fa-solid fa-minus"></i> Across all floors
+              </div>
+            </div>
+            <div class="db-kpi-card">
+              <div class="db-kpi-header">
+                <span class="db-kpi-label">Completed</span>
+                <div class="db-kpi-icon">
+                  <i class="fa-solid fa-circle-check"></i>
+                </div>
+              </div>
+              <div class="db-kpi-value">18</div>
+              <div class="db-kpi-trend up">
+                <i class="fa-solid fa-arrow-trend-up"></i> 53% done
+              </div>
+            </div>
+            <div class="db-kpi-card">
+              <div class="db-kpi-header">
+                <span class="db-kpi-label">In Progress</span>
+                <div class="db-kpi-icon">
+                  <i class="fa-solid fa-spinner"></i>
+                </div>
+              </div>
+              <div class="db-kpi-value">10</div>
+              <div class="db-kpi-trend neutral">
+                <i class="fa-solid fa-minus"></i> Assigned
+              </div>
+            </div>
+            <div class="db-kpi-card">
+              <div class="db-kpi-header">
+                <span class="db-kpi-label">Urgent</span>
+                <div class="db-kpi-icon">
+                  <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+              </div>
+              <div class="db-kpi-value">4</div>
+              <div class="db-kpi-trend down">
+                <i class="fa-solid fa-arrow-trend-down"></i> Checkouts
+              </div>
+            </div>
+          </div>
+
+          <div class="db-grid-2" style="margin-bottom: 0">
+            <div>
+              <div class="db-section-head" style="margin-bottom: 14px">
+                <div class="db-section-title">Pending Tasks</div>
+                <a
+                  href="#"
+                  class="btn-gold"
+                  style="font-size: 11px; padding: 8px 18px"
+                  ><i class="fa-solid fa-plus me-2"></i>Add Task</a
+                >
+              </div>
+              <div id="hk-list"></div>
+            </div>
+            <div>
+              <div class="db-section-head" style="margin-bottom: 14px">
+                <div class="db-section-title">Team On Duty</div>
+              </div>
+              <div class="db-card">
+                <div class="db-activity-list" id="hk-team"></div>
+              </div>
+              <div class="db-card" style="margin-top: 20px">
+                <div class="db-section-head">
+                  <div class="db-section-title">Linen & Supplies</div>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 12px">
+                  <div>
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        font-size: 12px;
+                        margin-bottom: 6px;
+                      "
+                    >
+                      <span>Fresh Linen Sets</span
+                      ><span style="color: var(--gold); font-weight: 500"
+                        >142 available</span
+                      >
+                    </div>
+                    <div
+                      style="
+                        background: #f0ece4;
+                        border-radius: 5px;
+                        height: 8px;
+                      "
+                    >
+                      <div
+                        style="
+                          width: 71%;
+                          height: 100%;
+                          border-radius: 5px;
+                          background: var(--gold);
+                        "
+                      ></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        font-size: 12px;
+                        margin-bottom: 6px;
+                      "
+                    >
+                      <span>Towel Stock</span
+                      ><span style="color: #27ae60; font-weight: 500"
+                        >280 available</span
+                      >
+                    </div>
+                    <div
+                      style="
+                        background: #f0ece4;
+                        border-radius: 5px;
+                        height: 8px;
+                      "
+                    >
+                      <div
+                        style="
+                          width: 80%;
+                          height: 100%;
+                          border-radius: 5px;
+                          background: #27ae60;
+                        "
+                      ></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        font-size: 12px;
+                        margin-bottom: 6px;
+                      "
+                    >
+                      <span>Toiletry Kits</span
+                      ><span style="color: #e74c3c; font-weight: 500"
+                        >38 remaining</span
+                      >
+                    </div>
+                    <div
+                      style="
+                        background: #f0ece4;
+                        border-radius: 5px;
+                        height: 8px;
+                      "
+                    >
+                      <div
+                        style="
+                          width: 19%;
+                          height: 100%;
+                          border-radius: 5px;
+                          background: #e74c3c;
+                        "
+                      ></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        font-size: 12px;
+                        margin-bottom: 6px;
+                      "
+                    >
+                      <span>Cleaning Supplies</span
+                      ><span style="color: var(--gold); font-weight: 500"
+                        >65% stocked</span
+                      >
+                    </div>
+                    <div
+                      style="
+                        background: #f0ece4;
+                        border-radius: 5px;
+                        height: 8px;
+                      "
+                    >
+                      <div
+                        style="
+                          width: 65%;
+                          height: 100%;
+                          border-radius: 5px;
+                          background: var(--gold);
+                        "
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="../../assets/js/db-shell.js"></script>
+    <script>
+      const tasks = [
+        {
+          room: "204",
+          type: "Full Checkout Clean",
+          assign: "Lucas B.",
+          priority: "urgent",
+          done: false,
+        },
+        {
+          room: "310",
+          type: "Full Checkout Clean",
+          assign: "Aisha N.",
+          priority: "urgent",
+          done: false,
+        },
+        {
+          room: "108",
+          type: "Turndown Service",
+          assign: "Lucas B.",
+          priority: "normal",
+          done: false,
+        },
+        {
+          room: "302",
+          type: "Linen Change",
+          assign: "Maria C.",
+          priority: "normal",
+          done: false,
+        },
+        {
+          room: "501",
+          type: "Deep Clean",
+          assign: "Aisha N.",
+          priority: "urgent",
+          done: false,
+        },
+        {
+          room: "112",
+          type: "Standard Service",
+          assign: "Maria C.",
+          priority: "low",
+          done: false,
+        },
+        {
+          room: "215",
+          type: "Turndown Service",
+          assign: "Lucas B.",
+          priority: "normal",
+          done: false,
+        },
+        {
+          room: "106",
+          type: "Room Inspection",
+          assign: "Lucas B.",
+          priority: "low",
+          done: false,
+        },
+      ];
+      const priCls = {
+        urgent: "pri-urgent",
+        normal: "pri-normal",
+        low: "pri-low",
+      };
+      function renderTasks() {
+        document.getElementById("hk-list").innerHTML = tasks
+          .map(
+            (t, i) => `
+    <div class="hk-task ${t.done ? "done" : ""}" id="task-${i}">
+      <div class="hk-check ${t.done ? "checked" : ""}" onclick="toggleTask(${i})">${t.done ? '<i class="fa-solid fa-check"></i>' : ""}</div>
+      <div class="hk-room">${t.room}</div>
+      <div style="flex:1;"><div class="hk-type">${t.type}</div><div class="hk-assign"><i class="fa-solid fa-user me-1"></i>${t.assign}</div></div>
+      <span class="hk-priority ${priCls[t.priority]}">${t.priority}</span>
+    </div>`,
+          )
+          .join("");
+      }
+      function toggleTask(i) {
+        tasks[i].done = !tasks[i].done;
+        renderTasks();
+      }
+      renderTasks();
+      const team = [
+        {
+          name: "Lucas Bennett",
+          role: "Team Lead · Floor 1–2",
+          shift: "08:00 – 16:00",
+        },
+        {
+          name: "Aisha Nkosi",
+          role: "Attendant · Floor 3–4",
+          shift: "08:00 – 16:00",
+        },
+        {
+          name: "Maria Costa",
+          role: "Attendant · Floor 5",
+          shift: "10:00 – 18:00",
+        },
+        {
+          name: "Paul Adeyemi",
+          role: "Night Attendant",
+          shift: "22:00 – 06:00",
+        },
+      ];
+      document.getElementById("hk-team").innerHTML = team
+        .map(
+          (m) => `
+  <div class="db-activity-item">
+    <div class="db-activity-icon"><i class="fa-solid fa-user"></i></div>
+    <div><div class="db-activity-text"><strong>${m.name}</strong> — ${m.role}</div><div class="db-activity-time"><i class="fa-solid fa-clock me-1"></i>${m.shift}</div></div>
+  </div>`,
+        )
+        .join("");
+    </script>
+  </body>
+</html>

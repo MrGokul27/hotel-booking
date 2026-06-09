@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spa & Dining - Stackly Hotel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../assets/css/dashboard.css" />
+    <style>
+      .service-card {
+        background: var(--white);
+        border: 1px solid #ede8e0;
+        border-radius: 10px;
+        padding: 22px;
+        transition: all 0.22s;
+      }
+      .service-card:hover {
+        box-shadow: 0 6px 24px rgba(184, 154, 96, 0.13);
+        transform: translateY(-2px);
+      }
+      .service-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        background: rgba(184, 154, 96, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gold);
+        font-size: 20px;
+        margin-bottom: 14px;
+      }
+      .service-name {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--dark);
+        margin-bottom: 5px;
+      }
+      .service-desc {
+        font-size: 12px;
+        color: var(--text-muted);
+        line-height: 1.6;
+        margin-bottom: 12px;
+      }
+      .service-price {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--gold);
+      }
+      .service-dur {
+        font-size: 11px;
+        color: var(--text-muted);
+      }
+      .slot-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+        gap: 8px;
+      }
+      .slot {
+        padding: 8px;
+        border: 1px solid #ede8e0;
+        border-radius: 6px;
+        text-align: center;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .slot.open {
+        background: rgba(39, 174, 96, 0.06);
+        border-color: rgba(39, 174, 96, 0.3);
+        color: #27ae60;
+      }
+      .slot.booked {
+        background: #faf8f5;
+        color: #ccc;
+        cursor: not-allowed;
+        border-color: #f0ece4;
+      }
+      .slot.open:hover {
+        background: rgba(39, 174, 96, 0.14);
+      }
+      .svc-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 16px;
+        margin-bottom: 28px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="db-wrapper">
+      <aside class="db-sidebar" id="db-sidebar"></aside>
+      <div class="db-sidebar-overlay" id="db-overlay"></div>
+      <div class="db-main">
+        <header class="db-topbar">
+          <div class="db-topbar-left">
+            <button class="db-menu-toggle" id="db-menu-toggle">
+              <i class="fa-solid fa-bars"></i>
+            </button>
+            <div>
+              <div class="db-page-title">Spa & Dining</div>
+              <div class="db-breadcrumb">Operations · Services Overview</div>
+            </div>
+          </div>
+          <div class="db-topbar-right">
+            <div class="db-topbar-date" id="db-date"></div>
+            <button class="db-notif-btn">
+              <i class="fa-regular fa-bell"></i
+              ><span class="db-notif-badge"></span>
+            </button>
+            <div class="db-topbar-user">
+              <div class="db-topbar-avatar" id="topbar-avatar">S</div>
+              <span class="db-topbar-name" id="topbar-name">Admin</span>
+            </div>
+          </div>
+        </header>
+        <main class="db-content">
+          <div class="db-kpi-grid" style="margin-bottom: 28px">
+            <div class="db-kpi-card">
+              <div class="db-kpi-header">
+                <span class="db-kpi-label">Spa Bookings Today</span>
+                <div class="db-kpi-icon"><i class="fa-solid fa-spa"></i></div>
+              </div>
+              <div class="db-kpi-value">18</div>
+              <div class="db-kpi-trend up">
+                <i class="fa-solid fa-arrow-trend-up"></i> 3 slots left
+              </div>
+            </div>
+            <div class="db-kpi-card">
+              <div class="db-kpi-header">
+                <span class="db-kpi-label">Dining Reservations</span>
+                <div class="db-kpi-icon">
+                  <i class="fa-solid fa-utensils"></i>
+                </div>
+              </div>
+              <div class="db-kpi-value">42</div>
+              <div class="db-kpi-trend up">
+                <i class="fa-solid fa-arrow-trend-up"></i> Lunch & Dinner
+              </div>
+            </div>
+            <div class="db-kpi-card">
+              <div class="db-kpi-header">
+                <span class="db-kpi-label">Spa Revenue</span>
+                <div class="db-kpi-icon">
+                  <i class="fa-solid fa-dollar-sign"></i>
+                </div>
+              </div>
+              <div class="db-kpi-value">$2,840</div>
+              <div class="db-kpi-trend up">
+                <i class="fa-solid fa-arrow-trend-up"></i> Today
+              </div>
+            </div>
+            <div class="db-kpi-card">
+              <div class="db-kpi-header">
+                <span class="db-kpi-label">F&B Revenue</span>
+                <div class="db-kpi-icon">
+                  <i class="fa-solid fa-wine-glass"></i>
+                </div>
+              </div>
+              <div class="db-kpi-value">$3,120</div>
+              <div class="db-kpi-trend up">
+                <i class="fa-solid fa-arrow-trend-up"></i> Today
+              </div>
+            </div>
+          </div>
+
+          <!-- Spa Services -->
+          <div class="db-section-head" style="margin-bottom: 16px">
+            <div class="db-section-title">Spa Services</div>
+            <a
+              href="#"
+              class="btn-gold"
+              style="font-size: 11px; padding: 8px 18px"
+              ><i class="fa-solid fa-plus me-2"></i>Add Service</a
+            >
+          </div>
+          <div class="svc-grid">
+            <div class="service-card">
+              <div class="service-icon"><i class="fa-solid fa-spa"></i></div>
+              <div class="service-name">Swedish Massage</div>
+              <div class="service-desc">
+                Full body relaxation massage using long, gliding strokes to ease
+                muscle tension.
+              </div>
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                "
+              >
+                <div class="service-price">$120</div>
+                <div class="service-dur">60 min</div>
+              </div>
+            </div>
+            <div class="service-card">
+              <div class="service-icon">
+                <i class="fa-solid fa-fire-flame-curved"></i>
+              </div>
+              <div class="service-name">Hot Stone Therapy</div>
+              <div class="service-desc">
+                Heated basalt stones melt away tension and promote deep muscle
+                relaxation.
+              </div>
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                "
+              >
+                <div class="service-price">$160</div>
+                <div class="service-dur">75 min</div>
+              </div>
+            </div>
+            <div class="service-card">
+              <div class="service-icon">
+                <i class="fa-solid fa-face-smile-relaxed"></i>
+              </div>
+              <div class="service-name">Signature Facial</div>
+              <div class="service-desc">
+                Luxury facial using premium skincare to cleanse, tone and deeply
+                hydrate.
+              </div>
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                "
+              >
+                <div class="service-price">$140</div>
+                <div class="service-dur">60 min</div>
+              </div>
+            </div>
+            <div class="service-card">
+              <div class="service-icon">
+                <i class="fa-solid fa-droplet"></i>
+              </div>
+              <div class="service-name">Aromatherapy</div>
+              <div class="service-desc">
+                Bespoke essential oil blend massage tailored to your wellness
+                needs.
+              </div>
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                "
+              >
+                <div class="service-price">$135</div>
+                <div class="service-dur">60 min</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="db-grid-2" style="margin-bottom: 28px">
+            <!-- Today's Spa Bookings -->
+            <div class="db-card">
+              <div class="db-section-head">
+                <div class="db-section-title">Today's Spa Bookings</div>
+              </div>
+              <table class="db-table">
+                <thead>
+                  <tr>
+                    <th>Guest</th>
+                    <th>Service</th>
+                    <th>Time</th>
+                    <th>Therapist</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Alexandra Moore</strong></td>
+                    <td>Hot Stone</td>
+                    <td>10:00</td>
+                    <td>Aisha N.</td>
+                    <td>
+                      <span class="db-badge db-badge-confirmed">Done</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Sophie Caldwell</strong></td>
+                    <td>Signature Facial</td>
+                    <td>11:30</td>
+                    <td>Fatima A.</td>
+                    <td>
+                      <span class="db-badge db-badge-checkedin"
+                        >In Progress</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Marcus Lefevre</strong></td>
+                    <td>Swedish Massage</td>
+                    <td>14:00</td>
+                    <td>Aisha N.</td>
+                    <td>
+                      <span class="db-badge db-badge-pending">Upcoming</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Priya Sharma</strong></td>
+                    <td>Aromatherapy</td>
+                    <td>15:30</td>
+                    <td>Fatima A.</td>
+                    <td>
+                      <span class="db-badge db-badge-pending">Upcoming</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Available Slots -->
+            <div class="db-card">
+              <div class="db-section-head">
+                <div class="db-section-title">Available Slots Today</div>
+              </div>
+              <div class="slot-grid">
+                <div class="slot booked">09:00</div>
+                <div class="slot booked">09:30</div>
+                <div class="slot open">10:30</div>
+                <div class="slot booked">11:00</div>
+                <div class="slot open">12:00</div>
+                <div class="slot open">12:30</div>
+                <div class="slot booked">13:00</div>
+                <div class="slot open">13:30</div>
+                <div class="slot booked">14:00</div>
+                <div class="slot open">14:30</div>
+                <div class="slot open">15:00</div>
+                <div class="slot booked">15:30</div>
+                <div class="slot open">16:00</div>
+                <div class="slot open">16:30</div>
+                <div class="slot open">17:00</div>
+              </div>
+              <p
+                style="
+                  font-size: 11px;
+                  color: var(--text-muted);
+                  margin-top: 14px;
+                "
+              >
+                <span
+                  style="
+                    display: inline-block;
+                    width: 10px;
+                    height: 10px;
+                    background: rgba(39, 174, 96, 0.2);
+                    border: 1px solid rgba(39, 174, 96, 0.4);
+                    border-radius: 2px;
+                    margin-right: 5px;
+                  "
+                ></span
+                >Open &nbsp;<span
+                  style="
+                    display: inline-block;
+                    width: 10px;
+                    height: 10px;
+                    background: #f0ece4;
+                    border: 1px solid #e0d8cf;
+                    border-radius: 2px;
+                    margin-right: 5px;
+                    margin-left: 10px;
+                  "
+                ></span
+                >Booked
+              </p>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="../../assets/js/db-shell.js"></script>
+  </body>
+</html>

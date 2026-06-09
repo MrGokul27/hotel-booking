@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings - Stackly Hotel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../assets/css/dashboard.css" />
+    <style>
+      .settings-section {
+        margin-bottom: 28px;
+      }
+      .settings-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 0;
+        border-bottom: 1px solid #f5f2ed;
+        gap: 20px;
+      }
+      .settings-row:last-child {
+        border-bottom: none;
+      }
+      .settings-label {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--dark);
+      }
+      .settings-sub {
+        font-size: 11px;
+        color: var(--text-muted);
+        margin-top: 2px;
+      }
+      .toggle-switch {
+        position: relative;
+        width: 42px;
+        height: 24px;
+        flex-shrink: 0;
+      }
+      .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .toggle-slider {
+        position: absolute;
+        inset: 0;
+        background: #e0d8cf;
+        border-radius: 24px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .toggle-slider::before {
+        content: "";
+        position: absolute;
+        height: 18px;
+        width: 18px;
+        left: 3px;
+        bottom: 3px;
+        background: white;
+        border-radius: 50%;
+        transition: 0.3s;
+      }
+      .toggle-switch input:checked + .toggle-slider {
+        background: var(--gold);
+      }
+      .toggle-switch input:checked + .toggle-slider::before {
+        transform: translateX(18px);
+      }
+      .settings-input {
+        padding: 9px 14px;
+        border: 1px solid #ede8e0;
+        border-radius: 6px;
+        font-family: Jost, sans-serif;
+        font-size: 13px;
+        outline: none;
+        min-width: 160px;
+        transition: border-color 0.2s;
+      }
+      .settings-input:focus {
+        border-color: var(--gold);
+      }
+      .danger-zone {
+        background: #fff5f5;
+        border: 1px solid rgba(231, 76, 60, 0.2);
+        border-radius: 10px;
+        padding: 20px;
+      }
+      .danger-zone .db-section-title {
+        color: #e74c3c;
+      }
+      .danger-zone .db-section-title::before {
+        background: #e74c3c;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="db-wrapper">
+      <aside class="db-sidebar" id="db-sidebar"></aside>
+      <div class="db-sidebar-overlay" id="db-overlay"></div>
+      <div class="db-main">
+        <header class="db-topbar">
+          <div class="db-topbar-left">
+            <button class="db-menu-toggle" id="db-menu-toggle">
+              <i class="fa-solid fa-bars"></i>
+            </button>
+            <div>
+              <div class="db-page-title">Settings</div>
+              <div class="db-breadcrumb">Account · Preferences & Security</div>
+            </div>
+          </div>
+          <div class="db-topbar-right">
+            <div class="db-topbar-date" id="db-date"></div>
+            <button class="db-notif-btn">
+              <i class="fa-regular fa-bell"></i
+              ><span class="db-notif-badge"></span>
+            </button>
+            <div class="db-topbar-user">
+              <div class="db-topbar-avatar" id="topbar-avatar">S</div>
+              <span class="db-topbar-name" id="topbar-name">Admin</span>
+            </div>
+          </div>
+        </header>
+        <main class="db-content">
+          <div class="db-grid-2">
+            <div>
+              <!-- Account Security -->
+              <div class="db-card settings-section">
+                <div class="db-section-head" style="margin-bottom: 4px">
+                  <div class="db-section-title">Account Security</div>
+                </div>
+                <div class="settings-row">
+                  <div>
+                    <div class="settings-label">Email Address</div>
+                    <div class="settings-sub" id="settings-email">
+                      guest@stackly.com
+                    </div>
+                  </div>
+                  <a
+                    href="#"
+                    class="btn-outline-gold"
+                    style="font-size: 11px; padding: 7px 14px"
+                    >Change</a
+                  >
+                </div>
+                <div class="settings-row">
+                  <div>
+                    <div class="settings-label">Password</div>
+                    <div class="settings-sub">Last changed 30 days ago</div>
+                  </div>
+                  <a
+                    href="#"
+                    class="btn-outline-gold"
+                    style="font-size: 11px; padding: 7px 14px"
+                    >Update</a
+                  >
+                </div>
+                <div class="settings-row">
+                  <div>
+                    <div class="settings-label">Two-Factor Authentication</div>
+                    <div class="settings-sub">
+                      Extra security via SMS or app
+                    </div>
+                  </div>
+                  <label class="toggle-switch"
+                    ><input type="checkbox" /><span class="toggle-slider"></span
+                  ></label>
+                </div>
+                <div class="settings-row">
+                  <div>
+                    <div class="settings-label">Active Sessions</div>
+                    <div class="settings-sub">
+                      2 devices currently signed in
+                    </div>
+                  </div>
+                  <a
+                    href="#"
+                    style="font-size: 12px; color: #e74c3c; font-weight: 500"
+                    >Sign out all</a
+                  >
+                </div>
+              </div>
+
+              <!-- Notifications -->
+              <div class="db-card settings-section">
+                <div class="db-section-head" style="margin-bottom: 4px">
+                  <div class="db-section-title">Notifications</div>
+                </div>
+                <div class="settings-row">
+                  <div>
+                    <div class="settings-label">Booking Confirmations</div>
+                    <div class="settings-sub">Email & SMS</div>
+                  </div>
+                  <label class="toggle-switch"
+                    ><input type="checkbox" checked /><span
+                      class="toggle-slider"
+                    ></span
+                  ></label>
+                </div>
+                <div class="settings-row">
+                  <div>
+                    <div class="settings-label">Promotional Emails</div>
+                    <div class="settings-sub">Offers and seasonal deals</div>
+                  </div>
+                  <label class="toggle-switch"
+                    ><input type="checkbox" checked /><span
+                      class="toggle-slider"
+                    ></span
+                  ></label>
+                </div>
+                <div class="settings-row">
+                  <div>
+                    <div class="settings-label">Loyalty Points Updates</div>
+                    <div class="settings-sub">When you earn or redeem</div>
+                  </div>
+                  <label class="toggle-switch"
+                    ><input type="checkbox" /><span class="toggle-slider"></span
+                  ></label>
+                </div>
+                <div class="settings-row">
+                  <div>
+                    <div class="settings-label">Event Invitations</div>
+                    <div class="settings-sub">Member-only events</div>
+                  </div>
+                  <label class="toggle-switch"
+                    ><input type="checkbox" checked /><span
+                      class="toggle-slider"
+                    ></span
+                  ></label>
+                </div>
+                <div class="settings-row">
+                  <div>
+                    <div class="settings-label">Push Notifications</div>
+                    <div class="settings-sub">Browser notifications</div>
+                  </div>
+                  <label class="toggle-switch"
+                    ><input type="checkbox" /><span class="toggle-slider"></span
+                  ></label>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <!-- Preferences -->
+              <div class="db-card settings-section">
+                <div class="db-section-head" style="margin-bottom: 4px">
+                  <div class="db-section-title">Display & Preferences</div>
+                </div>
+                <div class="settings-row">
+                  <div>
+                    <div class="settings-label">Language</div>
+                    <div class="settings-sub">Interface language</div>
+                  </div>
+                  <select class="settings-input">
+                    <option>English (UK)</option>
+                    <option>English (US)</option>
+                    <option>Français</option>
+                    <option>Deutsch</option>
+                    <option>Español</option>
+                  </select>
+                </div>
+                <div class="settings-row">
+                  <div>
+                    <div class="settings-label">Currency</div>
+                    <div class="settings-sub">Preferred display currency</div>
+                  </div>
+                  <select class="settings-input">
+                    <option>USD ($)</option>
+                    <option>GBP (£)</option>
+                    <option>EUR (€)</option>
+                    <option>AED (د.إ)</option>
+                  </select>
+                </div>
+                <div class="settings-row">
+                  <div><div class="settings-label">Date Format</div></div>
+                  <select class="settings-input">
+                    <option>DD MMM YYYY</option>
+                    <option>MM/DD/YYYY</option>
+                    <option>YYYY-MM-DD</option>
+                  </select>
+                </div>
+                <div class="settings-row">
+                  <div><div class="settings-label">Time Zone</div></div>
+                  <select class="settings-input">
+                    <option>America/New_York</option>
+                    <option>Europe/London</option>
+                    <option>Asia/Dubai</option>
+                    <option>Asia/Tokyo</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Admin System Settings (shown only for admin) -->
+              <div
+                class="db-card settings-section"
+                id="admin-settings"
+                style="display: none"
+              >
+                <div class="db-section-head" style="margin-bottom: 4px">
+                  <div class="db-section-title">System Settings</div>
+                </div>
+                <div class="settings-row">
+                  <div>
+                    <div class="settings-label">Maintenance Mode</div>
+                    <div class="settings-sub">
+                      Temporarily suspend new bookings
+                    </div>
+                  </div>
+                  <label class="toggle-switch"
+                    ><input type="checkbox" /><span class="toggle-slider"></span
+                  ></label>
+                </div>
+                <div class="settings-row">
+                  <div>
+                    <div class="settings-label">Auto-Confirm Bookings</div>
+                    <div class="settings-sub">Skip manual approval step</div>
+                  </div>
+                  <label class="toggle-switch"
+                    ><input type="checkbox" checked /><span
+                      class="toggle-slider"
+                    ></span
+                  ></label>
+                </div>
+                <div class="settings-row">
+                  <div>
+                    <div class="settings-label">Max Booking Horizon</div>
+                    <div class="settings-sub">
+                      How far ahead guests can book
+                    </div>
+                  </div>
+                  <select class="settings-input">
+                    <option>365 days</option>
+                    <option>180 days</option>
+                    <option>90 days</option>
+                  </select>
+                </div>
+                <div class="settings-row">
+                  <div>
+                    <div class="settings-label">Default Check-In Time</div>
+                  </div>
+                  <select class="settings-input">
+                    <option>14:00</option>
+                    <option>15:00</option>
+                    <option>16:00</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Danger Zone -->
+              <div class="danger-zone settings-section">
+                <div class="db-section-head" style="margin-bottom: 12px">
+                  <div class="db-section-title">Danger Zone</div>
+                </div>
+                <div
+                  class="settings-row"
+                  style="border-bottom: 1px solid rgba(231, 76, 60, 0.15)"
+                >
+                  <div>
+                    <div class="settings-label" style="color: #e74c3c">
+                      Delete Account
+                    </div>
+                    <div class="settings-sub">
+                      Permanently remove all data. Cannot be undone.
+                    </div>
+                  </div>
+                  <a
+                    href="#"
+                    style="
+                      color: #e74c3c;
+                      font-size: 12px;
+                      font-weight: 500;
+                      white-space: nowrap;
+                    "
+                    onclick="
+                      return confirm('Are you sure? This cannot be undone.');
+                    "
+                    >Delete</a
+                  >
+                </div>
+                <div class="settings-row">
+                  <div>
+                    <div class="settings-label">Download My Data</div>
+                    <div class="settings-sub">GDPR data export</div>
+                  </div>
+                  <a
+                    href="#"
+                    class="btn-outline-gold"
+                    style="font-size: 11px; padding: 7px 14px"
+                    >Export</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 4px">
+            <button
+              class="btn-gold"
+              style="font-size: 11px; padding: 12px 32px"
+            >
+              <i class="fa-solid fa-floppy-disk me-2"></i>Save All Settings
+            </button>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="../../assets/js/db-shell.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const { role, email } = window.DB || {};
+        const el = document.getElementById("settings-email");
+        if (el && email) el.textContent = email;
+        if (role === "admin") {
+          const as = document.getElementById("admin-settings");
+          if (as) as.style.display = "block";
+        }
+      });
+    </script>
+  </body>
+</html>

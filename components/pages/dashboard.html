@@ -1,0 +1,682 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Stackly Hotel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../assets/css/dashboard.css" />
+  </head>
+  <body>
+    <div class="db-wrapper">
+      <!-- ══ SIDEBAR ══ -->
+      <aside class="db-sidebar" id="db-sidebar">
+        <a href="../../index.html" class="db-sidebar-logo">
+          <img src="../../assets/images/logoStackly.webp" alt="Stackly" />
+          <span>Stackly</span>
+        </a>
+
+        <!-- User pill -->
+        <div class="db-user-pill">
+          <div class="db-user-avatar" id="sidebar-avatar">S</div>
+          <div class="db-user-info">
+            <div class="db-user-name" id="sidebar-name">Guest User</div>
+            <div class="db-user-role" id="sidebar-role">Guest</div>
+          </div>
+        </div>
+
+        <!-- Nav rendered by JS based on role -->
+        <nav id="db-nav"></nav>
+
+        <div class="db-sidebar-footer">
+          <a href="login.html" class="db-logout-btn">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Sign Out</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- Overlay (mobile) -->
+      <div class="db-sidebar-overlay" id="db-overlay"></div>
+
+      <!-- ══ MAIN ══ -->
+      <div class="db-main">
+        <!-- Top Bar -->
+        <header class="db-topbar">
+          <div class="db-topbar-left">
+            <button
+              class="db-menu-toggle"
+              id="db-menu-toggle"
+              aria-label="Toggle menu"
+            >
+              <i class="fa-solid fa-bars"></i>
+            </button>
+            <div>
+              <div class="db-page-title">Dashboard</div>
+              <div class="db-breadcrumb" id="db-breadcrumb">Overview</div>
+            </div>
+          </div>
+          <div class="db-topbar-right">
+            <div class="db-topbar-date" id="db-date"></div>
+            <button class="db-notif-btn" aria-label="Notifications">
+              <i class="fa-regular fa-bell"></i>
+              <span class="db-notif-badge"></span>
+            </button>
+            <div class="db-topbar-user">
+              <div class="db-topbar-avatar" id="topbar-avatar">S</div>
+              <span class="db-topbar-name" id="topbar-name">Guest</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- Content -->
+        <main class="db-content" id="db-content">
+          <!-- Welcome Banner -->
+          <div class="db-welcome">
+            <div class="db-welcome-text">
+              <div class="db-welcome-label">
+                Stackly Hotel &amp; Spa · Command Centre
+              </div>
+              <h2 id="welcome-heading">Good Morning, Guest</h2>
+              <p id="welcome-sub">
+                Here's what's happening at Stackly Hotel today.
+              </p>
+            </div>
+            <div class="db-welcome-actions" id="welcome-actions"></div>
+          </div>
+
+          <!-- KPI Cards -->
+          <div class="db-kpi-grid" id="kpi-grid"></div>
+
+          <!-- Row 1: Revenue Chart + Room Status -->
+          <div class="db-grid-3-1" id="row-charts">
+            <!-- Revenue Chart -->
+            <div class="db-card">
+              <div class="db-section-head">
+                <div class="db-section-title">Monthly Revenue</div>
+                <span style="font-size: 11px; color: var(--text-muted)"
+                  >Last 7 months</span
+                >
+              </div>
+              <div class="db-chart-area" id="revenue-chart"></div>
+            </div>
+
+            <!-- Room Status -->
+            <div class="db-card">
+              <div class="db-section-head">
+                <div class="db-section-title">Room Status</div>
+              </div>
+              <div class="db-donut-wrap">
+                <div class="db-donut">
+                  <svg viewBox="0 0 100 100" width="120" height="120">
+                    <circle class="db-donut-bg" cx="50" cy="50" r="45" />
+                    <circle
+                      class="db-donut-fill"
+                      id="donut-fill"
+                      cx="50"
+                      cy="50"
+                      r="45"
+                    />
+                  </svg>
+                  <div class="db-donut-label">
+                    <span class="db-donut-pct">76%</span>
+                    <span class="db-donut-sub">Occupied</span>
+                  </div>
+                </div>
+                <div class="db-donut-legend">
+                  <div class="db-legend-item">
+                    <span class="db-legend-dot dot-gold"></span>Occupied — 76
+                  </div>
+                  <div class="db-legend-item">
+                    <span class="db-legend-dot dot-green"></span>Available — 18
+                  </div>
+                  <div class="db-legend-item">
+                    <span class="db-legend-dot dot-blue"></span>Reserved — 4
+                  </div>
+                  <div class="db-legend-item">
+                    <span class="db-legend-dot dot-red"></span>Maintenance — 2
+                  </div>
+                </div>
+              </div>
+              <div class="db-room-status-grid" style="margin-top: 18px">
+                <div class="db-room-status-item">
+                  <div class="count">76</div>
+                  <div class="label">
+                    <span class="dot dot-gold"></span>Occupied
+                  </div>
+                </div>
+                <div class="db-room-status-item">
+                  <div class="count">18</div>
+                  <div class="label">
+                    <span class="dot dot-green"></span>Available
+                  </div>
+                </div>
+                <div class="db-room-status-item">
+                  <div class="count">4</div>
+                  <div class="label">
+                    <span class="dot dot-blue"></span>Reserved
+                  </div>
+                </div>
+                <div class="db-room-status-item">
+                  <div class="count">2</div>
+                  <div class="label">
+                    <span class="dot dot-red"></span>Maintenance
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2: Recent Bookings + Activity + Quick Actions -->
+          <div class="db-grid-2" id="row-main">
+            <!-- Recent Bookings -->
+            <div class="db-card">
+              <div class="db-section-head">
+                <div class="db-section-title">Recent Bookings</div>
+                <a href="#" class="db-view-all">View All</a>
+              </div>
+              <div style="overflow-x: auto">
+                <table class="db-table" id="bookings-table">
+                  <thead>
+                    <tr>
+                      <th>Guest</th>
+                      <th>Room</th>
+                      <th>Check-In</th>
+                      <th>Nights</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="bookings-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Activity + Quick Actions -->
+            <div style="display: flex; flex-direction: column; gap: 24px">
+              <!-- Activity Feed -->
+              <div class="db-card">
+                <div class="db-section-head">
+                  <div class="db-section-title">Live Activity</div>
+                </div>
+                <div class="db-activity-list" id="activity-list"></div>
+              </div>
+
+              <!-- Quick Actions (role-based) -->
+              <div class="db-card" id="quick-actions-card">
+                <div class="db-section-head">
+                  <div class="db-section-title">Quick Actions</div>
+                </div>
+                <div class="db-quick-grid" id="quick-actions"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 3: Upcoming Check-ins -->
+          <div class="db-card" style="margin-bottom: 28px" id="checkin-card">
+            <div class="db-section-head">
+              <div class="db-section-title">Today's Check-Ins</div>
+              <a href="#" class="db-view-all">View Schedule</a>
+            </div>
+            <div class="db-checkin-list" id="checkin-list"></div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <!-- /.db-wrapper -->
+
+    <script src="../../assets/js/db-shell.js"></script>
+    <script>
+      (() => {
+        /* ── Data from login ── */
+        /* ── user from shell ── */
+        const { role, nameFull, initials } = window.DB || {};
+        const now = new Date();
+        document.getElementById("db-breadcrumb").textContent =
+          (role || "guest").charAt(0).toUpperCase() +
+          (role || "guest").slice(1) +
+          " · Overview";
+
+        /* ── Welcome greeting ── */
+        const hr = now.getHours();
+        const greet =
+          hr < 12
+            ? "Good Morning"
+            : hr < 17
+              ? "Good Afternoon"
+              : "Good Evening";
+        document.getElementById("welcome-heading").textContent =
+          `${greet}, ${nameFull.split(" ")[0]}`;
+
+        /* ── Welcome sub & actions by role ── */
+        const welcomeSubs = {
+          admin:
+            "Full hotel overview — revenue, operations, staff & guest insights.",
+          guest:
+            "Your upcoming stays, rewards, and personalised recommendations.",
+          member:
+            "Your loyalty points, exclusive member benefits and booking history.",
+          corporate:
+            "Your company bookings, invoices, and corporate account summary.",
+        };
+        document.getElementById("welcome-sub").textContent =
+          welcomeSubs[role] || welcomeSubs.guest;
+
+        const welcomeActionsEl = document.getElementById("welcome-actions");
+        const roleActions = {
+          admin: [
+            { label: "New Booking", icon: "fa-plus", cls: "btn-gold" },
+            {
+              label: "Run Report",
+              icon: "fa-chart-bar",
+              cls: "btn-outline-gold",
+            },
+          ],
+          guest: [
+            { label: "Book a Room", icon: "fa-bed", cls: "btn-gold" },
+            {
+              label: "View History",
+              icon: "fa-clock-rotate-left",
+              cls: "btn-outline-gold",
+            },
+          ],
+          member: [
+            { label: "Book Now", icon: "fa-star", cls: "btn-gold" },
+            { label: "My Rewards", icon: "fa-gift", cls: "btn-outline-gold" },
+          ],
+          corporate: [
+            { label: "Book Rooms", icon: "fa-building", cls: "btn-gold" },
+            {
+              label: "View Invoices",
+              icon: "fa-file-invoice",
+              cls: "btn-outline-gold",
+            },
+          ],
+        };
+        (roleActions[role] || roleActions.guest).forEach((a) => {
+          const btn = document.createElement("a");
+          btn.href = "#";
+          btn.className = a.cls;
+          btn.style.cssText = "font-size:11px;padding:11px 24px;";
+          btn.innerHTML = `<i class="fa-solid ${a.icon} me-2"></i>${a.label}`;
+          welcomeActionsEl.appendChild(btn);
+        });
+
+        /* ── KPI Cards by role ── */
+        const kpiData = {
+          admin: [
+            {
+              label: "Total Revenue",
+              value: "$84,320",
+              trend: "+12.4%",
+              dir: "up",
+              icon: "fa-dollar-sign",
+            },
+            {
+              label: "Bookings Today",
+              value: "23",
+              trend: "+3",
+              dir: "up",
+              icon: "fa-calendar-check",
+            },
+            {
+              label: "Occupancy Rate",
+              value: "76%",
+              trend: "+2.1%",
+              dir: "up",
+              icon: "fa-bed",
+            },
+            {
+              label: "Avg. Rating",
+              value: "4.9",
+              trend: "Stable",
+              dir: "neutral",
+              icon: "fa-star",
+            },
+          ],
+          guest: [
+            {
+              label: "Active Booking",
+              value: "1",
+              trend: "Room 304",
+              dir: "neutral",
+              icon: "fa-bed",
+            },
+            {
+              label: "Nights Stayed",
+              value: "12",
+              trend: "This year",
+              dir: "neutral",
+              icon: "fa-moon",
+            },
+            {
+              label: "Points Earned",
+              value: "2,450",
+              trend: "+320 this stay",
+              dir: "up",
+              icon: "fa-star",
+            },
+            {
+              label: "Services Booked",
+              value: "3",
+              trend: "Spa, Dining…",
+              dir: "neutral",
+              icon: "fa-concierge-bell",
+            },
+          ],
+          member: [
+            {
+              label: "Loyalty Points",
+              value: "8,740",
+              trend: "+1,200 pts",
+              dir: "up",
+              icon: "fa-star",
+            },
+            {
+              label: "Tier Status",
+              value: "Gold",
+              trend: "3 stays to Platinum",
+              dir: "neutral",
+              icon: "fa-crown",
+            },
+            {
+              label: "Total Stays",
+              value: "28",
+              trend: "Since 2020",
+              dir: "neutral",
+              icon: "fa-bed",
+            },
+            {
+              label: "Savings",
+              value: "$1,840",
+              trend: "Member discounts",
+              dir: "up",
+              icon: "fa-piggy-bank",
+            },
+          ],
+          corporate: [
+            {
+              label: "Company Bookings",
+              value: "47",
+              trend: "+8 this month",
+              dir: "up",
+              icon: "fa-building",
+            },
+            {
+              label: "Staff Travelling",
+              value: "12",
+              trend: "Across 5 rooms",
+              dir: "neutral",
+              icon: "fa-users",
+            },
+            {
+              label: "Monthly Spend",
+              value: "$18,900",
+              trend: "+4.2%",
+              dir: "up",
+              icon: "fa-file-invoice-dollar",
+            },
+            {
+              label: "Pending Invoices",
+              value: "3",
+              trend: "Due this week",
+              dir: "down",
+              icon: "fa-file-invoice",
+            },
+          ],
+        };
+
+        const kpiGrid = document.getElementById("kpi-grid");
+        (kpiData[role] || kpiData.guest).forEach((k) => {
+          const card = document.createElement("div");
+          card.className = "db-kpi-card";
+          card.innerHTML = `
+          <div class="db-kpi-header">
+            <span class="db-kpi-label">${k.label}</span>
+            <div class="db-kpi-icon"><i class="fa-solid ${k.icon}"></i></div>
+          </div>
+          <div class="db-kpi-value">${k.value}</div>
+          <div class="db-kpi-trend ${k.dir}">
+            ${k.dir === "up" ? '<i class="fa-solid fa-arrow-trend-up"></i>' : k.dir === "down" ? '<i class="fa-solid fa-arrow-trend-down"></i>' : '<i class="fa-solid fa-minus"></i>'}
+            ${k.trend}
+          </div>`;
+          kpiGrid.appendChild(card);
+        });
+
+        /* ── Revenue Chart ── */
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"];
+        const heights = [58, 72, 64, 88, 78, 95, 84]; // %
+        const chartEl = document.getElementById("revenue-chart");
+        months.forEach((m, i) => {
+          const wrap = document.createElement("div");
+          wrap.className = "db-bar-wrap";
+          wrap.innerHTML = `<div class="db-bar" style="height:${heights[i]}%" title="${m}: $${(heights[i] * 900).toLocaleString()}"></div><div class="db-bar-label">${m}</div>`;
+          chartEl.appendChild(wrap);
+        });
+
+        /* ── Recent Bookings ── */
+        const bookings = [
+          {
+            guest: "Alexandra Moore",
+            room: "Suite 501",
+            checkin: "12 Jul 2025",
+            nights: 3,
+            status: "confirmed",
+          },
+          {
+            guest: "James Harrington",
+            room: "Deluxe 204",
+            checkin: "12 Jul 2025",
+            nights: 2,
+            status: "checkedin",
+          },
+          {
+            guest: "Priya Sharma",
+            room: "Standard 108",
+            checkin: "13 Jul 2025",
+            nights: 5,
+            status: "pending",
+          },
+          {
+            guest: "Marcus Lefevre",
+            room: "Suite 302",
+            checkin: "14 Jul 2025",
+            nights: 4,
+            status: "confirmed",
+          },
+          {
+            guest: "Sophie Caldwell",
+            room: "Pres. Suite",
+            checkin: "15 Jul 2025",
+            nights: 7,
+            status: "confirmed",
+          },
+          {
+            guest: "Tariq Al-Farsi",
+            room: "Deluxe 310",
+            checkin: "11 Jul 2025",
+            nights: 2,
+            status: "cancelled",
+          },
+        ];
+        const statusLabel = {
+          confirmed: "Confirmed",
+          pending: "Pending",
+          cancelled: "Cancelled",
+          checkedin: "Checked In",
+        };
+        const tbody = document.getElementById("bookings-tbody");
+        bookings.forEach((b) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+          <td><strong>${b.guest}</strong></td>
+          <td>${b.room}</td>
+          <td>${b.checkin}</td>
+          <td style="text-align:center;">${b.nights}</td>
+          <td><span class="db-badge db-badge-${b.status}">${statusLabel[b.status]}</span></td>`;
+          tbody.appendChild(tr);
+        });
+
+        /* ── Activity Feed ── */
+        const activities = [
+          {
+            icon: "fa-right-to-bracket",
+            text: "<strong>James Harrington</strong> checked into Room 204",
+            time: "2 min ago",
+          },
+          {
+            icon: "fa-star",
+            text: "New <strong>5-star review</strong> received from Sophie Caldwell",
+            time: "18 min ago",
+          },
+          {
+            icon: "fa-calendar-plus",
+            text: "<strong>Priya Sharma</strong> confirmed booking for Room 108",
+            time: "42 min ago",
+          },
+          {
+            icon: "fa-spa",
+            text: "Spa booking confirmed for <strong>Alexandra Moore</strong>",
+            time: "1 hr ago",
+          },
+          {
+            icon: "fa-xmark",
+            text: "Reservation cancelled by <strong>Tariq Al-Farsi</strong> (Room 310)",
+            time: "2 hrs ago",
+          },
+        ];
+        const activityList = document.getElementById("activity-list");
+        activities.forEach((a) => {
+          const item = document.createElement("div");
+          item.className = "db-activity-item";
+          item.innerHTML = `
+          <div class="db-activity-icon"><i class="fa-solid ${a.icon}"></i></div>
+          <div>
+            <div class="db-activity-text">${a.text}</div>
+            <div class="db-activity-time">${a.time}</div>
+          </div>`;
+          activityList.appendChild(item);
+        });
+
+        /* ── Quick Actions by role ── */
+        const quickByRole = {
+          admin: [
+            { icon: "fa-calendar-plus", label: "New Reservation" },
+            { icon: "fa-door-open", label: "Manage Rooms" },
+            { icon: "fa-user-plus", label: "Add Guest" },
+            { icon: "fa-chart-bar", label: "Revenue Report" },
+            { icon: "fa-concierge-bell", label: "Housekeeping Log" },
+            { icon: "fa-file-invoice-dollar", label: "Generate Invoice" },
+          ],
+          guest: [
+            { icon: "fa-bed", label: "Book a Room" },
+            { icon: "fa-spa", label: "Book Spa" },
+            { icon: "fa-utensils", label: "Reserve Dining" },
+            { icon: "fa-headset", label: "Contact Concierge" },
+          ],
+          member: [
+            { icon: "fa-bed", label: "Book a Room" },
+            { icon: "fa-gift", label: "Redeem Points" },
+            { icon: "fa-crown", label: "View Offers" },
+            { icon: "fa-headset", label: "VIP Concierge" },
+          ],
+          corporate: [
+            { icon: "fa-building", label: "Book for Team" },
+            { icon: "fa-file-invoice", label: "View Invoices" },
+            { icon: "fa-chalkboard-user", label: "Book Conference" },
+            { icon: "fa-handshake", label: "Account Manager" },
+          ],
+        };
+        const quickEl = document.getElementById("quick-actions");
+        (quickByRole[role] || quickByRole.guest).forEach((q) => {
+          const btn = document.createElement("a");
+          btn.href = "#";
+          btn.className = "db-quick-btn";
+          btn.innerHTML = `<i class="fa-solid ${q.icon}"></i><span>${q.label}</span>`;
+          quickEl.appendChild(btn);
+        });
+
+        /* ── Today's Check-Ins ── */
+        const checkins = [
+          {
+            name: "Alexandra Moore",
+            detail: "Suite 501 · 3 nights · 2 guests",
+            room: "Suite 501",
+            initials: "AM",
+          },
+          {
+            name: "Priya Sharma",
+            detail: "Standard 108 · 5 nights · 1 guest",
+            room: "Room 108",
+            initials: "PS",
+          },
+          {
+            name: "Marcus Lefevre",
+            detail: "Suite 302 · 4 nights · 2 guests",
+            room: "Suite 302",
+            initials: "ML",
+          },
+          {
+            name: "Daniel Osei",
+            detail: "Deluxe 215 · 2 nights · 2 guests",
+            room: "Room 215",
+            initials: "DO",
+          },
+        ];
+        const checkinList = document.getElementById("checkin-list");
+        checkins.forEach((c) => {
+          const item = document.createElement("div");
+          item.className = "db-checkin-item";
+          item.innerHTML = `
+          <div class="db-checkin-avatar">${c.initials}</div>
+          <div class="db-checkin-info">
+            <div class="name">${c.name}</div>
+            <div class="detail">${c.detail}</div>
+          </div>
+          <div class="db-checkin-room">${c.room}</div>`;
+          checkinList.appendChild(item);
+        });
+
+        /* ── Hide admin-only sections for non-admin roles ── */
+        if (role !== "admin") {
+          document.getElementById("row-charts").style.display = "none";
+          document.getElementById("checkin-card").style.display = "none";
+          document.getElementById("db-grid-2")?.style && null;
+          // Keep bookings + activity for all, hide only the table for pure guest view
+          if (role === "guest") {
+            const tableSection = document.getElementById("bookings-table");
+            if (tableSection) {
+              const newTitle = tableSection
+                .closest(".db-card")
+                .querySelector(".db-section-title");
+              if (newTitle)
+                newTitle.innerHTML = newTitle.innerHTML.replace(
+                  "Recent Bookings",
+                  "My Bookings",
+                );
+            }
+          }
+        }
+
+        /* ── Donut animation on load ── */
+        setTimeout(() => {
+          const fill = document.getElementById("donut-fill");
+          if (fill) fill.style.strokeDashoffset = "68";
+        }, 300);
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reservations - Stackly Hotel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../assets/css/dashboard.css" />
+    <style>
+      /* Toolbar */
+      .res-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .res-filters {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+        flex: 1;
+        min-width: 0;
+      }
+      .res-search-wrap {
+        position: relative;
+        flex: 1;
+        min-width: 140px;
+        max-width: 240px;
+      }
+      .res-search-wrap i {
+        position: absolute;
+        left: 11px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+        font-size: 12px;
+        pointer-events: none;
+      }
+      .res-search-wrap input {
+        width: 100%;
+        padding: 9px 12px 9px 32px;
+        border: 1px solid #ede8e0;
+        border-radius: 6px;
+        font-family: Jost, sans-serif;
+        font-size: 13px;
+        outline: none;
+      }
+      .res-select {
+        padding: 9px 12px;
+        border: 1px solid #ede8e0;
+        border-radius: 6px;
+        font-family: Jost, sans-serif;
+        font-size: 13px;
+        outline: none;
+        color: var(--text);
+        background: white;
+        min-width: 0;
+      }
+
+      /* Mobile card view */
+      .res-mobile-list {
+        display: none;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .res-mobile-card {
+        background: white;
+        border: 1px solid #ede8e0;
+        border-radius: 8px;
+        padding: 14px 16px;
+      }
+      .res-mobile-card-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+      .res-mobile-id {
+        font-size: 11px;
+        color: var(--text-muted);
+        font-weight: 500;
+      }
+      .res-mobile-card-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px 14px;
+      }
+      .res-mobile-field .lbl {
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+      .res-mobile-field .val {
+        font-size: 13px;
+        color: var(--dark);
+        margin-top: 1px;
+      }
+
+      /* Pagination */
+      .res-pagination {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 20px;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .res-page-btns {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .res-page-btn {
+        padding: 6px 12px;
+        border: 1px solid #ede8e0;
+        border-radius: 4px;
+        background: white;
+        font-size: 12px;
+        cursor: pointer;
+        font-family: Jost, sans-serif;
+      }
+      .res-page-btn.active {
+        border-color: var(--gold);
+        background: var(--gold);
+        color: white;
+      }
+
+      @media (max-width: 767px) {
+        .res-desktop-table {
+          display: none;
+        }
+        .res-mobile-list {
+          display: flex;
+        }
+        .res-select {
+          display: none;
+        }
+      }
+      @media (max-width: 575px) {
+        .res-search-wrap {
+          max-width: 100%;
+        }
+        .res-toolbar {
+          gap: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="db-wrapper">
+      <aside class="db-sidebar" id="db-sidebar"></aside>
+      <div class="db-sidebar-overlay" id="db-overlay"></div>
+      <div class="db-main">
+        <header class="db-topbar">
+          <div class="db-topbar-left">
+            <button class="db-menu-toggle" id="db-menu-toggle">
+              <i class="fa-solid fa-bars"></i>
+            </button>
+            <div>
+              <div class="db-page-title">Reservations</div>
+              <div class="db-breadcrumb">Admin · All Bookings</div>
+            </div>
+          </div>
+          <div class="db-topbar-right">
+            <div class="db-topbar-date" id="db-date"></div>
+            <button class="db-notif-btn">
+              <i class="fa-regular fa-bell"></i
+              ><span class="db-notif-badge"></span>
+            </button>
+            <div class="db-topbar-user">
+              <div class="db-topbar-avatar" id="topbar-avatar">S</div>
+              <span class="db-topbar-name" id="topbar-name">Admin</span>
+            </div>
+          </div>
+        </header>
+        <main class="db-content">
+          <!-- KPIs -->
+          <div class="db-kpi-grid" style="margin-bottom: 24px">
+            <div class="db-kpi-card">
+              <div class="db-kpi-header">
+                <span class="db-kpi-label">Total Bookings</span>
+                <div class="db-kpi-icon">
+                  <i class="fa-solid fa-calendar-days"></i>
+                </div>
+              </div>
+              <div class="db-kpi-value">248</div>
+              <div class="db-kpi-trend up">
+                <i class="fa-solid fa-arrow-trend-up"></i> +18 this month
+              </div>
+            </div>
+            <div class="db-kpi-card">
+              <div class="db-kpi-header">
+                <span class="db-kpi-label">Arriving Today</span>
+                <div class="db-kpi-icon">
+                  <i class="fa-solid fa-right-to-bracket"></i>
+                </div>
+              </div>
+              <div class="db-kpi-value">14</div>
+              <div class="db-kpi-trend neutral">
+                <i class="fa-solid fa-minus"></i> 6 checked in
+              </div>
+            </div>
+            <div class="db-kpi-card">
+              <div class="db-kpi-header">
+                <span class="db-kpi-label">Departing Today</span>
+                <div class="db-kpi-icon">
+                  <i class="fa-solid fa-right-from-bracket"></i>
+                </div>
+              </div>
+              <div class="db-kpi-value">9</div>
+              <div class="db-kpi-trend neutral">
+                <i class="fa-solid fa-minus"></i> 3 checked out
+              </div>
+            </div>
+            <div class="db-kpi-card">
+              <div class="db-kpi-header">
+                <span class="db-kpi-label">Pending Approval</span>
+                <div class="db-kpi-icon"><i class="fa-solid fa-clock"></i></div>
+              </div>
+              <div class="db-kpi-value">5</div>
+              <div class="db-kpi-trend down">
+                <i class="fa-solid fa-arrow-trend-down"></i> Needs action
+              </div>
+            </div>
+          </div>
+
+          <!-- Toolbar -->
+          <div class="db-card" style="margin-bottom: 20px">
+            <div class="res-toolbar">
+              <div class="res-filters">
+                <div class="res-search-wrap">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <input
+                    type="text"
+                    placeholder="Search guest, room…"
+                    oninput="filterTable(this.value)"
+                  />
+                </div>
+                <select class="res-select" onchange="filterStatus(this.value)">
+                  <option value="">All Statuses</option>
+                  <option value="confirmed">Confirmed</option>
+                  <option value="checkedin">Checked In</option>
+                  <option value="pending">Pending</option>
+                  <option value="cancelled">Cancelled</option>
+                </select>
+                <select class="res-select">
+                  <option>All Types</option>
+                  <option>Standard</option>
+                  <option>Deluxe</option>
+                  <option>Suite</option>
+                  <option>Presidential</option>
+                </select>
+              </div>
+              <a
+                href="#"
+                class="btn-gold"
+                style="font-size: 11px; padding: 9px 18px; white-space: nowrap"
+                ><i class="fa-solid fa-plus me-2"></i>New Reservation</a
+              >
+            </div>
+          </div>
+
+          <!-- Table card -->
+          <div class="db-card">
+            <div class="db-section-head">
+              <div class="db-section-title">All Reservations</div>
+              <span style="font-size: 12px; color: var(--text-muted)"
+                >Showing 12 of 248</span
+              >
+            </div>
+
+            <!-- Desktop table -->
+            <div class="res-desktop-table" style="overflow-x: auto">
+              <table class="db-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Guest</th>
+                    <th>Room</th>
+                    <th>Type</th>
+                    <th>Check-In</th>
+                    <th>Check-Out</th>
+                    <th>Nts</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="res-tbody"></tbody>
+              </table>
+            </div>
+
+            <!-- Mobile cards -->
+            <div class="res-mobile-list" id="res-mobile"></div>
+
+            <!-- Pagination -->
+            <div class="res-pagination">
+              <span style="font-size: 12px; color: var(--text-muted)"
+                >Page 1 of 21</span
+              >
+              <div class="res-page-btns">
+                <button class="res-page-btn">Prev</button>
+                <button class="res-page-btn active">1</button>
+                <button class="res-page-btn">2</button>
+                <button class="res-page-btn">3</button>
+                <button class="res-page-btn">Next</button>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="../../assets/js/db-shell.js"></script>
+    <script>
+      const reservations = [
+        {
+          id: "BK-1042",
+          guest: "Alexandra Moore",
+          room: "501",
+          type: "Suite",
+          checkin: "12 Jul 2025",
+          checkout: "15 Jul 2025",
+          nights: 3,
+          total: "$1,290",
+          status: "checkedin",
+        },
+        {
+          id: "BK-1043",
+          guest: "James Harrington",
+          room: "204",
+          type: "Deluxe",
+          checkin: "12 Jul 2025",
+          checkout: "14 Jul 2025",
+          nights: 2,
+          total: "$580",
+          status: "checkedin",
+        },
+        {
+          id: "BK-1044",
+          guest: "Priya Sharma",
+          room: "108",
+          type: "Standard",
+          checkin: "13 Jul 2025",
+          checkout: "18 Jul 2025",
+          nights: 5,
+          total: "$875",
+          status: "pending",
+        },
+        {
+          id: "BK-1045",
+          guest: "Marcus Lefevre",
+          room: "302",
+          type: "Suite",
+          checkin: "14 Jul 2025",
+          checkout: "18 Jul 2025",
+          nights: 4,
+          total: "$1,720",
+          status: "confirmed",
+        },
+        {
+          id: "BK-1046",
+          guest: "Sophie Caldwell",
+          room: "PS1",
+          type: "Presidential",
+          checkin: "15 Jul 2025",
+          checkout: "22 Jul 2025",
+          nights: 7,
+          total: "$5,250",
+          status: "confirmed",
+        },
+        {
+          id: "BK-1047",
+          guest: "Tariq Al-Farsi",
+          room: "310",
+          type: "Deluxe",
+          checkin: "11 Jul 2025",
+          checkout: "13 Jul 2025",
+          nights: 2,
+          total: "$580",
+          status: "cancelled",
+        },
+        {
+          id: "BK-1048",
+          guest: "Ingrid Larsson",
+          room: "112",
+          type: "Standard",
+          checkin: "16 Jul 2025",
+          checkout: "19 Jul 2025",
+          nights: 3,
+          total: "$525",
+          status: "confirmed",
+        },
+        {
+          id: "BK-1049",
+          guest: "Daniel Osei",
+          room: "215",
+          type: "Deluxe",
+          checkin: "12 Jul 2025",
+          checkout: "14 Jul 2025",
+          nights: 2,
+          total: "$580",
+          status: "checkedin",
+        },
+        {
+          id: "BK-1050",
+          guest: "Mei Lin",
+          room: "402",
+          type: "Suite",
+          checkin: "17 Jul 2025",
+          checkout: "20 Jul 2025",
+          nights: 3,
+          total: "$1,290",
+          status: "confirmed",
+        },
+        {
+          id: "BK-1051",
+          guest: "Robert Khan",
+          room: "106",
+          type: "Standard",
+          checkin: "13 Jul 2025",
+          checkout: "15 Jul 2025",
+          nights: 2,
+          total: "$350",
+          status: "pending",
+        },
+        {
+          id: "BK-1052",
+          guest: "Chiara Romano",
+          room: "308",
+          type: "Deluxe",
+          checkin: "18 Jul 2025",
+          checkout: "22 Jul 2025",
+          nights: 4,
+          total: "$1,160",
+          status: "confirmed",
+        },
+        {
+          id: "BK-1053",
+          guest: "Ivan Petrov",
+          room: "PS2",
+          type: "Presidential",
+          checkin: "20 Jul 2025",
+          checkout: "25 Jul 2025",
+          nights: 5,
+          total: "$3,750",
+          status: "confirmed",
+        },
+      ];
+      const labels = {
+        confirmed: "Confirmed",
+        pending: "Pending",
+        cancelled: "Cancelled",
+        checkedin: "Checked In",
+      };
+      let filtered = [...reservations];
+
+      function render() {
+        // Desktop table
+        document.getElementById("res-tbody").innerHTML = filtered
+          .map(
+            (r) => `
+    <tr>
+      <td style="font-size:11px;color:var(--text-muted);font-weight:500;">${r.id}</td>
+      <td><strong>${r.guest}</strong></td>
+      <td>Room ${r.room}</td>
+      <td style="font-size:12px;">${r.type}</td>
+      <td>${r.checkin}</td>
+      <td>${r.checkout}</td>
+      <td style="text-align:center;">${r.nights}</td>
+      <td style="font-weight:500;color:var(--dark);">${r.total}</td>
+      <td><span class="db-badge db-badge-${r.status}">${labels[r.status]}</span></td>
+      <td><a href="#" class="db-view-all" style="font-size:11px;">View</a></td>
+    </tr>`,
+          )
+          .join("");
+
+        // Mobile cards
+        document.getElementById("res-mobile").innerHTML = filtered
+          .map(
+            (r) => `
+    <div class="res-mobile-card">
+      <div class="res-mobile-card-top">
+        <span class="res-mobile-id">${r.id} · Room ${r.room}</span>
+        <span class="db-badge db-badge-${r.status}">${labels[r.status]}</span>
+      </div>
+      <div style="font-size:14px;font-weight:500;color:var(--dark);margin-bottom:10px;">${r.guest}</div>
+      <div class="res-mobile-card-grid">
+        <div class="res-mobile-field"><div class="lbl">Check-In</div><div class="val">${r.checkin}</div></div>
+        <div class="res-mobile-field"><div class="lbl">Check-Out</div><div class="val">${r.checkout}</div></div>
+        <div class="res-mobile-field"><div class="lbl">Type</div><div class="val">${r.type}</div></div>
+        <div class="res-mobile-field"><div class="lbl">Total</div><div class="val" style="color:var(--gold);font-weight:500;">${r.total}</div></div>
+      </div>
+    </div>`,
+          )
+          .join("");
+      }
+
+      function filterTable(q) {
+        q = q.toLowerCase();
+        filtered = reservations.filter(
+          (r) =>
+            r.guest.toLowerCase().includes(q) ||
+            r.room.includes(q) ||
+            r.id.toLowerCase().includes(q),
+        );
+        render();
+      }
+      function filterStatus(s) {
+        filtered = s
+          ? reservations.filter((r) => r.status === s)
+          : [...reservations];
+        render();
+      }
+      render();
+    </script>
+  </body>
+</html>
