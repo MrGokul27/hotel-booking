@@ -407,10 +407,14 @@
             </div>
           </div>
 
-          <div style="margin-top: 4px">
+          <div style="margin-top: 4px" id="save-settings-container">
             <button
               class="btn-gold"
               style="font-size: 11px; padding: 12px 32px"
+              onclick="
+                event.preventDefault();
+                window.location.href = '../../components/pages/404.html';
+              "
             >
               <i class="fa-solid fa-floppy-disk me-2"></i>Save All Settings
             </button>
