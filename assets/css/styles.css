@@ -1618,3 +1618,78 @@ p {
     font-size: 0.9rem;
   }
 }
+
+/* ── About Page Specific Styles - ab-numbar section ── */
+.ab-numbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 30px 0;
+  background: var(--dark-2);
+  color: var(--white);
+  flex-wrap: wrap;
+}
+
+.ab-numbar-item {
+  text-align: center;
+  padding: 10px 20px;
+}
+
+.ab-numbar-n {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  display: inline-block; /* Allows vertical-align to work reliably */
+}
+
+.ab-numbar-s {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  display: inline-block; /* Allows vertical-align to work reliably */
+  vertical-align: super; /* Positions the suffix slightly above the baseline */
+  margin-left: 2px; /* Small space between number and suffix */
+}
+
+.ab-numbar-l {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 8px;
+  display: block; /* Ensures the label is on a new line below the number/suffix */
+}
+
+.ab-numbar-divider {
+  width: 1px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 767.98px) {
+  .ab-numbar {
+    flex-direction: column;
+    padding: 20px 0;
+  }
+  .ab-numbar-item {
+    padding: 15px 0;
+  }
+  .ab-numbar-n {
+    font-size: 3rem;
+  }
+  .ab-numbar-s {
+    font-size: 1.5rem;
+    margin-left: 4px;
+  }
+  .ab-numbar-l {
+    margin-top: 4px;
+  }
+  .ab-numbar-divider {
+    width: 80%;
+    height: 1px;
+  }
+}

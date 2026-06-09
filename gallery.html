@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery — Stackly Hotel</title>
+    <meta
+      name="description"
+      content="Explore the Stackly Hotel photo gallery — rooms, rooftop pool, spa, dining and the Brooklyn skyline captured in every frame."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/gallery.css" />
+  </head>
+  <body>
+    <!-- HEADER -->
+    <div id="header-placeholder"></div>
+
+    <!-- ── HERO ── -->
+    <section class="gal-hero">
+      <img
+        src="assets/images/home/home-gallery-img-1.webp"
+        alt="Stackly Hotel Gallery"
+        class="gal-hero-img"
+      />
+      <div class="gal-hero-overlay"></div>
+      <div class="gal-hero-content">
+        <div class="container">
+          <p class="gal-hero-eyebrow fade-up">Photo Gallery</p>
+          <h1 class="gal-hero-title fade-up delay-1">
+            Every Corner,<br /><em>A Story Worth Telling</em>
+          </h1>
+          <p class="gal-hero-sub fade-up delay-2">
+            From sun-drenched rooftops to candlelit dining rooms — browse our
+            curated visual collection and let Stackly speak for itself.
+          </p>
+          <nav class="gal-breadcrumb fade-up delay-3" aria-label="Breadcrumb">
+            <a href="index.html">Home</a>
+            <span><i class="fa-solid fa-chevron-right"></i></span>
+            <span>Gallery</span>
+          </nav>
+        </div>
+      </div>
+      <!-- Floating stat cards -->
+      <div class="gal-hero-stats">
+        <div class="gal-hero-stat">
+          <div class="gal-hero-stat-num">120+</div>
+          <div class="gal-hero-stat-label">Photos</div>
+        </div>
+        <div class="gal-hero-stat">
+          <div class="gal-hero-stat-num">8</div>
+          <div class="gal-hero-stat-label">Categories</div>
+        </div>
+        <div class="gal-hero-stat">
+          <div class="gal-hero-stat-num">4K</div>
+          <div class="gal-hero-stat-label">Resolution</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FILTER BAR ── -->
+    <div class="gal-filter-bar">
+      <div class="container">
+        <div class="gal-filter-inner">
+          <button class="gal-filter-btn active" data-filter="all">
+            All Photos
+          </button>
+          <button class="gal-filter-btn" data-filter="rooms">
+            Rooms & Suites
+          </button>
+          <button class="gal-filter-btn" data-filter="dining">Dining</button>
+          <button class="gal-filter-btn" data-filter="pool">
+            Pool & Rooftop
+          </button>
+          <button class="gal-filter-btn" data-filter="spa">
+            Spa & Wellness
+          </button>
+          <button class="gal-filter-btn" data-filter="exterior">
+            Exterior
+          </button>
+          <button class="gal-filter-btn" data-filter="events">Events</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── MASONRY HERO GRID ── -->
+    <section class="section-pad">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="section-label fade-up">Featured Shots</span>
+          <h2 class="fade-up delay-1">Moments That Define Stackly</h2>
+          <p
+            class="text-muted mt-3 mx-auto fade-up delay-2"
+            style="max-width: 480px; font-size: 15px"
+          >
+            A hand-picked selection from our most celebrated spaces — click any
+            image to view full size.
+          </p>
+        </div>
+      </div>
+      <div class="gal-masonry-hero">
+        <!-- Large left — spans 2 rows -->
+        <div
+          class="gal-cell gal-cell-row-2"
+          data-src="assets/images/home/home-gallery-img-1.webp"
+          data-cap="The Grand Lobby"
+        >
+          <img
+            src="assets/images/home/home-gallery-img-1.webp"
+            alt="Grand Lobby"
+          />
+          <div class="gal-cell-overlay">
+            <div class="gal-cell-icon">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <span class="gal-cell-label">View</span>
+          </div>
+          <div class="gal-cell-cap">The Grand Lobby</div>
+        </div>
+        <!-- Top right — spans 2 cols -->
+        <div
+          class="gal-cell gal-cell-span-2"
+          data-src="assets/images/home/home-gallery-img-2.webp"
+          data-cap="Rooftop Infinity Pool"
+        >
+          <img
+            src="assets/images/home/home-gallery-img-2.webp"
+            alt="Rooftop Pool"
+          />
+          <div class="gal-cell-overlay">
+            <div class="gal-cell-icon">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <span class="gal-cell-label">View</span>
+          </div>
+          <div class="gal-cell-cap">Rooftop Infinity Pool</div>
+        </div>
+        <!-- Bottom row mid -->
+        <div
+          class="gal-cell"
+          data-src="assets/images/home/home-gallery-img-3.webp"
+          data-cap="Signature Dining"
+        >
+          <img src="assets/images/home/home-gallery-img-3.webp" alt="Dining" />
+          <div class="gal-cell-overlay">
+            <div class="gal-cell-icon">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <span class="gal-cell-label">View</span>
+          </div>
+          <div class="gal-cell-cap">Signature Dining</div>
+        </div>
+        <!-- Bottom row right -->
+        <div
+          class="gal-cell"
+          data-src="assets/images/home/home-gallery-img-4.webp"
+          data-cap="Fine Dining Terrace"
+        >
+          <img src="assets/images/home/home-gallery-img-4.webp" alt="Terrace" />
+          <div class="gal-cell-overlay">
+            <div class="gal-cell-icon">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <span class="gal-cell-label">View</span>
+          </div>
+          <div class="gal-cell-cap">Fine Dining Terrace</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── EDITORIAL SPLIT ── -->
+    <section class="gal-editorial">
+      <div class="gal-editorial-img fade-up">
+        <img
+          src="assets/images/home/home-gallery-img-5.webp"
+          alt="Spa and Wellness"
+        />
+        <div class="gal-editorial-img-overlay"></div>
+      </div>
+      <div class="gal-editorial-body fade-up delay-2">
+        <span class="section-label">Behind the Lens</span>
+        <h2>Photographed to<br />Inspire Your Stay</h2>
+        <p>
+          Every image in our gallery is shot on-location by our in-house
+          photography team. No filters, no staging — just the authentic beauty
+          of Stackly Hotel as our guests experience it every day, from the first
+          morning light on the rooftop to the golden glow of the Aurum Spa at
+          dusk.
+        </p>
+        <div class="gal-tag-row">
+          <span class="gal-tag">Rooms & Suites</span>
+          <span class="gal-tag">Rooftop Pool</span>
+          <span class="gal-tag">Fine Dining</span>
+          <span class="gal-tag">Spa & Wellness</span>
+          <span class="gal-tag">Events</span>
+          <span class="gal-tag">Brooklyn Views</span>
+        </div>
+        <a href="#" class="btn-gold">Download Press Kit</a>
+      </div>
+    </section>
+
+    <!-- ── UNIFORM GRID — Rooms & Spa ── -->
+    <section class="section-pad bg-light-custom">
+      <div class="container mb-4">
+        <div
+          class="d-flex align-items-end justify-content-between flex-wrap gap-3"
+        >
+          <div>
+            <span class="section-label fade-up">Rooms & Wellness</span>
+            <h2 class="mt-1 fade-up delay-1">Spaces Designed to Delight</h2>
+          </div>
+          <span class="text-muted fade-up delay-2" style="font-size: 13px"
+            >Click any image to expand</span
+          >
+        </div>
+      </div>
+      <div class="container">
+        <div class="gal-grid">
+          <div
+            class="gal-grid-item fade-up"
+            data-src="assets/images/home/home-ROOMS-img1.webp"
+            data-cap="Deluxe King Room"
+          >
+            <img
+              src="assets/images/home/home-ROOMS-img1.webp"
+              alt="Deluxe King Room"
+            />
+            <div class="gal-cell-overlay">
+              <div class="gal-cell-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </div>
+              <span class="gal-cell-label">View</span>
+            </div>
+            <div class="gal-cell-cap">Deluxe King Room</div>
+          </div>
+
+          <div
+            class="gal-grid-item fade-up delay-1"
+            data-src="assets/images/home/home-ROOMS-img2.webp"
+            data-cap="Family Suite"
+          >
+            <img
+              src="assets/images/home/home-ROOMS-img2.webp"
+              alt="Family Suite"
+            />
+            <div class="gal-cell-overlay">
+              <div class="gal-cell-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </div>
+              <span class="gal-cell-label">View</span>
+            </div>
+            <div class="gal-cell-cap">Family Suite</div>
+          </div>
+
+          <div
+            class="gal-grid-item fade-up delay-2"
+            data-src="assets/images/home/home-ROOMS-img3.webp"
+            data-cap="Presidential Suite"
+          >
+            <img
+              src="assets/images/home/home-ROOMS-img3.webp"
+              alt="Presidential Suite"
+            />
+            <div class="gal-cell-overlay">
+              <div class="gal-cell-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </div>
+              <span class="gal-cell-label">View</span>
+            </div>
+            <div class="gal-cell-cap">Presidential Suite</div>
+          </div>
+
+          <div
+            class="gal-grid-item fade-up"
+            data-src="assets/images/home/home-ROOMS-img4.webp"
+            data-cap="Superior Double Room"
+          >
+            <img
+              src="assets/images/home/home-ROOMS-img4.webp"
+              alt="Superior Double"
+            />
+            <div class="gal-cell-overlay">
+              <div class="gal-cell-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </div>
+              <span class="gal-cell-label">View</span>
+            </div>
+            <div class="gal-cell-cap">Superior Double Room</div>
+          </div>
+
+          <div
+            class="gal-grid-item fade-up delay-1"
+            data-src="assets/images/home/home-ROOMS-img5.webp"
+            data-cap="Junior Suite Bathroom"
+          >
+            <img
+              src="assets/images/home/home-ROOMS-img5.webp"
+              alt="Junior Suite"
+            />
+            <div class="gal-cell-overlay">
+              <div class="gal-cell-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </div>
+              <span class="gal-cell-label">View</span>
+            </div>
+            <div class="gal-cell-cap">Junior Suite Bathroom</div>
+          </div>
+
+          <div
+            class="gal-grid-item fade-up delay-2"
+            data-src="assets/images/home/home-ROOMS-img6.webp"
+            data-cap="Penthouse Terrace"
+          >
+            <img
+              src="assets/images/home/home-ROOMS-img6.webp"
+              alt="Penthouse"
+            />
+            <div class="gal-cell-overlay">
+              <div class="gal-cell-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </div>
+              <span class="gal-cell-label">View</span>
+            </div>
+            <div class="gal-cell-cap">Penthouse Terrace</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── VIDEO STRIP ── -->
+    <section class="gal-video-strip">
+      <img
+        src="assets/images/home/home-video-section-bg.webp"
+        alt="Hotel cinematic"
+        class="gal-video-bg"
+      />
+      <div class="gal-video-overlay"></div>
+      <div class="gal-video-content fade-up">
+        <div class="gal-play-btn">
+          <i class="fa-solid fa-play"></i>
+        </div>
+        <span
+          class="section-label"
+          style="color: var(--gold); justify-content: center; display: flex"
+          >Cinematic Tour</span
+        >
+        <h2 class="mt-2">See Stackly Come Alive</h2>
+        <p>
+          Watch our 4-minute cinematic hotel tour — from the lobby to the
+          rooftop, every frame captured in 4K.
+        </p>
+        <a href="#" class="btn-outline-white">Watch the Full Tour</a>
+      </div>
+    </section>
+
+    <!-- ── EXPERIENCES GRID ── -->
+    <section class="section-pad">
+      <div class="container mb-4">
+        <div
+          class="d-flex align-items-end justify-content-between flex-wrap gap-3"
+        >
+          <div>
+            <span class="section-label fade-up">Local Experiences</span>
+            <h2 class="mt-1 fade-up delay-1">Brooklyn Through Our Eyes</h2>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="gal-grid">
+          <div
+            class="gal-grid-item fade-up"
+            data-src="assets/images/home/home-LOCALEXPERIENCES-img-1.webp"
+            data-cap="Brooklyn Bridge at Dawn"
+          >
+            <img
+              src="assets/images/home/home-LOCALEXPERIENCES-img-1.webp"
+              alt="Brooklyn Bridge"
+            />
+            <div class="gal-cell-overlay">
+              <div class="gal-cell-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </div>
+              <span class="gal-cell-label">View</span>
+            </div>
+            <div class="gal-cell-cap">Brooklyn Bridge at Dawn</div>
+          </div>
+
+          <div
+            class="gal-grid-item fade-up delay-1"
+            data-src="assets/images/home/home-LOCALEXPERIENCES-img-2.webp"
+            data-cap="DUMBO Neighbourhood Walk"
+          >
+            <img
+              src="assets/images/home/home-LOCALEXPERIENCES-img-2.webp"
+              alt="DUMBO"
+            />
+            <div class="gal-cell-overlay">
+              <div class="gal-cell-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </div>
+              <span class="gal-cell-label">View</span>
+            </div>
+            <div class="gal-cell-cap">DUMBO Neighbourhood Walk</div>
+          </div>
+
+          <div
+            class="gal-grid-item fade-up delay-2"
+            data-src="assets/images/home/home-LOCALEXPERIENCES-img-3.webp"
+            data-cap="Sunset Kayaking"
+          >
+            <img
+              src="assets/images/home/home-LOCALEXPERIENCES-img-3.webp"
+              alt="Kayaking"
+            />
+            <div class="gal-cell-overlay">
+              <div class="gal-cell-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </div>
+              <span class="gal-cell-label">View</span>
+            </div>
+            <div class="gal-cell-cap">Sunset Kayaking</div>
+          </div>
+
+          <div
+            class="gal-grid-item fade-up"
+            data-src="assets/images/home/home-LOCALEXPERIENCES-img-4.webp"
+            data-cap="Brooklyn Botanic Garden"
+          >
+            <img
+              src="assets/images/home/home-LOCALEXPERIENCES-img-4.webp"
+              alt="Botanic Garden"
+            />
+            <div class="gal-cell-overlay">
+              <div class="gal-cell-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </div>
+              <span class="gal-cell-label">View</span>
+            </div>
+            <div class="gal-cell-cap">Brooklyn Botanic Garden</div>
+          </div>
+
+          <div
+            class="gal-grid-item fade-up delay-1"
+            data-src="assets/images/home/home-hero-bg-2.webp"
+            data-cap="Manhattan Skyline View"
+          >
+            <img src="assets/images/home/home-hero-bg-2.webp" alt="Skyline" />
+            <div class="gal-cell-overlay">
+              <div class="gal-cell-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </div>
+              <span class="gal-cell-label">View</span>
+            </div>
+            <div class="gal-cell-cap">Manhattan Skyline View</div>
+          </div>
+
+          <div
+            class="gal-grid-item fade-up delay-2"
+            data-src="assets/images/home/home-hero-bg-3.webp"
+            data-cap="Evening at the Hotel"
+          >
+            <img src="assets/images/home/home-hero-bg-3.webp" alt="Evening" />
+            <div class="gal-cell-overlay">
+              <div class="gal-cell-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </div>
+              <span class="gal-cell-label">View</span>
+            </div>
+            <div class="gal-cell-cap">Evening at the Hotel</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA SPLIT ── -->
+    <section class="gal-cta">
+      <div class="gal-cta-left">
+        <span class="section-label fade-up" style="color: var(--gold)"
+          >Experience It Live</span
+        >
+        <h2 class="text-white mt-2 mb-4 fade-up delay-1">
+          Pictures Are Just<br />the Beginning
+        </h2>
+        <p
+          class="fade-up delay-2"
+          style="
+            color: rgba(255, 255, 255, 0.65);
+            max-width: 380px;
+            line-height: 1.85;
+          "
+        >
+          No photograph can fully capture the warmth of our service, the scent
+          of the spa, or the view from your private terrace. Come stay and write
+          your own chapter at Stackly.
+        </p>
+        <div class="d-flex gap-3 flex-wrap mt-4 fade-up delay-3">
+          <a href="#" class="btn-gold">Reserve a Room</a>
+          <a href="#" class="btn-outline-white">Explore Facilities</a>
+        </div>
+      </div>
+      <div class="gal-cta-right">
+        <img
+          src="assets/images/home/home-welcome-section-img.webp"
+          alt="Stackly Hotel"
+        />
+        <div class="gal-cta-right-overlay"></div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <div id="footer-placeholder"></div>
+
+    <!-- ── LIGHTBOX ── -->
+    <div class="gal-lightbox" id="gal-lightbox">
+      <button class="gal-lightbox-close" id="gal-lb-close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <button class="gal-lightbox-prev" id="gal-lb-prev">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button class="gal-lightbox-next" id="gal-lb-next">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+      <div class="gal-lightbox-img-wrap">
+        <img src="" alt="" class="gal-lightbox-img" id="gal-lb-img" />
+      </div>
+      <div class="gal-lightbox-caption" id="gal-lb-cap"></div>
+      <div class="gal-lightbox-counter" id="gal-lb-counter"></div>
+    </div>
+
+    <button id="back-to-top" aria-label="Back to top">
+      <i class="fa-solid fa-chevron-up"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      /* ── Component loader ── */
+      function loadComponent(id, url, cb) {
+        fetch(url)
+          .then((r) => r.text())
+          .then((html) => {
+            document.getElementById(id).innerHTML = html;
+            if (cb) cb();
+          });
+      }
+      loadComponent(
+        "header-placeholder",
+        "components/common/header.html",
+        function () {
+          document.querySelectorAll(".nav-link").forEach(function (l) {
+            if (l.textContent.trim() === "Gallery") l.classList.add("active");
+          });
+          if (typeof initHeader === "function") initHeader();
+        },
+      );
+      loadComponent("footer-placeholder", "components/common/footer.html");
+
+      /* ── Filter tabs (visual only) ── */
+      document.querySelectorAll(".gal-filter-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          document
+            .querySelectorAll(".gal-filter-btn")
+            .forEach((b) => b.classList.remove("active"));
+          this.classList.add("active");
+        });
+      });
+
+      /* ── Lightbox ── */
+      var lb = document.getElementById("gal-lightbox");
+      var lbImg = document.getElementById("gal-lb-img");
+      var lbCap = document.getElementById("gal-lb-cap");
+      var lbCounter = document.getElementById("gal-lb-counter");
+      var items = [];
+      var current = 0;
+
+      function openLightbox(idx) {
+        current = idx;
+        lbImg.src = items[current].src;
+        lbImg.alt = items[current].cap;
+        lbCap.textContent = items[current].cap;
+        lbCounter.textContent = current + 1 + " / " + items.length;
+        lb.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+      function closeLightbox() {
+        lb.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("[data-src]").forEach(function (el, i) {
+          items.push({ src: el.dataset.src, cap: el.dataset.cap || "" });
+          el.addEventListener("click", function () {
+            openLightbox(i);
+          });
+        });
+        document
+          .getElementById("gal-lb-close")
+          .addEventListener("click", closeLightbox);
+        document
+          .getElementById("gal-lb-prev")
+          .addEventListener("click", function () {
+            openLightbox((current - 1 + items.length) % items.length);
+          });
+        document
+          .getElementById("gal-lb-next")
+          .addEventListener("click", function () {
+            openLightbox((current + 1) % items.length);
+          });
+        lb.addEventListener("click", function (e) {
+          if (e.target === lb) closeLightbox();
+        });
+        document.addEventListener("keydown", function (e) {
+          if (!lb.classList.contains("open")) return;
+          if (e.key === "Escape") closeLightbox();
+          if (e.key === "ArrowLeft")
+            openLightbox((current - 1 + items.length) % items.length);
+          if (e.key === "ArrowRight")
+            openLightbox((current + 1) % items.length);
+        });
+      });
+    </script>
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/dead-link-guard.js"></script>
+  </body>
+</html>

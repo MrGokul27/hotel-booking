@@ -4,7 +4,7 @@
   height: 72vh;
   min-height: 480px;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   overflow: hidden;
 }
 .fac-hero-img {
@@ -24,15 +24,16 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    to top,
-    rgba(10, 9, 7, 0.88) 0%,
-    rgba(10, 9, 7, 0.3) 60%
+    135deg,
+    rgba(10, 9, 7, 0.82) 0%,
+    rgba(10, 9, 7, 0.55) 60%,
+    rgba(10, 9, 7, 0.35) 100%
   );
 }
 .fac-hero-content {
   position: relative;
   z-index: 2;
-  padding: 80px 0 60px;
+  padding: 140px 0 60px;
   width: 100%;
 }
 .fac-hero-eyebrow {

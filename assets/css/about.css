@@ -34,11 +34,10 @@
   background: var(--dark);
   display: flex;
   align-items: center;
-  padding: 60px 0;
+  padding: 100px 0 60px;
 }
 .ab-hero-inner {
-  padding: 0 60px 0 56px;
-  max-width: 520px;
+  padding: 0 10px 0 56px;
 }
 .ab-hero-rule {
   width: 48px;

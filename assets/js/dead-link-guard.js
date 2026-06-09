@@ -3,6 +3,8 @@
     "index.html",
     "about.html",
     "facilities.html",
+    "offers.html",
+    "gallery.html",
     "login.html",
     "register.html",
     "404.html",
