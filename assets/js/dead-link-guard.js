@@ -1,6 +1,8 @@
 (function () {
   const VALID_PAGES = new Set([
     "index.html",
+    "about.html",
+    "facilities.html",
     "login.html",
     "register.html",
     "404.html",

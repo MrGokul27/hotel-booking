@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ── Counter animation ── */
-  const counters = document.querySelectorAll("[data-count]");
+  const counters = document.querySelectorAll("[data-count], .about-stat-num[data-count]");
 
   const animateCounter = (el) => {
     const target = +el.getAttribute("data-count");
