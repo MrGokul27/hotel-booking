@@ -40,7 +40,9 @@ function initHeader() {
   /* ── Active nav link based on current page ── */
   const currentPage = window.location.pathname.split("/").pop() || "index.html";
   document.querySelectorAll(".nav-link").forEach((link) => {
-    const linkPage = link.getAttribute("href").split("/").pop();
+    const href = link.getAttribute("href");
+    if (!href) return;
+    const linkPage = href.split("/").pop();
     if (linkPage === currentPage) {
       link.classList.add("active");
     }
@@ -179,7 +181,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ── Counter animation ── */
-  const counters = document.querySelectorAll("[data-count], .about-stat-num[data-count]");
+  const counters = document.querySelectorAll(
+    "[data-count], .about-stat-num[data-count]",
+  );
 
   const animateCounter = (el) => {
     const target = +el.getAttribute("data-count");

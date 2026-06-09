@@ -1113,6 +1113,9 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Custom JS -->
+    <script src="assets/js/script.js"></script>
+
     <!-- Component Loader -->
     <script>
       function loadComponent(id, url) {
@@ -1120,7 +1123,6 @@
           .then((r) => r.text())
           .then((html) => {
             document.getElementById(id).innerHTML = html;
-            // Re-run script.js init after header loads
             if (id === "header-placeholder") initHeader();
           });
       }
@@ -1128,8 +1130,6 @@
       loadComponent("footer-placeholder", "components/common/footer.html");
     </script>
 
-    <!-- Custom JS -->
-    <script src="assets/js/script.js"></script>
     <script src="assets/js/dead-link-guard.js"></script>
   </body>
 </html>
