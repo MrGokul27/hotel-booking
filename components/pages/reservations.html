@@ -313,15 +313,19 @@
 
             <!-- Pagination -->
             <div class="res-pagination">
-              <span style="font-size: 12px; color: var(--text-muted)"
-                >Page 1 of 21</span
-              >
-              <div class="res-page-btns">
-                <button class="res-page-btn">Prev</button>
-                <button class="res-page-btn active">1</button>
-                <button class="res-page-btn">2</button>
-                <button class="res-page-btn">3</button>
-                <button class="res-page-btn">Next</button>
+              <span style="font-size: 12px; color: var(--text-muted)"></span>
+              <div class="res-page-btns" id="pagination-controls">
+                <button class="res-page-btn" id="prev-page" href="#">
+                  Prev
+                </button>
+                <button class="res-page-btn active" data-page="1" href="#">
+                  1
+                </button>
+                <button class="res-page-btn" data-page="2" href="#">2</button>
+                <button class="res-page-btn" data-page="3" href="#">3</button>
+                <button class="res-page-btn" id="next-page" href="#">
+                  Next
+                </button>
               </div>
             </div>
           </div>
@@ -466,6 +470,9 @@
       ];
       const labels = {
         confirmed: "Confirmed",
+        checkedin: "Checked In",
+        confirmed: "Confirmed",
+        pending: "Pending",
         pending: "Pending",
         cancelled: "Cancelled",
         checkedin: "Checked In",
@@ -473,8 +480,20 @@
       let filtered = [...reservations];
 
       function render() {
+        displayReservations(currentPage);
+      }
+
+      const reservationsPerPage = 5; // Number of reservations per page
+      let currentPage = 1;
+
+      function displayReservations(page) {
+        currentPage = page;
         // Desktop table
-        document.getElementById("res-tbody").innerHTML = filtered
+        const startIndex = (currentPage - 1) * reservationsPerPage;
+        const endIndex = startIndex + reservationsPerPage;
+        const paginatedReservations = filtered.slice(startIndex, endIndex);
+
+        document.getElementById("res-tbody").innerHTML = paginatedReservations
           .map(
             (r) => `
     <tr>
@@ -493,7 +512,7 @@
           .join("");
 
         // Mobile cards
-        document.getElementById("res-mobile").innerHTML = filtered
+        document.getElementById("res-mobile").innerHTML = paginatedReservations
           .map(
             (r) => `
     <div class="res-mobile-card">
@@ -511,6 +530,9 @@
     </div>`,
           )
           .join("");
+
+        updatePaginationControls();
+        updateShowingText();
       }
 
       function filterTable(q) {
@@ -521,15 +543,70 @@
             r.room.includes(q) ||
             r.id.toLowerCase().includes(q),
         );
-        render();
+        currentPage = 1; // Reset to first page after filtering
+        displayReservations(currentPage);
       }
       function filterStatus(s) {
         filtered = s
           ? reservations.filter((r) => r.status === s)
           : [...reservations];
-        render();
+        currentPage = 1; // Reset to first page after filtering
+        displayReservations(currentPage);
       }
-      render();
+
+      function updatePaginationControls() {
+        const totalPages = Math.ceil(filtered.length / reservationsPerPage);
+        const paginationControls = document.getElementById(
+          "pagination-controls",
+        );
+        paginationControls.innerHTML = ""; // Clear existing buttons
+
+        const prevButton = document.createElement("button");
+        prevButton.className = "res-page-btn";
+        prevButton.id = "prev-page";
+        prevButton.textContent = "Prev";
+        prevButton.disabled = currentPage === 1;
+        prevButton.addEventListener("click", () =>
+          displayReservations(currentPage - 1),
+        );
+        paginationControls.appendChild(prevButton);
+
+        for (let i = 1; i <= totalPages; i++) {
+          const pageButton = document.createElement("button");
+          pageButton.className = "res-page-btn";
+          pageButton.textContent = i;
+          pageButton.dataset.page = i;
+          if (i === currentPage) {
+            pageButton.classList.add("active");
+          }
+          pageButton.addEventListener("click", () => displayReservations(i));
+          paginationControls.appendChild(pageButton);
+        }
+
+        const nextButton = document.createElement("button");
+        nextButton.className = "res-page-btn";
+        nextButton.id = "next-page";
+        nextButton.textContent = "Next";
+        nextButton.disabled = currentPage === totalPages;
+        nextButton.addEventListener("click", () =>
+          displayReservations(currentPage + 1),
+        );
+        paginationControls.appendChild(nextButton);
+      }
+
+      function updateShowingText() {
+        const totalReservations = filtered.length;
+        const start = (currentPage - 1) * reservationsPerPage + 1;
+        const end = Math.min(
+          currentPage * reservationsPerPage,
+          totalReservations,
+        );
+        document.querySelector(".db-section-head span").textContent =
+          `Showing ${start}–${end} of ${totalReservations}`;
+      }
+
+      // Initial render
+      displayReservations(currentPage);
     </script>
   </body>
 </html>

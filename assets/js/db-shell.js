@@ -279,6 +279,12 @@
   toggle?.addEventListener("click", openSidebar);
   overlay?.addEventListener("click", closeSidebar);
 
+  // Handle notification button click
+  const notifBtn = document.querySelector(".db-notif-btn");
+  notifBtn?.addEventListener("click", () => {
+    window.location.href = "../../components/pages/404.html";
+  });
+
   /* expose helpers */
   window.DB = { role, nameFull, initials, email, closeSidebar };
 
