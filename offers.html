@@ -461,10 +461,10 @@
           Subscribe and be the first to hear about our seasonal packages, flash
           sales, and members-only rates — delivered straight to your inbox.
         </p>
-        <div class="off-newsletter-form fade-up delay-3">
-          <input type="email" placeholder="Enter your email address" />
+        <form id="newsletter-form" class="off-newsletter-form fade-up delay-3">
+          <input type="email" placeholder="Enter your email address" required />
           <button type="submit">Subscribe</button>
-        </div>
+        </form>
         <p class="off-newsletter-note fade-up delay-4">
           No spam, ever. Unsubscribe anytime. We respect your privacy.
         </p>
@@ -540,6 +540,12 @@
           });
           this.classList.add("active");
         });
+      });
+
+      // Newsletter form submission handling
+      document.getElementById("newsletter-form")?.addEventListener("submit", function (e) {
+        e.preventDefault();
+        window.location.href = "components/pages/404.html";
       });
     </script>
     <script src="assets/js/script.js"></script>
