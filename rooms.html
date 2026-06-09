@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Rooms — Stackly Hotel</title>
+    <meta
+      name="description"
+      content="Explore Stackly Hotel's full collection of rooms and suites — from elegant Standard Rooms to the iconic Presidential Suite in Brooklyn, NY."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/rooms.css" />
+  </head>
+  <body>
+    <div id="header-placeholder"></div>
+
+    <!-- ── HERO ── -->
+    <section class="rooms-hero">
+      <img
+        src="assets/images/home/home-hero-bg-2.webp"
+        alt="Stackly Hotel Rooms"
+        class="rooms-hero-img"
+      />
+      <div class="rooms-hero-overlay"></div>
+      <div class="rooms-hero-content">
+        <div class="container">
+          <p class="rooms-hero-eyebrow fade-up">Brooklyn's Finest</p>
+          <h1 class="rooms-hero-title fade-up delay-1">
+            Rooms &amp; <em>Suites</em>
+          </h1>
+          <p class="rooms-hero-sub fade-up delay-2">
+            From thoughtfully designed standard rooms to our iconic Presidential
+            Suite — every space at Stackly is a sanctuary crafted for rest,
+            privacy and pure indulgence.
+          </p>
+          <nav class="rooms-breadcrumb fade-up delay-3" aria-label="Breadcrumb">
+            <a href="index.html">Home</a>
+            <span><i class="fa-solid fa-chevron-right"></i></span>
+            <span>Rooms &amp; Suites</span>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── STATS BAR ── -->
+    <div class="rooms-statsbar">
+      <div class="container-fluid px-0">
+        <div class="rooms-statsbar-inner">
+          <div class="rooms-stat fade-up">
+            <div class="rooms-stat-num">120</div>
+            <div class="rooms-stat-label">Luxury Rooms &amp; Suites</div>
+          </div>
+          <div class="rooms-stat fade-up delay-1">
+            <div class="rooms-stat-num">4</div>
+            <div class="rooms-stat-label">Room Categories</div>
+          </div>
+          <div class="rooms-stat fade-up delay-2">
+            <div class="rooms-stat-num">5★</div>
+            <div class="rooms-stat-label">Forbes Rated</div>
+          </div>
+          <div class="rooms-stat fade-up delay-3">
+            <div class="rooms-stat-num">24/7</div>
+            <div class="rooms-stat-label">Concierge Service</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── FILTER BAR ── -->
+    <div class="rooms-filter-bar">
+      <div class="container">
+        <div class="rooms-filter-inner">
+          <button class="rooms-filter-btn active" data-filter="all">
+            All Rooms
+          </button>
+          <button class="rooms-filter-btn" data-filter="standard">
+            Standard
+          </button>
+          <button class="rooms-filter-btn" data-filter="deluxe">Deluxe</button>
+          <button class="rooms-filter-btn" data-filter="suite">Suite</button>
+          <button class="rooms-filter-btn" data-filter="presidential">
+            Presidential
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── ROOMS GRID ── -->
+    <section class="section-pad">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="section-label fade-up">Accommodations</span>
+          <h2 class="fade-up delay-1">Choose Your Perfect Room</h2>
+          <p
+            class="text-muted mt-3 mx-auto fade-up delay-2"
+            style="max-width: 520px; font-size: 15px"
+          >
+            Every room is uniquely appointed with handpicked furnishings,
+            premium linens and curated amenities. Book direct for our best
+            guaranteed rate.
+          </p>
+        </div>
+
+        <div class="row g-4">
+          <!-- Standard Room -->
+          <div class="col-lg-6 fade-up" data-category="standard">
+            <div class="rl-card">
+              <div class="rl-card-img-wrap">
+                <img
+                  src="assets/images/home/home-ROOMS-img1.webp"
+                  alt="Standard Room"
+                  class="rl-card-img"
+                />
+                <span class="rl-card-badge">Most Popular</span>
+              </div>
+              <div class="rl-card-body">
+                <span class="rl-card-category">Standard · City View</span>
+                <h3 class="rl-card-title">Standard Room</h3>
+                <p class="rl-card-desc">
+                  A refined retreat for the modern traveller. Our Standard Rooms
+                  blend warm tones, Hypnos beds and floor-to-ceiling windows
+                  revealing Brooklyn's skyline — everything you need, nothing
+                  you don't.
+                </p>
+                <div class="rl-card-amenities">
+                  <span><i class="fa-solid fa-bed"></i> King Bed</span>
+                  <span><i class="fa-solid fa-wifi"></i> Free Wi-Fi</span>
+                  <span><i class="fa-solid fa-user-group"></i> 2 Guests</span>
+                  <span><i class="fa-solid fa-expand"></i> 30 m²</span>
+                  <span><i class="fa-solid fa-tv"></i> Smart TV</span>
+                  <span><i class="fa-solid fa-mug-hot"></i> Breakfast</span>
+                </div>
+                <div class="rl-card-footer">
+                  <div class="rl-card-price">
+                    <span class="from">From</span>$189<span class="per"
+                      >/ night</span
+                    >
+                  </div>
+                  <a href="#" class="btn-gold">View Room</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Deluxe Room -->
+          <div class="col-lg-6 fade-up delay-1" data-category="deluxe">
+            <div class="rl-card">
+              <div class="rl-card-img-wrap">
+                <img
+                  src="assets/images/home/home-ROOMS-img2.webp"
+                  alt="Deluxe Room"
+                  class="rl-card-img"
+                />
+                <span class="rl-card-badge badge-dark">Editor's Choice</span>
+              </div>
+              <div class="rl-card-body">
+                <span class="rl-card-category">Deluxe · Skyline View</span>
+                <h3 class="rl-card-title">Deluxe Room</h3>
+                <p class="rl-card-desc">
+                  Elevated in every sense. Deluxe Rooms offer a generous
+                  footprint, a deep soaking tub, curated minibar and a private
+                  balcony overlooking the Manhattan skyline — perfect for those
+                  who expect more.
+                </p>
+                <div class="rl-card-amenities">
+                  <span><i class="fa-solid fa-bed"></i> King Bed</span>
+                  <span><i class="fa-solid fa-bath"></i> Soaking Tub</span>
+                  <span><i class="fa-solid fa-user-group"></i> 2 Guests</span>
+                  <span><i class="fa-solid fa-expand"></i> 42 m²</span>
+                  <span><i class="fa-solid fa-martini-glass"></i> Minibar</span>
+                  <span><i class="fa-solid fa-door-open"></i> Balcony</span>
+                </div>
+                <div class="rl-card-footer">
+                  <div class="rl-card-price">
+                    <span class="from">From</span>$279<span class="per"
+                      >/ night</span
+                    >
+                  </div>
+                  <a href="#" class="btn-gold">View Room</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Suite -->
+          <div class="col-lg-6 fade-up" data-category="suite">
+            <div class="rl-card">
+              <div class="rl-card-img-wrap">
+                <img
+                  src="assets/images/home/home-ROOMS-img3.webp"
+                  alt="Luxury Suite"
+                  class="rl-card-img"
+                />
+                <span
+                  class="rl-card-badge badge-exclusive"
+                  style="background: #2c3e50"
+                  >Signature Suite</span
+                >
+              </div>
+              <div class="rl-card-body">
+                <span class="rl-card-category">Suite · Panoramic View</span>
+                <h3 class="rl-card-title">Luxury Suite</h3>
+                <p class="rl-card-desc">
+                  A separate living room, a rain shower, a freestanding copper
+                  bath and a wraparound terrace with panoramic city views. The
+                  Luxury Suite is designed for those who consider space a luxury
+                  in itself.
+                </p>
+                <div class="rl-card-amenities">
+                  <span><i class="fa-solid fa-bed"></i> King Bed</span>
+                  <span><i class="fa-solid fa-couch"></i> Living Room</span>
+                  <span><i class="fa-solid fa-user-group"></i> 3 Guests</span>
+                  <span><i class="fa-solid fa-expand"></i> 68 m²</span>
+                  <span><i class="fa-solid fa-bath"></i> Copper Bath</span>
+                  <span
+                    ><i class="fa-solid fa-umbrella-beach"></i> Terrace</span
+                  >
+                </div>
+                <div class="rl-card-footer">
+                  <div class="rl-card-price">
+                    <span class="from">From</span>$449<span class="per"
+                      >/ night</span
+                    >
+                  </div>
+                  <a href="#" class="btn-gold">View Room</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Presidential Suite -->
+          <div class="col-lg-6 fade-up delay-1" data-category="presidential">
+            <div class="rl-card">
+              <div class="rl-card-img-wrap">
+                <img
+                  src="assets/images/home/home-ROOMS-img4.webp"
+                  alt="Presidential Suite"
+                  class="rl-card-img"
+                />
+                <span class="rl-card-badge" style="background: var(--gold-dark)"
+                  >Most Exclusive</span
+                >
+              </div>
+              <div class="rl-card-body">
+                <span class="rl-card-category">Presidential · Full Floor</span>
+                <h3 class="rl-card-title">Presidential Suite</h3>
+                <p class="rl-card-desc">
+                  The crown of Stackly. Our full-floor Presidential Suite
+                  commands breathtaking 360° views, a private dining room, a
+                  home cinema, butler service and a private rooftop jacuzzi — an
+                  unrivalled experience.
+                </p>
+                <div class="rl-card-amenities">
+                  <span><i class="fa-solid fa-bed"></i> 2 King Beds</span>
+                  <span><i class="fa-solid fa-film"></i> Home Cinema</span>
+                  <span><i class="fa-solid fa-user-group"></i> 4 Guests</span>
+                  <span><i class="fa-solid fa-expand"></i> 220 m²</span>
+                  <span
+                    ><i class="fa-solid fa-hot-tub-person"></i> Rooftop
+                    Jacuzzi</span
+                  >
+                  <span><i class="fa-solid fa-bell-concierge"></i> Butler</span>
+                </div>
+                <div class="rl-card-footer">
+                  <div class="rl-card-price">
+                    <span class="from">From</span>$1,299<span class="per"
+                      >/ night</span
+                    >
+                  </div>
+                  <a href="#" class="btn-gold">View Room</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── WHAT'S INCLUDED ── -->
+    <section class="section-pad bg-light-custom">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-5">
+            <span class="section-label fade-up">Every Room Includes</span>
+            <h2 class="mt-2 mb-4 fade-up delay-1">
+              Exceptional Standards<br />Across All Categories
+            </h2>
+            <p
+              class="text-muted fade-up delay-2"
+              style="font-size: 15px; line-height: 1.85"
+            >
+              Regardless of the room you choose, every stay at Stackly comes
+              with the same uncompromising standard of care, quality and
+              hospitality.
+            </p>
+          </div>
+          <div class="col-lg-7">
+            <div class="row g-3">
+              <div class="col-sm-6 fade-up">
+                <div
+                  class="d-flex gap-3 align-items-start p-3 bg-white rounded"
+                >
+                  <div
+                    style="
+                      width: 44px;
+                      height: 44px;
+                      background: var(--gold);
+                      border-radius: 50%;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      color: #fff;
+                      font-size: 16px;
+                      flex-shrink: 0;
+                    "
+                  >
+                    <i class="fa-solid fa-bed"></i>
+                  </div>
+                  <div>
+                    <strong
+                      style="
+                        font-size: 0.95rem;
+                        display: block;
+                        margin-bottom: 4px;
+                      "
+                      >Hypnos Beds</strong
+                    ><span style="font-size: 13px; color: var(--text-muted)"
+                      >Hotel-grade mattresses with Egyptian cotton linens, 400
+                      thread count.</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 fade-up delay-1">
+                <div
+                  class="d-flex gap-3 align-items-start p-3 bg-white rounded"
+                >
+                  <div
+                    style="
+                      width: 44px;
+                      height: 44px;
+                      background: var(--gold);
+                      border-radius: 50%;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      color: #fff;
+                      font-size: 16px;
+                      flex-shrink: 0;
+                    "
+                  >
+                    <i class="fa-solid fa-wifi"></i>
+                  </div>
+                  <div>
+                    <strong
+                      style="
+                        font-size: 0.95rem;
+                        display: block;
+                        margin-bottom: 4px;
+                      "
+                      >Ultrafast Wi-Fi</strong
+                    ><span style="font-size: 13px; color: var(--text-muted)"
+                      >Fibre-optic 1 Gbps complimentary throughout your
+                      stay.</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 fade-up delay-2">
+                <div
+                  class="d-flex gap-3 align-items-start p-3 bg-white rounded"
+                >
+                  <div
+                    style="
+                      width: 44px;
+                      height: 44px;
+                      background: var(--gold);
+                      border-radius: 50%;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      color: #fff;
+                      font-size: 16px;
+                      flex-shrink: 0;
+                    "
+                  >
+                    <i class="fa-solid fa-mug-hot"></i>
+                  </div>
+                  <div>
+                    <strong
+                      style="
+                        font-size: 0.95rem;
+                        display: block;
+                        margin-bottom: 4px;
+                      "
+                      >Daily Breakfast</strong
+                    ><span style="font-size: 13px; color: var(--text-muted)"
+                      >Farm-to-table breakfast served in your room or our
+                      restaurant.</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 fade-up delay-3">
+                <div
+                  class="d-flex gap-3 align-items-start p-3 bg-white rounded"
+                >
+                  <div
+                    style="
+                      width: 44px;
+                      height: 44px;
+                      background: var(--gold);
+                      border-radius: 50%;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      color: #fff;
+                      font-size: 16px;
+                      flex-shrink: 0;
+                    "
+                  >
+                    <i class="fa-solid fa-bell-concierge"></i>
+                  </div>
+                  <div>
+                    <strong
+                      style="
+                        font-size: 0.95rem;
+                        display: block;
+                        margin-bottom: 4px;
+                      "
+                      >Named Concierge</strong
+                    ><span style="font-size: 13px; color: var(--text-muted)"
+                      >A dedicated concierge assigned before you even
+                      arrive.</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 fade-up">
+                <div
+                  class="d-flex gap-3 align-items-start p-3 bg-white rounded"
+                >
+                  <div
+                    style="
+                      width: 44px;
+                      height: 44px;
+                      background: var(--gold);
+                      border-radius: 50%;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      color: #fff;
+                      font-size: 16px;
+                      flex-shrink: 0;
+                    "
+                  >
+                    <i class="fa-solid fa-spa"></i>
+                  </div>
+                  <div>
+                    <strong
+                      style="
+                        font-size: 0.95rem;
+                        display: block;
+                        margin-bottom: 4px;
+                      "
+                      >Spa Access</strong
+                    ><span style="font-size: 13px; color: var(--text-muted)"
+                      >Complimentary access to Aurum Spa thermal circuit
+                      daily.</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 fade-up delay-1">
+                <div
+                  class="d-flex gap-3 align-items-start p-3 bg-white rounded"
+                >
+                  <div
+                    style="
+                      width: 44px;
+                      height: 44px;
+                      background: var(--gold);
+                      border-radius: 50%;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      color: #fff;
+                      font-size: 16px;
+                      flex-shrink: 0;
+                    "
+                  >
+                    <i class="fa-solid fa-rotate-left"></i>
+                  </div>
+                  <div>
+                    <strong
+                      style="
+                        font-size: 0.95rem;
+                        display: block;
+                        margin-bottom: 4px;
+                      "
+                      >Flexible Check-out</strong
+                    ><span style="font-size: 13px; color: var(--text-muted)"
+                      >Late checkout until 2 PM subject to availability, free of
+                      charge.</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA SPLIT ── -->
+    <section class="rooms-cta">
+      <div class="rooms-cta-left">
+        <span class="section-label fade-up" style="color: var(--gold)"
+          >Ready to Stay?</span
+        >
+        <h2 class="text-white mt-2 mb-4 fade-up delay-1">
+          Book Direct &amp;<br />Save Every Time
+        </h2>
+        <p
+          class="fade-up delay-2"
+          style="
+            color: rgba(255, 255, 255, 0.65);
+            max-width: 380px;
+            line-height: 1.85;
+            font-size: 15px;
+          "
+        >
+          Book directly on our website and receive our best guaranteed rate, a
+          complimentary room upgrade when available, and a personal welcome from
+          your named concierge.
+        </p>
+        <div class="d-flex gap-3 flex-wrap mt-4 fade-up delay-3">
+          <a href="#" class="btn-gold">Reserve Now</a>
+          <a href="#" class="btn-outline-white">View Offers</a>
+        </div>
+      </div>
+      <div class="rooms-cta-right">
+        <img
+          src="assets/images/home/home-gallery-img-4.webp"
+          alt="Stackly Hotel"
+        />
+        <div class="rooms-cta-right-overlay"></div>
+      </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <button id="back-to-top" aria-label="Back to top">
+      <i class="fa-solid fa-chevron-up"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      function loadComponent(id, url, cb) {
+        fetch(url)
+          .then((r) => r.text())
+          .then((html) => {
+            document.getElementById(id).innerHTML = html;
+            if (cb) cb();
+          });
+      }
+      loadComponent(
+        "header-placeholder",
+        "components/common/header.html",
+        function () {
+          if (typeof initHeader === "function") initHeader();
+        },
+      );
+      loadComponent("footer-placeholder", "components/common/footer.html");
+
+      document.querySelectorAll(".rooms-filter-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          document
+            .querySelectorAll(".rooms-filter-btn")
+            .forEach((b) => b.classList.remove("active"));
+          this.classList.add("active");
+          var filter = this.dataset.filter;
+          document.querySelectorAll("[data-category]").forEach(function (card) {
+            if (filter === "all" || card.dataset.category === filter) {
+              card.style.display = "";
+            } else {
+              card.style.display = "none";
+            }
+          });
+        });
+      });
+    </script>
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/dead-link-guard.js"></script>
+  </body>
+</html>

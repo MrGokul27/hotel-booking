@@ -31,30 +31,24 @@
 
     <!-- ── HERO ── -->
     <section class="off-hero">
-      <div class="off-hero-photo">
-        <img
-          src="assets/images/home/home-SPECIALOFFERS-1.webp"
-          alt="Stackly Hotel Special Offers"
-        />
-        <div class="off-hero-photo-overlay"></div>
-        <div class="off-hero-badge">
-          <span class="off-hero-badge-num">6</span>
-          <span class="off-hero-badge-text">Exclusive<br />Packages</span>
-        </div>
-      </div>
+      <img
+        src="assets/images/home/home-SPECIALOFFERS-1.webp"
+        alt="Stackly Hotel Special Offers"
+        class="off-hero-img"
+      />
+      <div class="off-hero-overlay"></div>
       <div class="off-hero-content">
-        <div class="off-hero-inner">
-          <div class="off-hero-rule fade-up"></div>
-          <p class="off-hero-eyebrow fade-up delay-1">Limited-Time Offers</p>
-          <h1 class="off-hero-title fade-up delay-2">
+        <div class="container">
+          <p class="off-hero-eyebrow fade-up">Limited-Time Offers</p>
+          <h1 class="off-hero-title fade-up delay-1">
             Stay More,<br /><em>Save More,</em><br />Experience Everything
           </h1>
-          <p class="off-hero-sub fade-up delay-3">
+          <p class="off-hero-sub fade-up delay-2">
             From romantic escapes to family adventures — every package at
             Stackly is crafted to make your stay unforgettable without
             compromise.
           </p>
-          <nav class="off-breadcrumb fade-up delay-4" aria-label="Breadcrumb">
+          <nav class="off-breadcrumb fade-up delay-3" aria-label="Breadcrumb">
             <a href="index.html">Home</a>
             <span><i class="fa-solid fa-chevron-right"></i></span>
             <span>Special Offers</span>
@@ -533,9 +527,6 @@
         "header-placeholder",
         "components/common/header.html",
         function () {
-          document.querySelectorAll(".nav-link").forEach(function (l) {
-            if (l.textContent.trim() === "Offers") l.classList.add("active");
-          });
           if (typeof initHeader === "function") initHeader();
         },
       );

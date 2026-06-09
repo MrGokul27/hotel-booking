@@ -1,7 +1,7 @@
 /* ── Hero (full-width cinematic) ── */
 .gal-hero {
   position: relative;
-  min-height: 88vh;
+  height: 78vh;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -33,7 +33,7 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  padding: 140px 0 100px;
+  padding: 0;
 }
 .gal-hero-eyebrow {
   font-size: 11px;
@@ -572,7 +572,7 @@
 /* ── Responsive ── */
 @media (max-width: 991.98px) {
   .gal-hero {
-    min-height: 70vh;
+    height: 60vh;
   }
   .gal-hero-stats {
     display: none;

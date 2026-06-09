@@ -37,7 +37,16 @@ function initHeader() {
   mobileClose?.addEventListener("click", closeNav);
   mobileOverlay?.addEventListener("click", closeNav);
 
-  /* Active nav on scroll */
+  /* ── Active nav link based on current page ── */
+  const currentPage = window.location.pathname.split("/").pop() || "index.html";
+  document.querySelectorAll(".nav-link").forEach((link) => {
+    const linkPage = link.getAttribute("href").split("/").pop();
+    if (linkPage === currentPage) {
+      link.classList.add("active");
+    }
+  });
+
+  /* Active nav on scroll (single-page anchor links only) */
   const sections = document.querySelectorAll("section[id]");
   const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
   const activateNav = () => {

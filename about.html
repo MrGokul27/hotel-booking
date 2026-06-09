@@ -30,33 +30,27 @@
     <div id="header-placeholder"></div>
 
     <section class="ab-hero">
-      <!-- left photo half -->
-      <div class="ab-hero-photo">
-        <img
-          src="assets/images/about/about-hero-bg.webp"
-          alt="Stackly Hotel lobby"
-        />
-        <div class="ab-hero-photo-overlay"></div>
-      </div>
-      <!-- right dark content half -->
+      <img
+        src="assets/images/about/about-hero-bg.webp"
+        alt="Stackly Hotel lobby"
+        class="ab-hero-img"
+      />
+      <div class="ab-hero-overlay"></div>
       <div class="ab-hero-content">
-        <div class="ab-hero-inner">
-          <div class="ab-hero-rule fade-up"></div>
-          <p class="ab-hero-eyebrow fade-up delay-1">
-            Est. 1999 · Brooklyn, NY
-          </p>
-          <h1 class="ab-hero-title fade-up delay-2">
+        <div class="container">
+          <p class="ab-hero-eyebrow fade-up">Est. 1999 · Brooklyn, NY</p>
+          <h1 class="ab-hero-title fade-up delay-1">
             Crafted for<br /><em>Those Who Seek</em><br />the Extraordinary
           </h1>
-          <p class="ab-hero-sub fade-up delay-3">
+          <p class="ab-hero-sub fade-up delay-2">
             Twenty-five years of redefining what luxury means — one perfectly
             curated stay at a time.
           </p>
-          <ol class="ab-breadcrumb fade-up delay-4">
-            <li><a href="index.html">Home</a></li>
-            <li><i class="fa-solid fa-chevron-right"></i></li>
-            <li>About Us</li>
-          </ol>
+          <nav class="ab-breadcrumb fade-up delay-3" aria-label="Breadcrumb">
+            <a href="index.html">Home</a>
+            <span><i class="fa-solid fa-chevron-right"></i></span>
+            <span>About Us</span>
+          </nav>
         </div>
       </div>
     </section>
@@ -612,9 +606,6 @@
         "header-placeholder",
         "components/common/header.html",
         function () {
-          document.querySelectorAll(".nav-link").forEach(function (l) {
-            if (l.textContent.trim() === "About") l.classList.add("active");
-          });
           if (typeof initHeader === "function") initHeader();
         },
       );

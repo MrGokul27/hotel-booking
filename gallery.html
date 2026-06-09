@@ -560,9 +560,6 @@
         "header-placeholder",
         "components/common/header.html",
         function () {
-          document.querySelectorAll(".nav-link").forEach(function (l) {
-            if (l.textContent.trim() === "Gallery") l.classList.add("active");
-          });
           if (typeof initHeader === "function") initHeader();
         },
       );

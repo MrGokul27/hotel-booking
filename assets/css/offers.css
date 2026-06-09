@@ -1,76 +1,39 @@
-/* ── Hero (split layout matching about.html) ── */
+/* ── Hero ── */
 .off-hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 82vh;
-}
-.off-hero-photo {
   position: relative;
+  height: 78vh;
+  display: flex;
+  align-items: center;
   overflow: hidden;
 }
-.off-hero-photo img {
+.off-hero-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
   transform: scale(1.06);
-  transition: transform 8s ease;
+  transition: transform 10s ease;
 }
-.off-hero-photo:hover img {
+.off-hero:hover .off-hero-img {
   transform: scale(1);
 }
-.off-hero-photo-overlay {
+.off-hero-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    to right,
-    rgba(10, 9, 7, 0) 55%,
-    rgba(10, 9, 7, 0.5) 100%
+    135deg,
+    rgba(10, 9, 7, 0.82) 0%,
+    rgba(10, 9, 7, 0.55) 60%,
+    rgba(10, 9, 7, 0.35) 100%
   );
 }
-/* Floating badge on hero photo */
-.off-hero-badge {
-  position: absolute;
-  bottom: 40px;
-  left: 40px;
-  background: var(--gold);
-  color: var(--white);
-  padding: 18px 24px;
-  text-align: center;
-  border-radius: var(--radius);
-  box-shadow: 0 8px 32px rgba(184, 154, 96, 0.45);
-  z-index: 2;
-}
-.off-hero-badge-num {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 2.4rem;
-  font-weight: 700;
-  line-height: 1;
-  display: block;
-}
-.off-hero-badge-text {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  opacity: 0.9;
-  margin-top: 4px;
-  display: block;
-}
 .off-hero-content {
-  background: var(--dark);
-  display: flex;
-  align-items: center;
-  padding: 100px 0 60px;
-}
-.off-hero-inner {
-  padding: 0 10px 0 56px;
-}
-.off-hero-rule {
-  width: 48px;
-  height: 2px;
-  background: var(--gold);
-  margin-bottom: 24px;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 0;
 }
 .off-hero-eyebrow {
   font-size: 11px;
@@ -78,15 +41,15 @@
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 .off-hero-title {
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(2.4rem, 4vw, 3.8rem);
+  font-size: clamp(2.8rem, 6vw, 5rem);
   font-weight: 700;
   color: var(--white);
-  line-height: 1.1;
-  margin-bottom: 22px;
+  line-height: 1.08;
+  margin-bottom: 18px;
 }
 .off-hero-title em {
   font-style: italic;
@@ -96,8 +59,9 @@
   font-size: 15px;
   font-weight: 300;
   color: rgba(255, 255, 255, 0.6);
+  max-width: 520px;
   line-height: 1.8;
-  margin-bottom: 36px;
+  margin-bottom: 32px;
 }
 .off-breadcrumb {
   display: flex;
@@ -578,22 +542,7 @@
 /* ── Responsive ── */
 @media (max-width: 991.98px) {
   .off-hero {
-    grid-template-columns: 1fr;
-    min-height: auto;
-  }
-  .off-hero-photo {
-    height: 50vh;
-    min-height: 300px;
-  }
-  .off-hero-photo-overlay {
-    background: rgba(10, 9, 7, 0.35);
-  }
-  .off-hero-content {
-    padding: 60px 0;
-  }
-  .off-hero-inner {
-    padding: 0 28px;
-    max-width: 100%;
+    height: 60vh;
   }
   .off-loyalty-inner {
     grid-template-columns: 1fr 1fr;
@@ -615,11 +564,7 @@
 
 @media (max-width: 767.98px) {
   .off-hero-title {
-    font-size: 2.2rem;
-  }
-  .off-hero-badge {
-    bottom: 20px;
-    left: 20px;
+    font-size: 2.4rem;
   }
   .off-featured {
     height: 420px;

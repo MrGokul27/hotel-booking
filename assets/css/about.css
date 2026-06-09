@@ -1,49 +1,38 @@
 .ab-hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 100vh;
-  padding-top: 0;
-}
-
-.ab-hero-photo {
   position: relative;
+  height: 78vh;
+  display: flex;
+  align-items: center;
   overflow: hidden;
 }
-.ab-hero-photo img {
+.ab-hero-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
   transform: scale(1.06);
-  transition: transform 8s ease;
+  transition: transform 10s ease;
 }
-.ab-hero-photo:hover img {
+.ab-hero:hover .ab-hero-img {
   transform: scale(1);
 }
-.ab-hero-photo-overlay {
+.ab-hero-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    to right,
-    rgba(10, 9, 7, 0) 60%,
-    rgba(10, 9, 7, 0.55) 100%
+    135deg,
+    rgba(10, 9, 7, 0.82) 0%,
+    rgba(10, 9, 7, 0.55) 60%,
+    rgba(10, 9, 7, 0.35) 100%
   );
 }
-
 .ab-hero-content {
-  background: var(--dark);
-  display: flex;
-  align-items: center;
-  padding: 100px 0 60px;
-}
-.ab-hero-inner {
-  padding: 0 10px 0 56px;
-}
-.ab-hero-rule {
-  width: 48px;
-  height: 2px;
-  background: var(--gold);
-  margin-bottom: 24px;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 0;
 }
 .ab-hero-eyebrow {
   font-size: 11px;
@@ -51,15 +40,15 @@
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 .ab-hero-title {
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(2.4rem, 4vw, 3.8rem);
+  font-size: clamp(2.8rem, 6vw, 5rem);
   font-weight: 700;
   color: var(--white);
-  line-height: 1.1;
-  margin-bottom: 22px;
+  line-height: 1.08;
+  margin-bottom: 18px;
 }
 .ab-hero-title em {
   font-style: italic;
@@ -69,8 +58,9 @@
   font-size: 15px;
   font-weight: 300;
   color: rgba(255, 255, 255, 0.6);
+  max-width: 520px;
   line-height: 1.8;
-  margin-bottom: 36px;
+  margin-bottom: 32px;
 }
 .ab-breadcrumb {
   display: flex;
@@ -692,35 +682,15 @@
    RESPONSIVE
 ═══════════════════════════════════════════ */
 @media (max-width: 1199.98px) {
-  .ab-hero-inner {
-    padding: 0 40px;
-  }
   .ab-story-text {
     padding-left: 40px;
   }
 }
 
 @media (max-width: 991.98px) {
-  /* Hero stacks */
   .ab-hero {
-    grid-template-columns: 1fr;
-    min-height: auto;
+    height: 60vh;
   }
-  .ab-hero-photo {
-    height: 50vh;
-    min-height: 300px;
-  }
-  .ab-hero-photo-overlay {
-    background: rgba(10, 9, 7, 0.35);
-  }
-  .ab-hero-content {
-    padding: 60px 0;
-  }
-  .ab-hero-inner {
-    padding: 0 28px;
-    max-width: 100%;
-  }
-
   /* Numbar wraps */
   .ab-numbar-divider {
     display: none;
@@ -791,7 +761,7 @@
 
 @media (max-width: 767.98px) {
   .ab-hero-title {
-    font-size: 2.2rem;
+    font-size: 2.4rem;
   }
 
   /* Numbar 1-col */

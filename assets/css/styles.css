@@ -469,7 +469,7 @@ p {
 /* Dropdown */
 .nav-dropdown {
   position: absolute;
-  top: calc(100% + 16px);
+  top: 100%;
   left: 50%;
   transform: translateX(-50%);
   background: var(--white);
@@ -477,18 +477,24 @@ p {
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
   border-top: 2px solid var(--gold);
   padding: 8px 0;
+  margin-top: 0;
   opacity: 0;
   visibility: hidden;
-  transition:
-    opacity 0.25s,
-    visibility 0.25s,
-    top 0.25s;
+  transition: opacity 0.25s, visibility 0.25s;
   pointer-events: none;
+  /* invisible bridge so mouse can travel from link to dropdown */
+}
+.nav-dropdown::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 0;
+  right: 0;
+  height: 12px;
 }
 .nav-list > li:hover .nav-dropdown {
   opacity: 1;
   visibility: visible;
-  top: calc(100% + 8px);
   pointer-events: auto;
 }
 .nav-dropdown a {

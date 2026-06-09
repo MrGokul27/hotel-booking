@@ -689,10 +689,6 @@
         "header-placeholder",
         "components/common/header.html",
         function () {
-          document.querySelectorAll(".nav-link").forEach(function (l) {
-            if (l.textContent.trim() === "Facilities")
-              l.classList.add("active");
-          });
           if (typeof initHeader === "function") initHeader();
         },
       );
