@@ -479,29 +479,78 @@
       /* ── Contact form ── */
       var form = document.getElementById("contact-form");
       var fields = {
-        "cf-name": { pattern: /^[a-zA-Z\s]{2,}$/, msg: "Please enter your full name (letters only, at least 2 characters)." },
-        "cf-email": { pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, msg: "Please enter a valid email address." },
-        "cf-phone": { pattern: /^\d{10}$/, msg: "Please enter a valid 10-digit phone number." },
+        "cf-name": {
+          pattern: /^[a-zA-Z\s]{2,}$/,
+          msg: "Please enter your full name (letters only, at least 2 characters).",
+        },
+        "cf-email": {
+          pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+          msg: "Please enter a valid email address.",
+        },
+        "cf-phone": {
+          pattern: /^\d{10}$/,
+          msg: "Please enter a valid 10-digit phone number.",
+        },
         "cf-subject": { pattern: null, msg: "Please select a subject." },
-        "cf-checkin": { pattern: null, msg: "Please select a preferred check-in date." },
-        "cf-message": { pattern: /^[\s\S]{10,}$/, msg: "Please enter a message (at least 10 characters)." }
+        "cf-checkin": {
+          pattern: null,
+          msg: "Please select a preferred check-in date.",
+        },
+        "cf-message": {
+          pattern: /^[\s\S]{10,}$/,
+          msg: "Please enter a message (at least 10 characters).",
+        },
       };
 
       /* Block numbers and special chars in name field */
-      document.getElementById("cf-name").addEventListener("keypress", function (e) {
-        if (!/[a-zA-Z\s]/.test(e.key)) e.preventDefault();
-      });
+      document
+        .getElementById("cf-name")
+        .addEventListener("keypress", function (e) {
+          if (!/[a-zA-Z\s]/.test(e.key)) e.preventDefault();
+        });
       document.getElementById("cf-name").addEventListener("input", function () {
         this.value = this.value.replace(/[^a-zA-Z\s]/g, "");
       });
 
       /* Allow only digits and max 10 in phone field */
-      document.getElementById("cf-phone").addEventListener("keypress", function (e) {
-        if (!/[0-9]/.test(e.key)) e.preventDefault();
-      });
-      document.getElementById("cf-phone").addEventListener("input", function () {
-        this.value = this.value.replace(/\D/g, "").slice(0, 10);
-      });
+      document
+        .getElementById("cf-phone")
+        .addEventListener("keypress", function (e) {
+          if (!/[0-9]/.test(e.key)) e.preventDefault();
+        });
+      document
+        .getElementById("cf-phone")
+        .addEventListener("input", function () {
+          this.value = this.value.replace(/\D/g, "").slice(0, 10);
+        });
+
+      /* ── Check-in date restriction logic ── */
+      var checkinInput = document.getElementById("cf-checkin");
+      var subjectSelect = document.getElementById("cf-subject");
+      var todayDateStr = new Date().toISOString().split("T")[0];
+
+      function handleDateRestrictions() {
+        var subject = subjectSelect.value;
+        var bookingRelated = [
+          "Room Reservation",
+          "Spa & Wellness Booking",
+          "Dining Reservation",
+          "Special Occasion",
+          "Group / Event Enquiry",
+        ];
+
+        if (bookingRelated.indexOf(subject) !== -1) {
+          checkinInput.min = todayDateStr;
+          if (checkinInput.value && checkinInput.value < todayDateStr) {
+            checkinInput.value = "";
+          }
+        } else {
+          checkinInput.removeAttribute("min");
+        }
+      }
+
+      subjectSelect.addEventListener("change", handleDateRestrictions);
+      handleDateRestrictions();
 
       function showError(id, msg) {
         var el = document.getElementById(id);
@@ -526,8 +575,14 @@
         var el = document.getElementById(id);
         var val = el.value.trim();
         var rule = fields[id];
-        if (!val) { showError(id, rule.msg); return false; }
-        if (rule.pattern && !rule.pattern.test(val)) { showError(id, rule.msg); return false; }
+        if (!val) {
+          showError(id, rule.msg);
+          return false;
+        }
+        if (rule.pattern && !rule.pattern.test(val)) {
+          showError(id, rule.msg);
+          return false;
+        }
         clearError(id);
         return true;
       }
@@ -535,8 +590,12 @@
       Object.keys(fields).forEach(function (id) {
         var el = document.getElementById(id);
         if (el) {
-          el.addEventListener("blur", function () { validateField(id); });
-          el.addEventListener("input", function () { if (el.classList.contains("con-field-error")) validateField(id); });
+          el.addEventListener("blur", function () {
+            validateField(id);
+          });
+          el.addEventListener("input", function () {
+            if (el.classList.contains("con-field-error")) validateField(id);
+          });
         }
       });
 
