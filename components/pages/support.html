@@ -161,7 +161,7 @@
               <div class="contact-desc">
                 Check-in, check-out & general queries
               </div>
-              <div class="contact-detail">+1 718 555 0100</div>
+              <div class="contact-detail">+91 718 555 0100</div>
             </div>
             <div class="contact-card">
               <div class="contact-icon">
@@ -177,7 +177,7 @@
               </div>
               <div class="contact-name">WhatsApp</div>
               <div class="contact-desc">Message our guest services team</div>
-              <div class="contact-detail">+1 718 555 0199</div>
+              <div class="contact-detail">+91 718 555 0199</div>
             </div>
           </div>
 
@@ -218,6 +218,7 @@
                       font-size: 13px;
                       outline: none;
                     "
+                    required
                   >
                     <option>Booking Query</option>
                     <option>Room Service</option>
@@ -251,6 +252,7 @@
                       font-size: 13px;
                       outline: none;
                     "
+                    required
                   />
                 </div>
                 <div style="margin-bottom: 16px">
@@ -278,6 +280,7 @@
                       resize: vertical;
                       min-height: 120px;
                     "
+                    required
                   ></textarea>
                 </div>
                 <button
@@ -361,7 +364,10 @@
         e.preventDefault();
         const toast = document.getElementById("support-toast");
         toast.style.display = "block";
-        setTimeout(() => (toast.style.display = "none"), 4000);
+        setTimeout(() => {
+          toast.style.display = "none";
+          window.location.href = "404.html";
+        }, 1200);
       }
     </script>
   </body>
