@@ -317,6 +317,7 @@
                     font-size: 13px;
                     outline: none;
                   "
+                  id="spa-date"
                 />
               </div>
               <div>
@@ -377,6 +378,7 @@
             <button
               class="btn-gold"
               style="font-size: 11px; padding: 12px 32px"
+              onclick="window.location.href = '404.html'"
             >
               <i class="fa-solid fa-calendar-check me-2"></i>Confirm Booking
             </button>
@@ -385,5 +387,15 @@
       </div>
     </div>
     <script src="../../assets/js/db-shell.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const dateInput = document.getElementById("spa-date");
+        if (dateInput) {
+          const today = new Date().toISOString().split("T")[0];
+          dateInput.min = today;
+          dateInput.value = today;
+        }
+      });
+    </script>
   </body>
 </html>
